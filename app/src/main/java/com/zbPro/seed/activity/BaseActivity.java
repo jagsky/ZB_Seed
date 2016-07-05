@@ -9,6 +9,8 @@ import android.util.Log;
 import com.zbPro.seed.collector.ActivityCollector;
 import com.zbPro.seed.db.DatabaseHelper;
 
+import java.util.List;
+
 /*
 * 类名：BaseActivity
 * 作用：基础Activity
