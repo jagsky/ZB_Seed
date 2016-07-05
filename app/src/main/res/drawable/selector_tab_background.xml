@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--tab选择器，在点击时，与未点击时显示不同的图片-->
+
+    <item android:drawable="@mipmap/home_btn_bg" android:state_pressed="true" />
+    <item android:drawable="@mipmap/home_btn_bg" android:state_selected="true" />
+</selector>

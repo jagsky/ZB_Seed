@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="用户名："
+        android:textColor="#0008ff"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/fragment4_UserIdtv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#e60f12"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/fragment4_UserIdbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="退出当前账户"
+        android:textSize="30sp" />
+</LinearLayout>
