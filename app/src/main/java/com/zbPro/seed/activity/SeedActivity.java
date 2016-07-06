@@ -18,6 +18,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -26,6 +27,7 @@ import com.squareup.okhttp.Response;
 import com.zbPro.seed.bean.Seed;
 import com.zbPro.seed.collector.LogBase;
 import com.zbPro.seed.dao.SeedDao;
+import com.zbPro.seed.net.HttpPost;
 import com.zbPro.seed.util.Constant;
 
 import java.io.IOException;
@@ -79,9 +81,9 @@ public class SeedActivity extends BaseActivity {
     //设置一个搜索栏控件的适配器
     ArrayAdapter arrayAdapter;
     //获取日期格式器对象
-    DateFormat fmtDate = new SimpleDateFormat( "yyyy-MM-dd" );
+    DateFormat fmtDate = new SimpleDateFormat("yyyy-MM-dd");
     //获取一个日历对象
-    Calendar dateAndTime = Calendar.getInstance( Locale.CHINA );
+    Calendar dateAndTime = Calendar.getInstance(Locale.CHINA);
     //当点击DatePickerDialog控件的设置按钮时，调用该方法
     DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
         @Override
@@ -89,11 +91,11 @@ public class SeedActivity extends BaseActivity {
                               int dayOfMonth) {
             //修改日历控件的年，月，日
             //这里的year,monthOfYear,dayOfMonth的值与DatePickerDialog控件设置的最新值一致
-            dateAndTime.set( Calendar.YEAR, year );
-            dateAndTime.set( Calendar.MONTH, monthOfYear );
-            dateAndTime.set( Calendar.DAY_OF_MONTH, dayOfMonth );
+            dateAndTime.set(Calendar.YEAR, year);
+            dateAndTime.set(Calendar.MONTH, monthOfYear);
+            dateAndTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             //将页面TextView的显示更新为最新时间
-            txtDate.setText( fmtDate.format( dateAndTime.getTime() ) );
+            txtDate.setText(fmtDate.format(dateAndTime.getTime()));
 
         }
     };
@@ -104,11 +106,11 @@ public class SeedActivity extends BaseActivity {
                               int dayOfMonth) {
             //修改日历控件的年，月，日
             //这里的year,monthOfYear,dayOfMonth的值与DatePickerDialog控件设置的最新值一致
-            dateAndTime.set( Calendar.YEAR, year );
-            dateAndTime.set( Calendar.MONTH, monthOfYear );
-            dateAndTime.set( Calendar.DAY_OF_MONTH, dayOfMonth );
+            dateAndTime.set(Calendar.YEAR, year);
+            dateAndTime.set(Calendar.MONTH, monthOfYear);
+            dateAndTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             //将页面TextView的显示更新为最新时间
-            txtDatefu1.setText( fmtDate.format( dateAndTime.getTime() ) );
+            txtDatefu1.setText(fmtDate.format(dateAndTime.getTime()));
 
         }
     };
@@ -119,11 +121,11 @@ public class SeedActivity extends BaseActivity {
                               int dayOfMonth) {
             //修改日历控件的年，月，日
             //这里的year,monthOfYear,dayOfMonth的值与DatePickerDialog控件设置的最新值一致
-            dateAndTime.set( Calendar.YEAR, year );
-            dateAndTime.set( Calendar.MONTH, monthOfYear );
-            dateAndTime.set( Calendar.DAY_OF_MONTH, dayOfMonth );
+            dateAndTime.set(Calendar.YEAR, year);
+            dateAndTime.set(Calendar.MONTH, monthOfYear);
+            dateAndTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             //将页面TextView的显示更新为最新时间
-            txtDatefu2.setText( fmtDate.format( dateAndTime.getTime() ) );
+            txtDatefu2.setText(fmtDate.format(dateAndTime.getTime()));
 
         }
     };
@@ -134,11 +136,11 @@ public class SeedActivity extends BaseActivity {
                               int dayOfMonth) {
             //修改日历控件的年，月，日
             //这里的year,monthOfYear,dayOfMonth的值与DatePickerDialog控件设置的最新值一致
-            dateAndTime.set( Calendar.YEAR, year );
-            dateAndTime.set( Calendar.MONTH, monthOfYear );
-            dateAndTime.set( Calendar.DAY_OF_MONTH, dayOfMonth );
+            dateAndTime.set(Calendar.YEAR, year);
+            dateAndTime.set(Calendar.MONTH, monthOfYear);
+            dateAndTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             //将页面TextView的显示更新为最新时间
-            txtDatemo.setText( fmtDate.format( dateAndTime.getTime() ) );
+            txtDatemo.setText(fmtDate.format(dateAndTime.getTime()));
 
         }
     };
@@ -178,9 +180,9 @@ public class SeedActivity extends BaseActivity {
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            super.handleMessage( msg );
+            super.handleMessage(msg);
             Bundle bundle = msg.getData();
-            IsSkiplogin = bundle.getString( "str" );
+            IsSkiplogin = bundle.getString("str");
 
             IsSkiplogin();
 
@@ -190,112 +192,112 @@ public class SeedActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_seed );
-        ButterKnife.bind( this );
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_seed);
+        ButterKnife.bind(this);
         //获取搜索栏控件
-        seedAutoCompleteTextView = (AutoCompleteTextView) findViewById( R.id.seed_AutoCompleteTextView );
+        seedAutoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.seed_AutoCompleteTextView);
         //获取Button控件
-        seed_send_btn = (Button) findViewById( R.id.seed_send_btn );
+        seed_send_btn = (Button) findViewById(R.id.seed_send_btn);
         //获取Seed表操作权限
-        seedDao = new SeedDao( getApplicationContext() );
+        seedDao = new SeedDao(getApplicationContext());
         //获取地块号
         lineArrayList = seedDao.displaySeedDKnumber();
         //在创建Activity时，设置今天的时间
-        txtDate.setText( fmtDate.format( dateAndTime.getTime() ) );
-        txtDatefu1.setText( fmtDate.format( dateAndTime.getTime() ) );
-        txtDatefu2.setText( fmtDate.format( dateAndTime.getTime() ) );
-        txtDatemo.setText( fmtDate.format( dateAndTime.getTime() ) );
+        txtDate.setText(fmtDate.format(dateAndTime.getTime()));
+        txtDatefu1.setText(fmtDate.format(dateAndTime.getTime()));
+        txtDatefu2.setText(fmtDate.format(dateAndTime.getTime()));
+        txtDatemo.setText(fmtDate.format(dateAndTime.getTime()));
         //  System.out.println(lineArrayList.toString());
-        txtDate = (EditText) findViewById( R.id.txtDate );
-        seedBtnDate = (Button) findViewById( R.id.seed_btnDate );
-        seedBtnDate.setOnClickListener( new View.OnClickListener() {
+        txtDate = (EditText) findViewById(R.id.txtDate);
+        seedBtnDate = (Button) findViewById(R.id.seed_btnDate);
+        seedBtnDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerDialog dateDlg = new DatePickerDialog( SeedActivity.this,
+                DatePickerDialog dateDlg = new DatePickerDialog(SeedActivity.this,
                         d,
-                        dateAndTime.get( Calendar.YEAR ),
-                        dateAndTime.get( Calendar.MONTH ),
-                        dateAndTime.get( Calendar.DAY_OF_MONTH ) );
+                        dateAndTime.get(Calendar.YEAR),
+                        dateAndTime.get(Calendar.MONTH),
+                        dateAndTime.get(Calendar.DAY_OF_MONTH));
                 dateDlg.show();
 
 
             }
 
-        } );
+        });
         //设置一个是配置，用于高级控件展示数据。
-        arrayAdapter = new ArrayAdapter( SeedActivity.this,
-                android.R.layout.simple_expandable_list_item_1, lineArrayList );
+        arrayAdapter = new ArrayAdapter(SeedActivity.this,
+                android.R.layout.simple_expandable_list_item_1, lineArrayList);
         //播种界面搜索栏设置适配器
-        seedAutoCompleteTextView.setAdapter( arrayAdapter );
+        seedAutoCompleteTextView.setAdapter(arrayAdapter);
         //搜索栏点击事件
-        seedAutoCompleteTextView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
+        seedAutoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ((InputMethodManager) getSystemService( Context.INPUT_METHOD_SERVICE )).hideSoftInputFromWindow( SeedActivity.this.getCurrentFocus().getWindowToken(),
-                        InputMethodManager.HIDE_NOT_ALWAYS );
+                ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(SeedActivity.this.getCurrentFocus().getWindowToken(),
+                        InputMethodManager.HIDE_NOT_ALWAYS);
                 //获取搜索栏点击下标的地块号
-                queryDKNumber = parent.getItemAtPosition( position ).toString();
+                queryDKNumber = parent.getItemAtPosition(position).toString();
                 //获取数据库seed表的数据，但是最好用SeedBean实体接收数据
                 ArrayList<HashMap<String, Object>> seedSelectAllData = seedDao.displaySeedAllData();
                 //通过position（下标），获取是哪一行的数据
-                positionRaw = seedSelectAllData.get( position );
+                positionRaw = seedSelectAllData.get(position);
                 //获取此行信息，将数据显示到界面对应的空间中。
                 //如果数据为空，则判断为不显示
-                seedFarmerNameEt.setText( positionRaw.get( "framarName" ).toString() );
-                far = (String) positionRaw.get( "framarName" );
-                String types = (String) positionRaw.get( "type" );
-                seedNumberEt.setText( queryDKNumber );
-                seedTypeEt.setText( positionRaw.get( "type" ).toString() );
+                seedFarmerNameEt.setText(positionRaw.get("framarName").toString());
+                far = (String) positionRaw.get("framarName");
+                String types = (String) positionRaw.get("type");
+                seedNumberEt.setText(queryDKNumber);
+                seedTypeEt.setText(positionRaw.get("type").toString());
                 String s1 = null;
-                s1 = (String) positionRaw.get( "seedDate" );
+                s1 = (String) positionRaw.get("seedDate");
                 if (s1 != null) {
-                    txtDate.setText( s1 );
+                    txtDate.setText(s1);
                 } else {
-                    txtDate.setText( fmtDate.format( dateAndTime.getTime() ) );
+                    txtDate.setText(fmtDate.format(dateAndTime.getTime()));
                 }
-                String s2 = (String) positionRaw.get( "father1" );
+                String s2 = (String) positionRaw.get("father1");
                 if (s2 != null) {
-                    txtDatefu1.setText( s2 );
+                    txtDatefu1.setText(s2);
                 } else {
-                    txtDatefu1.setText( fmtDate.format( dateAndTime.getTime() ) );
+                    txtDatefu1.setText(fmtDate.format(dateAndTime.getTime()));
                 }
-                String s3 = (String) positionRaw.get( "father2" );
+                String s3 = (String) positionRaw.get("father2");
                 if (s3 != null) {
-                    txtDatefu2.setText( s3 );
+                    txtDatefu2.setText(s3);
                 } else {
-                    txtDatefu2.setText( fmtDate.format( dateAndTime.getTime() ) );
+                    txtDatefu2.setText(fmtDate.format(dateAndTime.getTime()));
                 }
-                String s4 = (String) positionRaw.get( "mother" );
+                String s4 = (String) positionRaw.get("mother");
                 if (s4 != null) {
-                    txtDatemo.setText( s4 );
+                    txtDatemo.setText(s4);
                 } else {
-                    txtDatemo.setText( fmtDate.format( dateAndTime.getTime() ) );
+                    txtDatemo.setText(fmtDate.format(dateAndTime.getTime()));
                 }
-                String s5 = (String) positionRaw.get( "fatherUse" );
+                String s5 = (String) positionRaw.get("fatherUse");
                 if (s5 != null) {
-                    seedfatherUse.setText( s5 );
+                    seedfatherUse.setText(s5);
                 } else {
-                    seedfatherUse.setText( "" );
+                    seedfatherUse.setText("");
                 }
-                String s6 = (String) positionRaw.get( "motherUse" );
+                String s6 = (String) positionRaw.get("motherUse");
                 if (s6 != null) {
-                    seedMontherUse.setText( s6 );
+                    seedMontherUse.setText(s6);
                 } else {
-                    seedMontherUse.setText( "" );
+                    seedMontherUse.setText("");
                 }
 
-                String s7 = (String) positionRaw.get( beizhu );
+                String s7 = (String) positionRaw.get(beizhu);
                 if (s7 != null) {
-                    seedBeiZhuId.setText( s7 );
+                    seedBeiZhuId.setText(s7);
                 } else {
-                    seedBeiZhuId.setText( "" );
+                    seedBeiZhuId.setText("");
                 }
-                Toast.makeText( SeedActivity.this, "你选择了   " + far, Toast.LENGTH_SHORT ).show();
+                Toast.makeText(SeedActivity.this, "你选择了   " + far, Toast.LENGTH_SHORT).show();
 
 
             }
-        } );
+        });
 
 
     }
@@ -305,39 +307,39 @@ public class SeedActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnDatefu1:
-                DatePickerDialog dateDlg1 = new DatePickerDialog( SeedActivity.this,
+                DatePickerDialog dateDlg1 = new DatePickerDialog(SeedActivity.this,
                         d1,
-                        dateAndTime.get( Calendar.YEAR ),
-                        dateAndTime.get( Calendar.MONTH ),
-                        dateAndTime.get( Calendar.DAY_OF_MONTH ) );
+                        dateAndTime.get(Calendar.YEAR),
+                        dateAndTime.get(Calendar.MONTH),
+                        dateAndTime.get(Calendar.DAY_OF_MONTH));
                 dateDlg1.show();
 
                 break;
             case R.id.btnDatefu2:
-                DatePickerDialog dateDlg2 = new DatePickerDialog( SeedActivity.this,
+                DatePickerDialog dateDlg2 = new DatePickerDialog(SeedActivity.this,
                         d2,
-                        dateAndTime.get( Calendar.YEAR ),
-                        dateAndTime.get( Calendar.MONTH ),
-                        dateAndTime.get( Calendar.DAY_OF_MONTH ) );
+                        dateAndTime.get(Calendar.YEAR),
+                        dateAndTime.get(Calendar.MONTH),
+                        dateAndTime.get(Calendar.DAY_OF_MONTH));
                 dateDlg2.show();
 
                 break;
             case R.id.btnDatemo:
-                DatePickerDialog dateDlg = new DatePickerDialog( SeedActivity.this,
+                DatePickerDialog dateDlg = new DatePickerDialog(SeedActivity.this,
                         d3,
-                        dateAndTime.get( Calendar.YEAR ),
-                        dateAndTime.get( Calendar.MONTH ),
-                        dateAndTime.get( Calendar.DAY_OF_MONTH ) );
+                        dateAndTime.get(Calendar.YEAR),
+                        dateAndTime.get(Calendar.MONTH),
+                        dateAndTime.get(Calendar.DAY_OF_MONTH));
                 dateDlg.show();
 
                 break;
             case R.id.seedBC_btn:
                 s = seedNumberEt.getText().toString();
-                if (!s.equals( "" )) {
+                if (!s.equals("")) {
                     dialogbtn();
 
                 } else {
-                    Toast.makeText( SeedActivity.this, "请获取农户基本信息", Toast.LENGTH_SHORT ).show();
+                    Toast.makeText(SeedActivity.this, "请获取农户基本信息", Toast.LENGTH_SHORT).show();
                 }
                 //保存数据按钮
                 //1.在保存的时候弹出对话框，判断是否保存
@@ -353,67 +355,68 @@ public class SeedActivity extends BaseActivity {
                   3.如果点击确认则首先说去数据，然后发送
                 * */
                 s = seedNumberEt.getText().toString();
-                if (!s.equals( "" )) {
+                if (!s.equals("")) {
                     dialog();
 
                 } else {
-                    Toast.makeText( SeedActivity.this, "请获取农户基本信息", Toast.LENGTH_SHORT ).show();
+                    Toast.makeText(SeedActivity.this, "请获取农户基本信息", Toast.LENGTH_SHORT).show();
                 }
 
 
         }
     }
 
+    Gson gson;
+    String json;
+
     //发送json数据到服务器
-    private void seedSendhttpPost() {
+    private void seedSendhttpPost() throws IOException {
         //发送数据前，先保存数据
         saveSeedData();
-        final OkHttpClient client = new OkHttpClient();
-        RequestBody formBody = new FormEncodingBuilder()
-                .add( "userId", userId )
-                .add( "framarName", framarName )
-                .add( "dKNumber", dKNumber )
-                .add( "type", type )
-                .add( "seedDate", seedDate )
-                .add( "father1", father1 )
-                .add( "father2", father2 )
-                .add( "mother", mother )
-                .add( "fatherUse", fatherUse )
-                .add( "motherUse", motherUse )
-                .add( "beizhu", beizhu )
-                .build();
-
-        final Request request = new Request.Builder()
-                .url( Constant.PATH + Constant.SEED )
-                .post( formBody )
-                .build();
-
-        new Thread( new Runnable() {
+        //发送Json数据
+        //1.将数据转换成Json类型
+        gson = new Gson();
+        json = gson.toJson(seed);
+        LogBase.i(json);
+        //1.将Bean对象转换成Json格式数据
+        new Thread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        String s = HttpPost.SendhttpPostJson(json, Constant.PATH + Constant.SEED);
+                        //Toast.makeText( RogueActivity.this, "ssss", Toast.LENGTH_SHORT ).show();
+                    }
+                }
+        ).start();
+      /*  new Thread(new Runnable() {
             @Override
             public void run() {
+                OkHttpClient client = new OkHttpClient();
+                RequestBody formBody = new FormEncodingBuilder()
+                        .add("user", "user")
+                        .add("name", "name")
+                        .build();
+
+                final Request request = new Request.Builder()
+                        .url(Constant.PATH + Constant.SEED)
+                        .post(formBody)
+                        .build();
                 Response response = null;
                 try {
-                    response = client.newCall( request ).execute();
-                    if (response.isSuccessful()) {
-                        String str = response.body().string();
-                        // LogBase.i( "打印POST响应的数据：" + str );
-                        Message message = handler.obtainMessage();
-                        Bundle bundle = new Bundle();
-                        bundle.putString( "str", str );
-                        message.setData( bundle );
-                        handler.sendMessage( message );
-                    } else {
-                        throw new IOException( "Unexpected code " + response );
-
-
-                    }
+                    response = client.newCall(request).execute();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                if (response.isSuccessful()) {
+                    try {
+                        String resultSet = response.body().string();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
-        } ).start();
+        }).start();*/
 
-        Toast.makeText( SeedActivity.this, "发送成功", Toast.LENGTH_SHORT ).show();
 
     }
 
@@ -421,8 +424,8 @@ public class SeedActivity extends BaseActivity {
 
     //在保存的时候获取所有View的数据，并将其保存到Seedbean实体类中
     private void getALlViewData() {
-        preferences = getSharedPreferences( "login", MODE_PRIVATE );
-        userId = preferences.getString( "register_userName", "da" );
+        preferences = getSharedPreferences("login", MODE_PRIVATE);
+        userId = preferences.getString("register_userName", "da");
         framarName = seedFarmerNameEt.getText().toString();
         dKNumber = seedNumberEt.getText().toString();
         type = seedTypeEt.getText().toString();
@@ -434,10 +437,9 @@ public class SeedActivity extends BaseActivity {
         motherUse = seedMontherUse.getText().toString();
         beizhu = seedBeiZhuId.getText().toString();
 
-        seed = new Seed( userId, framarName, dKNumber,
-                type, seedDate, father1, father2, mother, fatherUse, motherUse, beizhu );
+        seed = new Seed(userId, framarName, dKNumber,
+                type, seedDate, father1, father2, mother, fatherUse, motherUse, beizhu);
     }
-
 
 
     ArrayList dKnumberList;
@@ -449,20 +451,20 @@ public class SeedActivity extends BaseActivity {
             //首先查询地块这一列的信息
 
             dKnumberList = seedDao.displaySeedDKnumber();
-            if (dKnumberList.contains( dKNumber ) && !dKNumber.equals( "" )) {
-                seedDao.refreshSeedBeanRow( dKNumber );
-                Seed seedUp = seedDao.addSeed( seed );
-                LogBase.i( "更新成功" );
-                Toast.makeText( SeedActivity.this, far + "   的数据更新成功", Toast.LENGTH_SHORT ).show();
+            if (dKnumberList.contains(dKNumber) && !dKNumber.equals("")) {
+                seedDao.refreshSeedBeanRow(dKNumber);
+                Seed seedUp = seedDao.addSeed(seed);
+                LogBase.i("更新成功");
+                Toast.makeText(SeedActivity.this, far + "   的数据更新成功", Toast.LENGTH_SHORT).show();
                 finish();
                 // System.out.println(seedUp.toString());
-            } else if (!dKnumberList.contains( dKNumber ) && !dKNumber.equals( "" )) {
-                Seed seedAdd = seedDao.addSeed( seed );
-                LogBase.i( "创建成功" );
-                Toast.makeText( SeedActivity.this, "创建数据数据成功", Toast.LENGTH_SHORT ).show();
+            } else if (!dKnumberList.contains(dKNumber) && !dKNumber.equals("")) {
+                Seed seedAdd = seedDao.addSeed(seed);
+                LogBase.i("创建成功");
+                Toast.makeText(SeedActivity.this, "创建数据数据成功", Toast.LENGTH_SHORT).show();
                 finish();
             } else {
-                Toast.makeText( SeedActivity.this, "请先获取农户基本信息", Toast.LENGTH_SHORT ).show();
+                Toast.makeText(SeedActivity.this, "请先获取农户基本信息", Toast.LENGTH_SHORT).show();
             }
 
             // System.out.println(seed1.toString());
@@ -474,31 +476,35 @@ public class SeedActivity extends BaseActivity {
 
 
     public void dialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder( SeedActivity.this );
-        builder.setMessage( "是否发送？" );
-        builder.setTitle( "提示" );
-        builder.setPositiveButton( "确认", new DialogInterface.OnClickListener() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(SeedActivity.this);
+        builder.setMessage("是否发送？");
+        builder.setTitle("提示");
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 getALlViewData();
-                seedSendhttpPost();
+                try {
+                    seedSendhttpPost();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 dialog.dismiss();
             }
-        } );
-        builder.setNegativeButton( "取消", new DialogInterface.OnClickListener() {
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
-        } );
+        });
         builder.create().show();
     }
 
     public void dialogbtn() {
-        AlertDialog.Builder builder = new AlertDialog.Builder( SeedActivity.this );
-        builder.setMessage( "是否保存数据？" );
-        builder.setTitle( "提示" );
-        builder.setPositiveButton( "确认", new DialogInterface.OnClickListener() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(SeedActivity.this);
+        builder.setMessage("是否保存数据？");
+        builder.setTitle("提示");
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //在保存的时候获取所有View的数据
@@ -506,14 +512,14 @@ public class SeedActivity extends BaseActivity {
                 saveSeedData();
                 dialog.dismiss();
             }
-        } );
-        builder.setNegativeButton( "取消", new DialogInterface.OnClickListener() {
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
                 dialog.dismiss();
             }
-        } );
+        });
         builder.create().show();
     }
 

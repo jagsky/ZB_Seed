@@ -8,6 +8,7 @@ import com.j256.ormlite.table.DatabaseTable;
  * ClassName ：com.zbPro.seed.dao
  * 作用：
  */
+
 @DatabaseTable(tableName = "GainBean")
 public class GainBean {
     @DatabaseField(generatedId = true)
@@ -45,7 +46,8 @@ public class GainBean {
     @DatabaseField(columnName = "gainOutput")
     private String gainOutput;
 
-
+    @DatabaseField(columnName = "BeiZhu")
+    private String BeiZhu;
 
     public int getId() {
         return id;
@@ -57,10 +59,9 @@ public class GainBean {
     public GainBean() {
     }
 
-    public GainBean(String framarName,
-                String dKNumber, String type, String motherNO,
-                String singlePlant, String thousand, String fatherExciseStart,
-                String fatherExciseStop, String gainTime, String gainOutput) {
+    public GainBean(int id, String userId, String framarName, String dKNumber, String type, String motherNO, String singlePlant, String thousand, String fatherExciseStart, String fatherExciseStop, String gainTime, String gainOutput, String beiZhu) {
+        this.id = id;
+        UserId = userId;
         this.framarName = framarName;
         this.dKNumber = dKNumber;
         this.type = type;
@@ -71,6 +72,7 @@ public class GainBean {
         this.fatherExciseStop = fatherExciseStop;
         this.gainTime = gainTime;
         this.gainOutput = gainOutput;
+        BeiZhu = beiZhu;
     }
 
     public String getUserId() {
@@ -181,5 +183,13 @@ public class GainBean {
         this.framarName = framarName;
         this.dKNumber = dKNumber;
         this.type = type;
+    }
+
+    public String getBeiZhu() {
+        return BeiZhu;
+    }
+
+    public void setBeiZhu(String beiZhu) {
+        BeiZhu = beiZhu;
     }
 }

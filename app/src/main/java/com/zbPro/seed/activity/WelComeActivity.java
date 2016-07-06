@@ -55,7 +55,7 @@ public class WelComeActivity extends BaseActivity {
                 String s = preferences.getString( "register_userName", "0" );
                 if (IsOK == false) {
                     //如果之前没有保存过账号密码，则先跳转到登入界面
-                    Intent intent = new Intent( WelComeActivity.this, LoginActivity.class );
+                    Intent intent = new Intent( WelComeActivity.this, MainActivity.class );
                     startActivity( intent );
                     finish();
                 } else {

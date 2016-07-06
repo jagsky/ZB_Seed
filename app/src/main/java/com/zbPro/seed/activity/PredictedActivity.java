@@ -239,12 +239,12 @@ public class PredictedActivity extends BaseActivity {
                 } else {
                     gainImpurties.setText( "" );
                 }
-               /* beizhu = (String) positionRaw.get( "beizhu" );
+                beizhu = (String) positionRaw.get( "beizhu" );
                 if (beizhu != null) {
                     gainBeiZhu.setText( beizhu );
                 } else {
                     gainBeiZhu.setText( "" );
-                }*/
+                }
                 Toast.makeText( PredictedActivity.this, "你选择了   " + framarName, Toast.LENGTH_SHORT ).show();
             }
         } );
@@ -318,7 +318,7 @@ public class PredictedActivity extends BaseActivity {
         gainBean.setFatherExciseStop( gainTxtDate2.getText().toString() );
         gainBean.setGainTime( gainTxtDate3.getText().toString() );
         gainBean.setGainOutput( gainImpurties.getText().toString() );
-       // gainBean.setBeizhu( gainBeiZhu.getText().toString() );
+        gainBean.setBeiZhu( gainBeiZhu.getText().toString() );
     }
 
     String json;
