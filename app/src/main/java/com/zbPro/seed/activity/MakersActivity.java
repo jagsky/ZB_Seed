@@ -1,6 +1,5 @@
 package com.zbPro.seed.activity;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,28 +7,32 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bigkoo.quicksidebar.QuickSideBarTipsView;
 import com.bigkoo.quicksidebar.QuickSideBarView;
 import com.bigkoo.quicksidebar.listener.OnQuickSideBarTouchListener;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter;
+import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
 import com.zbPro.seed.adapter.CityListAdapter;
+import com.zbPro.seed.adapter.DividerDecoration;
+import com.zbPro.seed.bean.City;
 import com.zbPro.seed.bean.FarmerBean;
 import com.zbPro.seed.dao.FarmaerDao;
+import com.zbPro.seed.util.DataConstants;
 
+import java.lang.reflect.Type;
 import java.security.SecureRandom;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.LinkedList;
 
 /*
 * 时间：2016/6/15
@@ -39,9 +42,10 @@ import java.util.List;
 * */
 public class MakersActivity extends BaseActivity implements OnQuickSideBarTouchListener {
     RecyclerView recyclerView;
-    HashMap<String, Integer> lettrs = new HashMap<>();
+    HashMap<String, Integer> letters = new HashMap<>();
     QuickSideBarView quickSideBarView;
     QuickSideBarTipsView quickSideBarTipsView;
+
 
     //获取listview控件
     ListView farmer_lv;
@@ -77,19 +81,56 @@ public class MakersActivity extends BaseActivity implements OnQuickSideBarTouchL
         //获取 farmer表中 姓名 地块号 种类显示到Listvew中
         farmerNDTList = farmaerDao.displayFarmerNDT();
         initlistview();
-        initView();
+        // initView();
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         quickSideBarView = (QuickSideBarView) findViewById(R.id.quickSideBarView);
         quickSideBarTipsView = (QuickSideBarTipsView) findViewById(R.id.quickSideBarTipsView);
+
         //设置监听
         quickSideBarView.setOnQuickSideBarTouchListener(this);
+
+
         //设置列表数据和浮动header
         final LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
         // Add the sticky headers decoration
-        CityListWithHeadersAdapter adapter = new CityListWithHeadersAdapter(lineArrayList);
+        CityListWithHeadersAdapter adapter = new CityListWithHeadersAdapter();
 
+        //GSON解释出来
+        Type listType = new TypeToken<LinkedList<City>>() {
+        }.getType();
+        Gson gson = new Gson();
+        LinkedList<City> cities = gson.fromJson(DataConstants.cityDataList, listType);
+
+        ArrayList<String> customLetters = new ArrayList<>();
+
+        int position = 0;
+        for (City city : cities) {
+            String letter = city.getFirstLetter();
+            //如果没有这个key则加入并把位置也加入
+            if (!letters.containsKey(letter)) {
+                letters.put(letter, position);
+                customLetters.add(letter);
+            }
+            position++;
+        }
+
+        //不自定义则默认26个字母
+        quickSideBarView.setLetters(customLetters);
+        adapter.addAll(cities);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        final StickyRecyclerHeadersDecoration headersDecor = new StickyRecyclerHeadersDecoration(adapter);
+        recyclerView.addItemDecoration(headersDecor);
+
+        // Add decoration for dividers between list items
+        recyclerView.addItemDecoration(new DividerDecoration(this));
 
 
     }
@@ -106,7 +147,7 @@ public class MakersActivity extends BaseActivity implements OnQuickSideBarTouchL
         farmer_lv.setAdapter(simpleAdapter);*/
     }
 
-    private void initView() {
+    /*private void initView() {
         //初始化搜索栏控件
         farmer_AutoCompleteTextView = (AutoCompleteTextView)
                 findViewById(R.id.farmer_AutoCompleteTextView);
@@ -126,31 +167,37 @@ public class MakersActivity extends BaseActivity implements OnQuickSideBarTouchL
         });
 
 
-    }
+    <AutoCompleteTextView
+        android:id="@+id/farmer_AutoCompleteTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="5dp"
+        android:completionThreshold="1"
+        android:digits="@string/register_name_digits"
+        android:dropDownHeight="wrap_content"
+        android:hint="请输入农户的地块号"
+        android:maxLength="15" />
+    }*/
 
 
     @Override
     public void onLetterChanged(String letter, int position, int itemHeight) {
         quickSideBarTipsView.setText(letter, position, itemHeight);
         //有此key则获取位置并滚动到该位置
-/*
-        if(farmerNDTList.contains(letter)) {
-            recyclerView.scrollToPosition(farmerNDTList.get(letter));
-        }*/
+        if (letters.containsKey(letter)) {
+            recyclerView.scrollToPosition(letters.get(letter));
+        }
     }
 
     @Override
     public void onLetterTouching(boolean touching) {
         //可以自己加入动画效果渐显渐隐
-        quickSideBarTipsView.setVisibility(touching? View.VISIBLE:View.INVISIBLE);
-
+        quickSideBarTipsView.setVisibility(touching ? View.VISIBLE : View.INVISIBLE);
     }
+
     private class CityListWithHeadersAdapter extends CityListAdapter<RecyclerView.ViewHolder>
             implements StickyRecyclerHeadersAdapter<RecyclerView.ViewHolder> {
-        public CityListWithHeadersAdapter(List list) {
-            super(list);
-        }
-
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
@@ -162,36 +209,9 @@ public class MakersActivity extends BaseActivity implements OnQuickSideBarTouchL
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             TextView textView = (TextView) holder.itemView;
-            textView.setText(getItem(position).toString());
+            textView.setText(getItem(position).getCityName());
         }
 
-        @Override
-        public long getHeaderId(int position) {
-            return getItem(position).charAt(0);
-        }
-
-        @Override
-        public RecyclerView.ViewHolder onCreateHeaderViewHolder(ViewGroup parent) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.view_header, parent, false);
-            return new RecyclerView.ViewHolder(view) {
-            };
-        }
-
-        @Override
-        public void onBindHeaderViewHolder(RecyclerView.ViewHolder holder, int position) {
-            TextView textView = (TextView) holder.itemView;
-            textView.setText(String.valueOf(getItem(position)));
-            holder.itemView.setBackgroundColor(getRandomColor());
-        }
-
-        private int getRandomColor() {
-            SecureRandom rgen = new SecureRandom();
-            return Color.HSVToColor(150, new float[]{
-                    rgen.nextInt(359), 1, 1
-            });
-        }
-/*
         @Override
         public long getHeaderId(int position) {
             return getItem(position).getFirstLetter().charAt(0);
@@ -203,14 +223,21 @@ public class MakersActivity extends BaseActivity implements OnQuickSideBarTouchL
                     .inflate(R.layout.view_header, parent, false);
             return new RecyclerView.ViewHolder(view) {
             };
-        }*/
+        }
 
-       /* @Override
+        @Override
         public void onBindHeaderViewHolder(RecyclerView.ViewHolder holder, int position) {
             TextView textView = (TextView) holder.itemView;
             textView.setText(String.valueOf(getItem(position).getFirstLetter()));
             holder.itemView.setBackgroundColor(getRandomColor());
-        }*/
+        }
+
+        private int getRandomColor() {
+            SecureRandom rgen = new SecureRandom();
+            return Color.HSVToColor(150, new float[]{
+                    rgen.nextInt(359), 1, 1
+            });
+        }
 
     }
 }
