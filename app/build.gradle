@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.zbPro.seed"
-        minSdkVersion 9
+        minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -23,6 +23,7 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:recyclerview-v7:23.4.0'
     compile 'com.jakewharton:butterknife:7.0.1'
     //OKHTTP框架
     compile files('libs/okhttp-2.7.5.jar')
@@ -35,4 +36,6 @@ dependencies {
     compile 'com.nineoldandroids:library:2.4.0'
     //ListVIew实现通讯录效果
     compile 'com.bigkoo:quicksidebar:1.0.1'
+    compile 'com.timehop.stickyheadersrecyclerview:library:0.3.3@aar'
+
 }

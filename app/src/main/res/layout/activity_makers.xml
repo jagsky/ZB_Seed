@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fadingEdge="vertical"
     android:focusable="true"
     android:focusableInTouchMode="true"
@@ -19,9 +20,24 @@
         android:hint="请输入农户的地块号"
         android:maxLength="15" />
 
-    <ListView
-        android:id="@+id/farmer_lv"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
+    <com.bigkoo.quicksidebar.QuickSideBarTipsView
+        android:id="@+id/quickSideBarTipsView"
+        app:sidebarTextColor="@android:color/white"
+        app:sidebarBackgroundColor="@color/colorPrimary"
+        android:layout_toLeftOf="@+id/quickSideBarView"
+        android:layout_width="@dimen/height_quicksidebartips"
+        android:layout_height="match_parent"/>
+
+    <com.bigkoo.quicksidebar.QuickSideBarView
+        android:id="@id/quickSideBarView"
+        app:sidebarTextColorChoose="@color/colorPrimary"
+        app:sidebarTextColor="@android:color/black"
+        android:layout_alignParentRight="true"
+        android:layout_width="20dp"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

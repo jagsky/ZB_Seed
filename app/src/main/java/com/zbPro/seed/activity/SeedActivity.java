@@ -287,7 +287,7 @@ public class SeedActivity extends BaseActivity {
                     seedMontherUse.setText("");
                 }
 
-                String s7 = (String) positionRaw.get(beizhu);
+                String s7 = (String) positionRaw.get( "beizhu" );
                 if (s7 != null) {
                     seedBeiZhuId.setText(s7);
                 } else {
