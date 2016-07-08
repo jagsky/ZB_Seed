@@ -7,5 +7,5 @@
         android:id="@+id/welcome_iv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@mipmap/welcome_bg" />
+        android:background="@mipmap/guide_bg1" />
 </LinearLayout>

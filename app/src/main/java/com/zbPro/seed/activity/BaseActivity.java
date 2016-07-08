@@ -1,5 +1,6 @@
 package com.zbPro.seed.activity;
 
+import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -7,9 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.zbPro.seed.collector.ActivityCollector;
-import com.zbPro.seed.db.DatabaseHelper;
-
-import java.util.List;
 
 /*
 * 类名：BaseActivity
@@ -17,11 +15,18 @@ import java.util.List;
 * 功能：所有Activity继承此界面，方便管理
 * */
 public class BaseActivity extends AppCompatActivity {
+
+    Activity activity;
+
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
         //在创建的时候知道是那个Activity
         ActivityCollector.addActivity(this);
+        initwindown();
+    }
+
+    private void initwindown() {
 
     }
 

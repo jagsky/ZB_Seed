@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">田间种植</string>
+
     <string name="register_name_digits">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLIMNOPQRSTUVWXYZ</string>
 </resources>
