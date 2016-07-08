@@ -45,7 +45,7 @@ public class WelComeActivity extends BaseActivity {
         animation.setAnimationListener( new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-
+            //这是我最新
             }
 
             @Override

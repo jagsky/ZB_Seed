@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/ZB_Seed.iml" filepath="$PROJECT_DIR$/ZB_Seed.iml" />
       <module fileurl="file://$PROJECT_DIR$/ZB_SeedProject-master-master.iml" filepath="$PROJECT_DIR$/ZB_SeedProject-master-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
