@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.zbPro.seed.activity">
+    package="com.zbPro.seed.activity"
+    android:versionCode="1"
+    android:versionName="1.0">
 
     <!-- 访问互联网权限 根据需要添加 -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -11,6 +13,7 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
     <application
         android:allowBackup="true"
@@ -41,6 +44,9 @@
         <service
             android:name="com.zbPro.seed.service.FarmerService"
             android:exported="false" />
+
+        <activity android:name=".FarmerDataActivity" />
+        <activity android:name=".FarmerBasedataActiivty"></activity>
     </application>
 
 </manifest>

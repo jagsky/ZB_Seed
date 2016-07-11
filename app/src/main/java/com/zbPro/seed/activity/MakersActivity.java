@@ -1,17 +1,24 @@
 package com.zbPro.seed.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bigkoo.quicksidebar.QuickSideBarTipsView;
 import com.bigkoo.quicksidebar.QuickSideBarView;
@@ -33,6 +40,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 /*
 * 时间：2016/6/15
@@ -40,11 +49,11 @@ import java.util.LinkedList;
 * 作用：显示农户的基本信息
 * 实现功能：显示农户的基本信息
 * */
-public class MakersActivity extends BaseActivity implements OnQuickSideBarTouchListener {
-    RecyclerView recyclerView;
+public class MakersActivity extends BaseActivity {
+   /* RecyclerView recyclerView;
     HashMap<String, Integer> letters = new HashMap<>();
     QuickSideBarView quickSideBarView;
-    QuickSideBarTipsView quickSideBarTipsView;
+    QuickSideBarTipsView quickSideBarTipsView;*/
 
 
     //获取listview控件
@@ -81,8 +90,8 @@ public class MakersActivity extends BaseActivity implements OnQuickSideBarTouchL
         //获取 farmer表中 姓名 地块号 种类显示到Listvew中
         farmerNDTList = farmaerDao.displayFarmerNDT();
         initlistview();
-        // initView();
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        initView();
+       /* recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         quickSideBarView = (QuickSideBarView) findViewById(R.id.quickSideBarView);
         quickSideBarTipsView = (QuickSideBarTipsView) findViewById(R.id.quickSideBarTipsView);
 
@@ -113,41 +122,58 @@ public class MakersActivity extends BaseActivity implements OnQuickSideBarTouchL
                 letters.put(letter, position);
                 customLetters.add(letter);
             }
-            position++;
-        }
-
-        //不自定义则默认26个字母
-        quickSideBarView.setLetters(customLetters);
-        adapter.addAll(cities);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        final StickyRecyclerHeadersDecoration headersDecor = new StickyRecyclerHeadersDecoration(adapter);
-        recyclerView.addItemDecoration(headersDecor);
-
-        // Add decoration for dividers between list items
-        recyclerView.addItemDecoration(new DividerDecoration(this));
-
-
+            position++;*/
     }
 
+    /*   //不自定义则默认26个字母
+       quickSideBarView.setLetters(customLetters);
+       adapter.addAll(cities);
+       recyclerView.setAdapter(adapter);
+       recyclerView.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+
+           }
+       });
+       final StickyRecyclerHeadersDecoration headersDecor = new StickyRecyclerHeadersDecoration(adapter);
+       recyclerView.addItemDecoration(headersDecor);
+
+       // Add decoration for dividers between list items
+       recyclerView.addItemDecoration(new DividerDecoration(this));
+
+
+   }*/
+    Map<String, String> listItemData = new HashMap<String, String>();
+
+    //listview初始化
     private void initlistview() {
         //初始化控件
-       /* //初始化Listview空间
+        //初始化Listview空间
         farmer_lv = (ListView) findViewById(R.id.farmer_lv);
         //设置一个ListView的适配器
         simpleAdapter = new SimpleAdapter(MakersActivity.this, farmerNDTList,
                 R.layout.farmer_item,
                 new String[]{"name", "DkNumber", "type"},
                 new int[]{R.id.txtitem_1, R.id.txtitem_2, R.id.txtitem_3});
-        farmer_lv.setAdapter(simpleAdapter);*/
+        farmer_lv.setAdapter(simpleAdapter);
+        farmer_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                listItemData = (Map<String, String>) parent.getItemAtPosition(position);
+                String farmerData = listItemData.get("DkNumber").toString();
+                Intent intent = new Intent(MakersActivity.this, FarmerBasedataActiivty.class);
+                intent.putExtra("dk", farmerData);
+                startActivity(intent);
+
+            }
+        });
+
     }
 
-    /*private void initView() {
+    int i;
+
+    //AutoCompleteTextView初始化
+    private void initView() {
         //初始化搜索栏控件
         farmer_AutoCompleteTextView = (AutoCompleteTextView)
                 findViewById(R.id.farmer_AutoCompleteTextView);
@@ -163,25 +189,17 @@ public class MakersActivity extends BaseActivity implements OnQuickSideBarTouchL
                         InputMethodManager.HIDE_NOT_ALWAYS);
                 queryDKNumber = parent.getItemAtPosition(position).toString();
                 Toast.makeText(MakersActivity.this, "你选择了" + queryDKNumber, Toast.LENGTH_SHORT).show();
+
+                i = farmer_lv.getChildAt(position).getId();
+                System.out.println(i);
+
+
             }
         });
 
 
-    <AutoCompleteTextView
-        android:id="@+id/farmer_AutoCompleteTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="5dp"
-        android:completionThreshold="1"
-        android:digits="@string/register_name_digits"
-        android:dropDownHeight="wrap_content"
-        android:hint="请输入农户的地块号"
-        android:maxLength="15" />
-    }*/
 
-
-    @Override
+  /*  @Override
     public void onLetterChanged(String letter, int position, int itemHeight) {
         quickSideBarTipsView.setText(letter, position, itemHeight);
         //有此key则获取位置并滚动到该位置
@@ -239,5 +257,7 @@ public class MakersActivity extends BaseActivity implements OnQuickSideBarTouchL
             });
         }
 
+    }*/
     }
+
 }

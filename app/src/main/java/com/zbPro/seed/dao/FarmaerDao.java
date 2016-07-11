@@ -130,5 +130,20 @@ public class FarmaerDao {
         return null;
     }
 
+    FarmerBean farmerBean = new FarmerBean();
+
+    public FarmerBean queryFarmerLine(String dk) {
+        try {
+// 查询的query 返回值是一个列表
+// 类似 select * from User where 'username' = username;
+            List<FarmerBean> users = mUserDAO.queryBuilder().where().eq("dKNumber", dk).query();
+
+            return users.get(0);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
 }

@@ -8,22 +8,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
         android:orientation="vertical">
 
-        <AutoCompleteTextView
-            android:digits="@string/register_name_digits"
-            android:id="@+id/rogue_AutoCompleteTextView"
+        <!--<ListView
+            android:id="@+id/farmerline_lv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="5dp"
-            android:completionThreshold="1"
-            android:dropDownHeight="wrap_content"
-            android:hint="请输入农户的地块号"
-            android:maxLength="15" />
-
+            android:layout_height="wrap_content"></ListView>-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,18 +21,17 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="80dp"
+                android:layout_width="120dp"
                 android:layout_height="50dp"
                 android:gravity="center_vertical|right"
                 android:text="姓名" />
 
             <EditText
-                android:id="@+id/rogue_FarmerName_et"
+                android:id="@+id/farmer_name"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_weight="1"
-                android:focusable="false"
-                android:textColor="@color/colorAccent" />
+                android:focusable="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -52,18 +41,17 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="80dp"
+                android:layout_width="120dp"
                 android:layout_height="50dp"
                 android:gravity="center_vertical|right"
                 android:text="地块" />
 
             <EditText
-                android:id="@+id/rogue_Number_et"
+                android:id="@+id/farmer_Number_et"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:focusable="false"
-                android:textColor="@color/colorAccent" />
+                android:focusable="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -73,48 +61,17 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="80dp"
+                android:layout_width="120dp"
                 android:layout_height="50dp"
                 android:gravity="center_vertical|right"
                 android:text="种类" />
 
             <EditText
-                android:id="@+id/rogue_Type_et"
+                android:id="@+id/farmer_type_et"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:focusable="false"
-                android:textColor="@color/colorAccent" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="5dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:gravity="center"
-                android:text="去杂时间" />
-
-            <EditText
-                android:id="@+id/rogue_txtDate"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:focusable="false"
-                android:gravity="center"
-                android:textColor="@color/colorAccent"
-                android:textColorHint="@color/colorAccent" />
-
-            <Button
-                android:id="@+id/btnDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="修改" />
-
+                android:focusable="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -124,19 +81,17 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="80dp"
+                android:layout_width="120dp"
                 android:layout_height="50dp"
                 android:gravity="center_vertical|right"
-                android:text="父株距" />
+                android:text="基地名称" />
 
             <EditText
-                android:id="@+id/rogue_rowFather"
+                android:id="@+id/farmer_base_et"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:inputType="number" />
-
-
+                android:focusable="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -146,18 +101,17 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="80dp"
+                android:layout_width="120dp"
                 android:layout_height="50dp"
                 android:gravity="center_vertical|right"
-                android:text="母株距" />
+                android:text="联系方式" />
 
             <EditText
-                android:id="@+id/rogue_rowMothers"
+                android:id="@+id/farmer_house_et"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:inputType="number" />
-
+                android:focusable="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -167,21 +121,18 @@
             android:orientation="horizontal">
 
             <TextView
-
-                android:layout_width="80dp"
+                android:layout_width="120dp"
                 android:layout_height="50dp"
                 android:gravity="center_vertical|right"
-                android:text="行距" />
+                android:text="身份证" />
 
             <EditText
-                android:id="@+id/rogue_lineWidth"
+                android:id="@+id/farmer_idcard_et"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:inputType="number" />
-
+                android:focusable="false" />
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -190,19 +141,17 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="80dp"
+                android:layout_width="120dp"
                 android:layout_height="50dp"
                 android:gravity="center_vertical|right"
-                android:text="行比" />
+                android:text="区域温度" />
 
             <EditText
-                android:id="@+id/rogue_lineRatio"
+                android:id="@+id/farmer_temperature_et"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:inputType="number" />
-            android:layout_weight="1" />
-
+                android:focusable="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -212,56 +161,17 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="80dp"
+                android:layout_width="120dp"
                 android:layout_height="50dp"
                 android:gravity="center_vertical|right"
-                android:text="出苗父" />
+                android:text="村委会配合" />
 
             <EditText
-                android:id="@+id/rogue_comeOutFather"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="50dp"
-                android:gravity="center_vertical|right"
-                android:text="出苗母" />
-
-            <EditText
-                android:id="@+id/rogue_conmeOutMother"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="50dp"
-                android:gravity="center_vertical|right"
-                android:text="杂株率" />
-
-            <EditText
-                android:id="@+id/rogue_impurties"
+                android:id="@+id/farmer_voyages_et"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:inputType="number" />
+                android:focusable="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -271,17 +181,17 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="80dp"
+                android:layout_width="120dp"
                 android:layout_height="50dp"
                 android:gravity="center_vertical|right"
-                android:text="可育株率" />
+                android:text="土地管理模式" />
 
             <EditText
-                android:id="@+id/rogue_fertility"
+                android:id="@+id/farmer_manure_et"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:inputType="number" />
+                android:focusable="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -291,22 +201,18 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="80dp"
+                android:layout_width="120dp"
                 android:layout_height="50dp"
                 android:gravity="center_vertical|right"
-                android:text="备注" />
+                android:text="生产队" />
 
             <EditText
-                android:id="@+id/rogue_beiZhu"
+                android:id="@+id/farmer_troopsName_et"
                 android:layout_width="0dp"
-                android:layout_height="120dp"
+                android:layout_height="50dp"
                 android:layout_weight="1"
-                android:gravity="left|top"
-                android:inputType="textMultiLine"
-                android:minLines="3"
-                android:singleLine="false" />
+                android:focusable="false" />
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -314,28 +220,48 @@
             android:layout_marginLeft="5dp"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/rogue_BC_btn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:text="保存"
-                android:textColor="#fa0111"
-                android:textSize="30sp" />
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="50dp"
+                android:gravity="center_vertical|right"
+                android:text="往年产量" />
 
-            <Button
-                android:id="@+id/rogue_send_btn"
+            <EditText
+                android:id="@+id/farmer_yield_et"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:gravity="center"
-                android:text="保存"
-                android:textColor="#fa0111"
-                android:textSize="30sp"
-                />
-
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:focusable="false" />
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="50dp"
+                android:gravity="center_vertical|right"
+                android:text="地块面积" />
+
+            <EditText
+                android:id="@+id/farmer_aera_et"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:focusable="false" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/farmer_call"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="拨打电话"
+            android:textColor="@color/colorPrimary"
+            android:textSize="30sp" />
 
     </LinearLayout>
+
 </ScrollView>

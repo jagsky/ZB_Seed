@@ -24,7 +24,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="农户管理"
+            android:text="农户"
             android:textColor="@color/swap_holo_green_bright"
             android:textSize="30sp" />
 
