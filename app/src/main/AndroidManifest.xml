@@ -13,7 +13,7 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -43,7 +43,8 @@
 
         <service
             android:name="com.zbPro.seed.service.FarmerService"
-            android:exported="false" />
+            android:enabled="true"
+            android:exported="true" />
 
         <activity android:name=".FarmerDataActivity" />
         <activity android:name=".FarmerBasedataActiivty"></activity>

@@ -16,7 +16,14 @@ public class FarmerService extends Service {
     }
 
     @Override
-    public void onStart(Intent intent, int startId) {
-        super.onStart( intent, startId );
+    public void onCreate() {
+        super.onCreate();
+
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+
+        return super.onStartCommand(intent, flags, startId);
     }
 }

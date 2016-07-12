@@ -16,6 +16,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
+import com.zbPro.seed.service.FarmerService;
 import com.zbPro.seed.util.Constant;
 
 import java.io.IOException;
@@ -175,6 +176,8 @@ public class RegisterActivity extends BaseActivity {
         if (isRegisterOK.equals("1")) {
             //将数据添加到文件中
             preferences();
+            Intent startSeveice = new Intent(RegisterActivity.this, FarmerService.class);
+            startService(startSeveice);
             Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
            /* intent.putExtra("userName", register_userName);
             intent.putExtra("isReqeust", 1);*/
