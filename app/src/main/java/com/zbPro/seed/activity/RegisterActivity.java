@@ -135,7 +135,7 @@ public class RegisterActivity extends BaseActivity {
                 .build();
 
         final Request request = new Request.Builder()
-                .url(Constant.PATH + Constant.REGISTER)
+                .url("http://192.168.0.100:8080/register.do")
                 .post(formBody)
                 .build();
 
@@ -176,12 +176,12 @@ public class RegisterActivity extends BaseActivity {
         if (isRegisterOK.equals("1")) {
             //将数据添加到文件中
             preferences();
-            Intent startSeveice = new Intent(RegisterActivity.this, FarmerService.class);
-            startService(startSeveice);
+           /* Intent startSeveice = new Intent(RegisterActivity.this, FarmerService.class);
+            startSeveice.putExtra("register_idCard",register_idCard);
+            startService(startSeveice);*/
             Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
            /* intent.putExtra("userName", register_userName);
             intent.putExtra("isReqeust", 1);*/
-            intent.putExtra("register", "register");
             startActivity(intent);
             finish();
             Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();

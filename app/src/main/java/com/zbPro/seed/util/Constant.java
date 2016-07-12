@@ -13,4 +13,5 @@ public class Constant {
     public static final String ROGUE = "rogue.do";
     public static final String CASTRATION = "castration.do";
     public static final String GAIN = "gain.do";
+    public static final String FARMER = "farmer.do";
 }
