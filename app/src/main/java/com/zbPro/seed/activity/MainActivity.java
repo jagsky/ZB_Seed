@@ -8,10 +8,8 @@ package com.zbPro.seed.activity;
     * 实现功能：自定义TabHost
     * */
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -28,7 +26,6 @@ import com.zbPro.seed.dao.FarmaerDao;
 import com.zbPro.seed.dao.GainDao;
 import com.zbPro.seed.dao.RogueDao;
 import com.zbPro.seed.dao.SeedDao;
-import com.zbPro.seed.db.DatabaseHelper;
 import com.zbPro.seed.fragment.Fragment1;
 import com.zbPro.seed.fragment.Fragment2;
 import com.zbPro.seed.fragment.Fragment3;
@@ -140,7 +137,7 @@ public class MainActivity extends BaseActivity {
         int ss = intent.getIntExtra("isReqeust", 0);
         if (ss == 1) {
             //启动一个服务接收返回过来的数据
-            Intent intent1 = new Intent(MainActivity.this, FarmerService.class);
+            Intent intent1 = new Intent(MainActivity.this, .class);
             intent1.putExtra("",);
             startService(intent1);
         }

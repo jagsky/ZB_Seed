@@ -3,6 +3,7 @@ package com.zbPro.seed.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
@@ -55,7 +56,7 @@ public class WelComeActivity extends BaseActivity {
                 String s = preferences.getString( "register_userName", "0" );
                 if (IsOK == false) {
                     //如果之前没有保存过账号密码，则先跳转到登入界面
-                    Intent intent = new Intent( WelComeActivity.this, MainActivity.class );
+                    Intent intent = new Intent( WelComeActivity.this, LoginActivity.class );
                     startActivity( intent );
                     finish();
                 } else {
