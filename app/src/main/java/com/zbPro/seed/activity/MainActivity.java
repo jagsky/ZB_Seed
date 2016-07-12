@@ -8,6 +8,7 @@ package com.zbPro.seed.activity;
     * 实现功能：自定义TabHost
     * */
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
@@ -55,13 +56,20 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        //启动服务获取返回的数据
+        netService();
         //初始化View控件
         initView();
         //获取Intent传递过来的数据
         // getIntentData();
-       addDatabase();
+        addDatabase();
 
 
+    }
+
+    private void netService() {
+        Intent startIntent = getIntent();
+        String s = startIntent.getStringExtra("register");
     }
 
 

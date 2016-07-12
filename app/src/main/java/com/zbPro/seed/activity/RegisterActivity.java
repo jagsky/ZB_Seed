@@ -178,6 +178,7 @@ public class RegisterActivity extends BaseActivity {
             Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
            /* intent.putExtra("userName", register_userName);
             intent.putExtra("isReqeust", 1);*/
+            intent.putExtra("register", "register");
             startActivity(intent);
             finish();
             Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
