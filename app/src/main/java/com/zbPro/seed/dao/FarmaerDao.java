@@ -54,7 +54,7 @@ public class FarmaerDao {
         List<FarmerBean> users = queryAllFarmerBean();
         arrayList = new ArrayList();
         for (FarmerBean user1 : users) {
-            arrayList.add(user1.getdKNumber());
+            arrayList.add(user1.getdKnumber());
         }
         //  System.out.println(arrayList.toString());
         //  System.out.println(users.toString());
@@ -74,8 +74,8 @@ public class FarmaerDao {
         for (FarmerBean farmerBean : queryBuilder) {
 
             HashMap<String, Object> map = new HashMap<String, Object>();
-            map.put("name", farmerBean.getName());
-            map.put("DkNumber", farmerBean.getdKNumber());
+            map.put("name", farmerBean.getFarmerName());
+            map.put("DkNumber", farmerBean.getdKnumber());
             map.put("type", farmerBean.getType());
             arrayList1.add(map);
 

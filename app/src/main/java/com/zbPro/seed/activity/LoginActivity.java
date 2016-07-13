@@ -44,14 +44,12 @@ public class LoginActivity extends BaseActivity {
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
     //判断登入是否成功
-    private String IsSkiplogin;
-    private String IsSuccessful;
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             Bundle bundle = msg.getData();
-            IsSkiplogin = bundle.getString("str");
+            String IsSkiplogin = bundle.getString("str");
 
             IsSkiplogin(IsSkiplogin);
 
@@ -144,7 +142,7 @@ public class LoginActivity extends BaseActivity {
                     response = client.newCall(request).execute();
                     if (response.isSuccessful()) {
                         String str = response.body().string();
-                        LogBase.i("打印POST响应的数据：" + str);
+                        LogBase.i("打印POST响应的数据：ACTIVITY" + str);
                         Message message = handler.obtainMessage();
                         Bundle bundle = new Bundle();
                         bundle.putString("str", str);
@@ -168,24 +166,24 @@ public class LoginActivity extends BaseActivity {
     //是否登入成功，如果成功则在此处
     private void IsSkiplogin(String isSkiplogin) {
         // System.out.println(IsSkiplogin);
-        if (IsSkiplogin.equals("1")) {
+        if (isSkiplogin.equals("1")) {
             editor.putBoolean("IsOK", true);
             editor.putString("register_userName", userName);
             editor.putString("register_password", password);
             editor.commit();
             Intent intent = new Intent(LoginActivity.this, LoginMyService.class);
-            intent.putExtra("userName","userName");
-            startActivity(intent);
+            intent.putExtra("userName", userName);
+            startService(intent);
             Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(loginIntent);
             finish();
 
             Toast.makeText(LoginActivity.this, "登入成功", Toast.LENGTH_SHORT).show();
-        } else if (IsSkiplogin.equals("0")) {
+        } else if (isSkiplogin.equals("0")) {
             Toast.makeText(LoginActivity.this, "密码/账号错误", Toast.LENGTH_SHORT).show();
 
 
-        } else if (IsSkiplogin.equals("")) {
+        } else if (isSkiplogin.equals("")) {
             Toast.makeText(LoginActivity.this, "服务器错误", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(LoginActivity.this, "连接失败", Toast.LENGTH_SHORT).show();

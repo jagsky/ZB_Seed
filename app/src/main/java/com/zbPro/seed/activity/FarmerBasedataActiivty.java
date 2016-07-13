@@ -94,18 +94,18 @@ public class FarmerBasedataActiivty extends BaseActivity {
         beanList.add(map);
         SimpleAdapter simpleAdapter = new SimpleAdapter(FarmerBasedataActiivty.this,beanList,R.layout.farmerline_data,
                 new String[]{"姓名"},new int[]{});*/
-        farmerName.setText(farmerBean.getName());
-        farmerNumberEt.setText(farmerBean.getdKNumber());
+        farmerName.setText(farmerBean.getFarmerName());
+        farmerNumberEt.setText(farmerBean.getdKnumber());
         farmerTypeEt.setText(farmerBean.getType());
         farmerBaseEt.setText(farmerBean.getBaseName());
         farmerHouseEt.setText(farmerBean.getHouse());
-        farmerIdcardEt.setText(farmerBean.getIdCard());
+        farmerIdcardEt.setText(farmerBean.getIdcard());
         farmerTemperatureEt.setText(farmerBean.getTemperature());
-        farmerVoyagesEt.setText(farmerBean.getVoyages());
-        farmerManureEt.setText(farmerBean.getManure());
-        farmerTroopsNameEt.setText(farmerBean.getTroopsName());
-        farmerYieldEt.setText(farmerBean.getYield());
-        farmerAeraEt.setText(farmerBean.getAera());
+        farmerVoyagesEt.setText(farmerBean.getFarmer_voyages());
+        farmerManureEt.setText(farmerBean.getFarmer_manure());
+        farmerTroopsNameEt.setText(farmerBean.getFarmer_troopsname());
+        farmerYieldEt.setText(farmerBean.getFarmer_yield());
+        farmerAeraEt.setText(farmerBean.getFarmer_area());
 
     }
 
@@ -184,7 +184,6 @@ public class FarmerBasedataActiivty extends BaseActivity {
         }
 
     }
-
 
 
 }

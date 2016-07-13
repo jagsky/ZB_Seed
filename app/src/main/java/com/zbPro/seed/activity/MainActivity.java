@@ -62,7 +62,7 @@ public class MainActivity extends BaseActivity {
         initView();
         //获取Intent传递过来的数据
         // getIntentData();
-        addDatabase();
+        // addDatabase();
 
 
     }
@@ -72,7 +72,7 @@ public class MainActivity extends BaseActivity {
         String s = startIntent.getStringExtra("register");
     }
 
-
+/*
     private void addDatabase() {
         Seed seed;
         SeedDao seedDao;
@@ -134,7 +134,7 @@ public class MainActivity extends BaseActivity {
             }
         }
 
-    }
+    }*/
 
 /*
     //

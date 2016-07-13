@@ -19,4 +19,11 @@
         android:textColor="#e60f12"
         android:textSize="30sp" />
 
+    <Button
+        android:id="@+id/fragment4_UserIdbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="退出当前账户"
+        android:textSize="30sp" />
 </LinearLayout>

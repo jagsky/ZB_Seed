@@ -106,12 +106,12 @@ public class FarmerService extends Service {
 
     private void jsonTOArray(String jsonstr) {
         Gson gson = new Gson();
-        Type type = new TypeToken<ArrayList<FarmerBean>>() {
+        Type type = new TypeToken<LinkedList<FarmerBean>>() {
         }.getType();
-        FarmerBean farmerBean = new FarmerBean();
         FarmaerDao farmaerDao = new FarmaerDao(FarmerService.this);
 
         List<FarmerBean> farmerBeanList = gson.fromJson(jsonstr, type);
+        System.out.println("这个是我新打印的" + farmerBeanList.toString());
         try {
             for (int i = 0; i < farmerBeanList.size(); i++) {
 
@@ -124,7 +124,6 @@ public class FarmerService extends Service {
 
 
     }
-
 
     @Override
     public void onDestroy() {
