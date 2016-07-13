@@ -18,20 +18,17 @@ import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 import com.zbPro.seed.bean.FarmerBean;
 import com.zbPro.seed.dao.FarmaerDao;
-import com.zbPro.seed.net.HttpPost;
 import com.zbPro.seed.util.Constant;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Created by Administrator on 2016/7/1.
- */
-public class FarmerService extends Service {
+public class LoginMyService extends Service {
+    public LoginMyService() {
+    }
 
     Handler handler = new Handler() {
         @Override
@@ -59,11 +56,11 @@ public class FarmerService extends Service {
 
     }
 
-    String register_idCard = null;
+    String userName = null;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        register_idCard = intent.getStringExtra("register_idCard");
+        userName = intent.getStringExtra("userName");
         isRegisterOKGoHttpGet();
         return START_NOT_STICKY;
     }
@@ -71,11 +68,11 @@ public class FarmerService extends Service {
     private void isRegisterOKGoHttpGet() {
         final OkHttpClient client = new OkHttpClient();
         RequestBody formBody = new FormEncodingBuilder()
-                .add("idCard", register_idCard)
+                .add("userName", userName)
                 .build();
 
         final Request request = new Request.Builder()
-                .url(Constant.PATH + Constant.FARMER)
+                .url(Constant.PATH + Constant.LOGINFARMER)
                 .post(formBody)
                 .build();
 
@@ -109,7 +106,7 @@ public class FarmerService extends Service {
         Type type = new TypeToken<ArrayList<FarmerBean>>() {
         }.getType();
         FarmerBean farmerBean = new FarmerBean();
-        FarmaerDao farmaerDao = new FarmaerDao(FarmerService.this);
+        FarmaerDao farmaerDao = new FarmaerDao(LoginMyService.this);
 
         List<FarmerBean> farmerBeanList = gson.fromJson(jsonstr, type);
         try {

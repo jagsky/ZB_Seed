@@ -47,7 +47,12 @@
             android:exported="true" />
 
         <activity android:name=".FarmerDataActivity" />
-        <activity android:name=".FarmerBasedataActiivty"></activity>
+        <activity android:name=".FarmerBasedataActiivty" />
+
+        <service
+            android:name="com.zbPro.seed.service.LoginMyService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

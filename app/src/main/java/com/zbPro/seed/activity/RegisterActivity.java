@@ -135,7 +135,7 @@ public class RegisterActivity extends BaseActivity {
                 .build();
 
         final Request request = new Request.Builder()
-                .url("http://192.168.0.100:8080/register.do")
+                .url(Constant.PATH+Constant.REGISTER)
                 .post(formBody)
                 .build();
 
@@ -148,7 +148,7 @@ public class RegisterActivity extends BaseActivity {
                     if (response.isSuccessful()) {
 
                         String str = response.body().string();
-                        Log.i("WY", "打印POST响应的数据：" + str);
+                       // Log.i("WY", "打印POST响应的数据：" + str);
                         Message message = handler.obtainMessage();
                         Bundle bundle = new Bundle();
                         bundle.putString("str", str);
@@ -176,9 +176,9 @@ public class RegisterActivity extends BaseActivity {
         if (isRegisterOK.equals("1")) {
             //将数据添加到文件中
             preferences();
-           /* Intent startSeveice = new Intent(RegisterActivity.this, FarmerService.class);
+            Intent startSeveice = new Intent(RegisterActivity.this, FarmerService.class);
             startSeveice.putExtra("register_idCard",register_idCard);
-            startService(startSeveice);*/
+            startService(startSeveice);
             Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
            /* intent.putExtra("userName", register_userName);
             intent.putExtra("isReqeust", 1);*/

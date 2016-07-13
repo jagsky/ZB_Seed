@@ -20,6 +20,8 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 import com.zbPro.seed.collector.LogBase;
+import com.zbPro.seed.service.FarmerService;
+import com.zbPro.seed.service.LoginMyService;
 import com.zbPro.seed.util.Constant;
 
 import java.io.IOException;
@@ -47,11 +49,11 @@ public class LoginActivity extends BaseActivity {
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            super.handleMessage( msg );
+            super.handleMessage(msg);
             Bundle bundle = msg.getData();
-            IsSkiplogin = bundle.getString( "str" );
+            IsSkiplogin = bundle.getString("str");
 
-            IsSkiplogin( IsSkiplogin );
+            IsSkiplogin(IsSkiplogin);
 
         }
     };
@@ -70,11 +72,11 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_login );
-        ButterKnife.bind( this );
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+        ButterKnife.bind(this);
         //获取IsOK事务的SharedPreferences对象以及编辑对象
-        preferences = getSharedPreferences( "login", MODE_PRIVATE );
+        preferences = getSharedPreferences("login", MODE_PRIVATE);
         editor = preferences.edit();
 
     }
@@ -94,17 +96,17 @@ public class LoginActivity extends BaseActivity {
                 boolean isNetwork = isNetworkConnected();
                 //   System.out.println(isNetwork);
                 if (isNetwork) {
-                    postRequest( userName, password );
+                    postRequest();
                 } else {
-                    Toast.makeText( LoginActivity.this, "网络错误", Toast.LENGTH_SHORT ).show();
+                    Toast.makeText(LoginActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
                 }
 
 
                 break;
             case R.id.register_btn:
                 //注册按钮 跳转到注册页面
-                Intent registerIntent = new Intent( LoginActivity.this, RegisterActivity.class );
-                startActivity( registerIntent );
+                Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(registerIntent);
                 finish();
 
                 break;
@@ -112,7 +114,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     public boolean isNetworkConnected() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService( Context.CONNECTIVITY_SERVICE );
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo ni = cm.getActiveNetworkInfo();
         return ni != null && ni.isConnectedOrConnecting();
     }
@@ -122,34 +124,34 @@ public class LoginActivity extends BaseActivity {
     * 功能：在用户点击登入按钮时候 发送Post请求携带用户名与密码去判断用户账号与密码
     * 参数：name 用户名  psd 登入密码
     * */
-    public void postRequest(String name, String psd) {
+    public void postRequest() {
         final OkHttpClient client = new OkHttpClient();
         RequestBody formBody = new FormEncodingBuilder()
-                .add( "userName", name )
-                .add( "password", psd )
+                .add("userName", userName)
+                .add("password", password)
                 .build();
 
         final Request request = new Request.Builder()
-                .url( Constant.PATH + Constant.LOGIN )
-                .post( formBody )
+                .url(Constant.PATH + Constant.LOGIN)
+                .post(formBody)
                 .build();
 
-        new Thread( new Runnable() {
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 Response response = null;
                 try {
-                    response = client.newCall( request ).execute();
+                    response = client.newCall(request).execute();
                     if (response.isSuccessful()) {
                         String str = response.body().string();
-                        LogBase.i( "打印POST响应的数据：" + str );
+                        LogBase.i("打印POST响应的数据：" + str);
                         Message message = handler.obtainMessage();
                         Bundle bundle = new Bundle();
-                        bundle.putString( "str", str );
-                        message.setData( bundle );
-                        handler.sendMessage( message );
+                        bundle.putString("str", str);
+                        message.setData(bundle);
+                        handler.sendMessage(message);
                     } else {
-                        throw new IOException( "Unexpected code " + response );
+                        throw new IOException("Unexpected code " + response);
 
 
                     }
@@ -157,7 +159,7 @@ public class LoginActivity extends BaseActivity {
                     e.printStackTrace();
                 }
             }
-        } ).start();
+        }).start();
 
 
     }
@@ -166,24 +168,27 @@ public class LoginActivity extends BaseActivity {
     //是否登入成功，如果成功则在此处
     private void IsSkiplogin(String isSkiplogin) {
         // System.out.println(IsSkiplogin);
-        if (IsSkiplogin.equals( "1" )) {
-            editor.putBoolean( "IsOK", true );
-            editor.putString( "register_userName", userName );
-            editor.putString( "register_password", password );
+        if (IsSkiplogin.equals("1")) {
+            editor.putBoolean("IsOK", true);
+            editor.putString("register_userName", userName);
+            editor.putString("register_password", password);
             editor.commit();
-            Intent loginIntent = new Intent( LoginActivity.this, MainActivity.class );
-            startActivity( loginIntent );
+            Intent intent = new Intent(LoginActivity.this, LoginMyService.class);
+            intent.putExtra("userName","userName");
+            startActivity(intent);
+            Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(loginIntent);
             finish();
 
-            Toast.makeText( LoginActivity.this, "登入成功", Toast.LENGTH_SHORT ).show();
-        } else if (IsSkiplogin.equals( "0" )) {
-            Toast.makeText( LoginActivity.this, "密码/账号错误", Toast.LENGTH_SHORT ).show();
+            Toast.makeText(LoginActivity.this, "登入成功", Toast.LENGTH_SHORT).show();
+        } else if (IsSkiplogin.equals("0")) {
+            Toast.makeText(LoginActivity.this, "密码/账号错误", Toast.LENGTH_SHORT).show();
 
 
-        } else if (IsSkiplogin.equals( "" )) {
-            Toast.makeText( LoginActivity.this, "服务器错误", Toast.LENGTH_SHORT ).show();
+        } else if (IsSkiplogin.equals("")) {
+            Toast.makeText(LoginActivity.this, "服务器错误", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText( LoginActivity.this, "连接失败", Toast.LENGTH_SHORT ).show();
+            Toast.makeText(LoginActivity.this, "连接失败", Toast.LENGTH_SHORT).show();
         }
     }
 
