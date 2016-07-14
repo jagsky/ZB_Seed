@@ -5,4 +5,6 @@
     <color name="colorAccent">#ed588c</color>
     <color name="colorPrimarLog">#fc07f4</color>
     <color name="colorBlack">#3e3e3d</color>
+    <color name="colorGray">#BFBFBF</color>
+    <color name="colorWhite">#ffffff</color>
 </resources>
