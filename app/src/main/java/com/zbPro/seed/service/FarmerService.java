@@ -97,6 +97,7 @@ public class FarmerService extends Service {
                     } else {
                         throw new IOException("Unexpected code " + response);
                     }
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

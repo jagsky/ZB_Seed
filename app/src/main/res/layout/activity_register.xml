@@ -13,21 +13,20 @@
         android:paddingBottom="10dp">
 
         <TextView
-            android:gravity="right|center"
             android:id="@+id/register_userTv"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
+            android:gravity="right|center"
             android:text="账号"
-            android:textColor="@color/colorBlack"
-             />
+            android:textColor="@color/colorBlack" />
 
         <EditText
             android:id="@+id/register_userEt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-           android:inputType="number"
             android:hint="请输入注册手机号"
+            android:inputType="number"
             android:maxLength="11"
             android:paddingLeft="10dp" />
 
@@ -40,10 +39,10 @@
         android:paddingBottom="10dp">
 
         <TextView
-            android:gravity="right|center"
             android:id="@+id/register_passworld1Tv"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
+            android:gravity="right|center"
             android:text="密码"
             android:textColor="@color/colorBlack" />
 
@@ -67,10 +66,10 @@
         android:paddingBottom="10dp">
 
         <TextView
-            android:gravity="right|center"
             android:id="@+id/register_password2Tv"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
+            android:gravity="right|center"
             android:text="密码"
             android:textColor="@color/colorBlack" />
 
@@ -94,10 +93,10 @@
         android:paddingBottom="10dp">
 
         <TextView
-            android:gravity="right|center"
             android:id="@+id/register_idCardTv"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
+            android:gravity="right|center"
             android:text="身份证"
             android:textColor="@color/colorBlack" />
 
@@ -119,8 +118,7 @@
         android:layout_height="wrap_content"
         android:text="提示：输入公司收录的身份证号码"
         android:textColor="#ff0004"
-        android:textSize="20sp"
-         />
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/register_registerBtn"

@@ -16,8 +16,9 @@
             android:id="@+id/user_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="right|center"
             android:text="账号"
-            android:textSize="30sp" />
+            android:textColor="@color/colorBlack" />
 
         <EditText
             android:id="@+id/user_et"
@@ -26,7 +27,8 @@
             android:layout_weight="1"
             android:digits="@string/register_name_digits"
             android:hint="请输入你的手机号码"
-            android:maxLength="11" />
+            android:maxLength="11"
+            android:paddingLeft="10dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -39,8 +41,9 @@
             android:id="@+id/password_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="right|center"
             android:text="密码"
-            android:textSize="30sp" />
+            android:textColor="@color/colorBlack" />
 
         <EditText
             android:id="@+id/password_et"
@@ -50,7 +53,8 @@
             android:digits="@string/register_name_digits"
             android:hint="请输入密码"
             android:inputType="textPassword"
-            android:maxLength="15" />
+            android:maxLength="15"
+            android:paddingLeft="10dp" />
     </LinearLayout>
 
     <Button

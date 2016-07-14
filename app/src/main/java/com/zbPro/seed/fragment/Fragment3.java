@@ -1,6 +1,5 @@
 package com.zbPro.seed.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,8 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.gson.Gson;
-import com.zbPro.seed.activity.FarmerDataActivity;
 import com.zbPro.seed.activity.R;
 
 /**
@@ -23,9 +20,8 @@ public class Fragment3 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup
             container, @Nullable Bundle savedInstanceState) {
-        Intent intent = new Intent(getActivity(), FarmerDataActivity.class);
-        startActivity(intent);
-        Gson gson = new Gson();
+
+
         return inflater.inflate(R.layout.fragmentpage3, null);
 
     }
