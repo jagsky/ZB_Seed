@@ -6,6 +6,7 @@ package com.zbPro.seed.bean;
 public class City {
 
     /**
+     * {"cityName":"广州","firstLetter":"☆"
      * cityName : 鞍山
      * firstLetter : A
      */

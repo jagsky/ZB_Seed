@@ -2,6 +2,8 @@ package com.zbPro.seed.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,6 +21,8 @@ import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
 import com.zbPro.seed.adapter.CityListAdapter;
 import com.zbPro.seed.adapter.DividerDecoration;
 import com.zbPro.seed.bean.City;
+import com.zbPro.seed.net.HttpPost;
+import com.zbPro.seed.util.Constant;
 import com.zbPro.seed.util.DataConstants;
 
 import java.lang.reflect.Type;
@@ -32,6 +36,17 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
     HashMap<String, Integer> letters = new HashMap<>();
     QuickSideBarView quickSideBarView;
     QuickSideBarTipsView quickSideBarTipsView;
+    String allData;
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Bundle bundle = msg.getData();
+            allData = bundle.getString("str");
+         //   System.out.println("发送过来的数据" + allData);
+        }
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +55,9 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         quickSideBarView = (QuickSideBarView) findViewById(R.id.quickSideBarView);
         quickSideBarTipsView = (QuickSideBarTipsView) findViewById(R.id.quickSideBarTipsView);
-
         //设置监听
         quickSideBarView.setOnQuickSideBarTouchListener(this);
-
-
+        httpJson();
         //设置列表数据和浮动header
         final LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
@@ -53,13 +66,13 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
         CityListWithHeadersAdapter adapter = new CityListWithHeadersAdapter();
 
         //GSON解释出来
-        Type listType = new TypeToken<LinkedList<City>>() {
+        Type type = new TypeToken<LinkedList<City>>() {
         }.getType();
         Gson gson = new Gson();
-        LinkedList<City> cities = gson.fromJson(DataConstants.cityDataList, listType);
-
-        ArrayList<String> customLetters = new ArrayList<>();
-
+        System.out.println("最新打印" + allData);
+        LinkedList<City> cities = gson.fromJson(allData, type);
+//        System.out.println("便利签" + cities.toString());
+        ArrayList<String> customLetters = new ArrayList<String>();
         int position = 0;
         for (City city : cities) {
             String letter = city.getFirstLetter();
@@ -85,12 +98,31 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
 
     }
 
+    private void httpJson() {
+        String str = "{boolean\": true,\n" +
+                "  \"null\": null,\n" +
+                "  \"number\": 123,\n}";
+        Gson gson = new Gson();
+        final String json = gson.toJson(str);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String str = HttpPost.SendhttpPostJson(json, Constant.PATH + Constant.TECHNICIAN);
+                Message message = Message.obtain(handler);
+                Bundle bundle = new Bundle();
+                bundle.putString("str", str);
+                message.setData(bundle);
+                handler.sendMessage(message);
+            }
+        }).start();
+    }
+
 
     @Override
     public void onLetterChanged(String letter, int position, int itemHeight) {
         quickSideBarTipsView.setText(letter, position, itemHeight);
         //有此key则获取位置并滚动到该位置
-        if(letters.containsKey(letter)) {
+        if (letters.containsKey(letter)) {
             recyclerView.scrollToPosition(letters.get(letter));
         }
     }
@@ -98,7 +130,7 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
     @Override
     public void onLetterTouching(boolean touching) {
         //可以自己加入动画效果渐显渐隐
-        quickSideBarTipsView.setVisibility(touching? View.VISIBLE: View.INVISIBLE);
+        quickSideBarTipsView.setVisibility(touching ? View.VISIBLE : View.INVISIBLE);
     }
 
     private class CityListWithHeadersAdapter extends CityListAdapter<RecyclerView.ViewHolder>

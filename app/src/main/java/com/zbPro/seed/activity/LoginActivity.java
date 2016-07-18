@@ -20,7 +20,6 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 import com.zbPro.seed.collector.LogBase;
-import com.zbPro.seed.service.FarmerService;
 import com.zbPro.seed.service.LoginMyService;
 import com.zbPro.seed.util.Constant;
 
