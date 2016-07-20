@@ -23,7 +23,6 @@ import com.zbPro.seed.adapter.DividerDecoration;
 import com.zbPro.seed.bean.City;
 import com.zbPro.seed.net.HttpPost;
 import com.zbPro.seed.util.Constant;
-import com.zbPro.seed.util.DataConstants;
 
 import java.lang.reflect.Type;
 import java.security.SecureRandom;
@@ -36,14 +35,13 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
     HashMap<String, Integer> letters = new HashMap<>();
     QuickSideBarView quickSideBarView;
     QuickSideBarTipsView quickSideBarTipsView;
-    String allData;
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             Bundle bundle = msg.getData();
-            allData = bundle.getString("str");
-         //   System.out.println("发送过来的数据" + allData);
+            String allData = bundle.getString("str");
+            getUI(allData);
         }
     };
 
@@ -58,6 +56,11 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
         //设置监听
         quickSideBarView.setOnQuickSideBarTouchListener(this);
         httpJson();
+
+
+    }
+
+    protected void getUI(String allData) {
         //设置列表数据和浮动header
         final LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
@@ -69,8 +72,9 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
         Type type = new TypeToken<LinkedList<City>>() {
         }.getType();
         Gson gson = new Gson();
-        System.out.println("最新打印" + allData);
+
         LinkedList<City> cities = gson.fromJson(allData, type);
+
 //        System.out.println("便利签" + cities.toString());
         ArrayList<String> customLetters = new ArrayList<String>();
         int position = 0;
@@ -94,8 +98,6 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
 
         // Add decoration for dividers between list items
         recyclerView.addItemDecoration(new DividerDecoration(this));
-
-
     }
 
     private void httpJson() {
