@@ -28,40 +28,40 @@ public class WelComeActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate( savedInstanceState );
-        requestWindowFeature( Window.FEATURE_NO_TITLE );
-        getWindow().setFlags( WindowManager.LayoutParams.FLAG_FULLSCREEN
-                , WindowManager.LayoutParams.FLAG_FULLSCREEN );
-        setContentView( R.layout.activity_wel_come );
-        ButterKnife.bind( this );
+        super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN
+                , WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_wel_come);
+        ButterKnife.bind(this);
         //初始化数据
         init();
     }
 
     private void init() {
         //创建一个渐变动画
-        AlphaAnimation animation = new AlphaAnimation( 0.1f, 1.0f );
-        animation.setDuration( 2000 );
-        welcomeIv.setAnimation( animation );
-        animation.setAnimationListener( new Animation.AnimationListener() {
+        AlphaAnimation animation = new AlphaAnimation(0.1f, 1.0f);
+        animation.setDuration(2000);
+        welcomeIv.setAnimation(animation);
+        animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-            //这是我最新
+                //这是我最新
             }
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                preferences = getSharedPreferences( "login", MODE_PRIVATE );
-                boolean IsOK = preferences.getBoolean( "IsOK", false );
-                String s = preferences.getString( "register_userName", "0" );
+                preferences = getSharedPreferences("login", MODE_PRIVATE);
+                boolean IsOK = preferences.getBoolean("IsOK", false);
+                String s = preferences.getString("register_userName", "0");
                 if (IsOK == false) {
                     //如果之前没有保存过账号密码，则先跳转到登入界面
-                    Intent intent = new Intent( WelComeActivity.this, LoginActivity.class );
-                    startActivity( intent );
+                    Intent intent = new Intent(WelComeActivity.this, LoginActivity.class);
+                    startActivity(intent);
                     finish();
                 } else {
-                    Intent intent = new Intent( WelComeActivity.this, MainActivity.class );
-                    startActivity( intent );
+                    Intent intent = new Intent(WelComeActivity.this, MainActivity.class);
+                    startActivity(intent);
                     finish();
                 }
             }
@@ -70,7 +70,7 @@ public class WelComeActivity extends BaseActivity {
             public void onAnimationRepeat(Animation animation) {
 
             }
-        } );
+        });
 
     }
 }
