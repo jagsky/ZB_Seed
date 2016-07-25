@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">田间种植</string>
     <string name="dailyworkreport">每日工作汇报</string>
+    <string name="send">发送</string>
+    <string name="save">保存</string>
+    <string name="revamp">修改</string>
     <string name="register_name_digits">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLIMNOPQRSTUVWXYZ</string>
 </resources>
