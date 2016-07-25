@@ -16,4 +16,5 @@ public class Constant {
     public static final String FARMER = "farmer.do";
     public static final String LOGINFARMER = "loginFarmer.do";
     public static final String TECHNICIAN = "technician.do";
+    public static final String EVERYDAY = "everybay.do";
 }

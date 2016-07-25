@@ -62,6 +62,7 @@ public class HttpPost {
         return s;
     }
 
+
   /*  //上传各种数据
     public static void SendhttpPost(String json, String url, MediaType mediaType) {
         // final MediaType JSON = MediaType.parse( "application/json; charset=utf-8" );
