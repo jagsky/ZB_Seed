@@ -60,7 +60,7 @@ public class WelComeActivity extends BaseActivity {
                     startActivity(intent);
                     finish();
                 } else {
-                    Intent intent = new Intent(WelComeActivity.this, MainActivity.class);
+                    Intent intent = new Intent(WelComeActivity.this, TechnicianActivity.class);
                     startActivity(intent);
                     finish();
                 }

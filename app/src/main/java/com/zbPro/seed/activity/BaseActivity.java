@@ -16,16 +16,17 @@ import com.zbPro.seed.collector.ActivityCollector;
 * 作用：基础Activity
 * 功能：所有Activity继承此界面，方便管理
 * */
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends Activity {
 
     Activity activity;
+
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
         //在创建的时候知道是那个Activity
         ActivityCollector.addActivity(this);
         initwindown();
-       // screenBrightness_check();
+        // screenBrightness_check();
     }
 
     private void initwindown() {

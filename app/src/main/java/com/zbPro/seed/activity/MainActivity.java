@@ -10,6 +10,8 @@ package com.zbPro.seed.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +38,7 @@ import java.sql.SQLException;
 
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends FragmentActivity {
 
     //定义FragmentTabHost对象
     private FragmentTabHost mTabHost;

@@ -52,7 +52,10 @@
         <service
             android:name="com.zbPro.seed.service.LoginMyService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
+        <activity android:name=".AdminActivity" />
+        <activity android:name=".TechnicianActivity"></activity>
     </application>
 
 </manifest>
