@@ -1,8 +1,10 @@
 package com.zbPro.seed.fragment;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.format.DateFormat;
@@ -11,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +25,6 @@ import com.zbPro.seed.activity.R;
 import com.zbPro.seed.util.Constant;
 
 import java.io.IOException;
-import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -36,6 +36,7 @@ import butterknife.OnClick;
  * 作用：
  */
 public class Fragment1 extends Fragment {
+    SharedPreferences preferences;
     String timeContent;
     String bobyContent;
     @Bind(R.id.fragment1_et)
@@ -44,6 +45,18 @@ public class Fragment1 extends Fragment {
     EditText contentEt;
     @Bind(R.id.fragment1_send_btn)
     Button fragment1SendBtn;
+
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragmentpage1, null);
+        TimeThrad timeThread = new TimeThrad();
+        timeThread.start();
+        ButterKnife.bind(this, view);
+        return view;
+    }
+
 
     private boolean isRun = true;
     Handler handler = new Handler() {
@@ -62,35 +75,37 @@ public class Fragment1 extends Fragment {
         }
     };
 
-
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragmentpage1, null);
-        ButterKnife.bind(this, view);
-        TimeThrad timeThread = new TimeThrad();
-        timeThread.start();
-        return view;
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 
-    @OnClick({R.id.fragment1_send_btn})
-    public void onClick(View view) throws IOException {
-        switch (view.getId()) {
-            case R.id.fragment1_send_btn:
-                timeContent = fragment1Et.getText().toString();
-                bobyContent = contentEt.getText().toString();
+    @OnClick(R.id.fragment1_send_btn)
+    public void onClick() {
+
+        timeContent = fragment1Et.getText().toString();
+        bobyContent = contentEt.getText().toString();
+        System.out.println(timeContent);
                 if (bobyContent.length() == 0 && bobyContent.equals("")) {
                     Toast.makeText(getActivity(), "请输入信息", Toast.LENGTH_SHORT).show();
                 } else {
-                    sendHttpPost();
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            sendHttpPost();
+                        }
+                    }).start();
                 }
-                break;
-        }
+
     }
 
-    private void sendHttpPost() throws IOException {
+    private void sendHttpPost() {
+        preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String register_userName = preferences.getString("register_userName", "sss");
         OkHttpClient okHttpClient = new OkHttpClient();
         RequestBody requestBody = new FormEncodingBuilder()
+                .add("register_userName", register_userName)
                 .add("timeContent", timeContent)
                 .add("bobyContent", bobyContent)
                 .build();
@@ -98,13 +113,18 @@ public class Fragment1 extends Fragment {
                 .url(Constant.PATH + Constant.EVERYDAY)
                 .post(requestBody)
                 .build();
-        Response response = okHttpClient.newCall(request).execute();
-        if (response.isSuccessful()) {
-            String resultSet = response.body().toString();
-            System.out.println(resultSet);
-        } else if (response.isRedirect()) {
+        Response response = null;
+        try {
+            response = okHttpClient.newCall(request).execute();
+            if (response.isSuccessful()) {
+                String resultSet = response.body().toString();
+                System.out.println(resultSet);
+            } else {
 
-            new Throwable("response" + response.body().toString());
+                throw new IOException("Unexpected code " + response);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
 
@@ -122,13 +142,6 @@ public class Fragment1 extends Fragment {
 
 
         }
-    }
-
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 
 

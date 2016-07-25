@@ -4,6 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorGray"
+        android:text="@string/personageCollection"
+        android:textSize="15sp" />
 
     <TextView
         android:layout_width="wrap_content"

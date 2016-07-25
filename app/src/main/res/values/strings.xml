@@ -4,5 +4,8 @@
     <string name="send">发送</string>
     <string name="save">保存</string>
     <string name="revamp">修改</string>
+    <string name="dataCollection">数据收集中心</string>
+    <string name="farmerCollection">农户基础数据</string>
+    <string name="personageCollection">个人中心</string>
     <string name="register_name_digits">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLIMNOPQRSTUVWXYZ</string>
 </resources>

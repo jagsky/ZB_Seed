@@ -3,6 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorGray"
+        android:text="@string/farmerCollection"
+        android:textSize="15sp" />
     <EditText
         android:maxLines="1"
         android:id="@+id/te_et"

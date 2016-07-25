@@ -3,7 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorGray"
+        android:text="@string/dataCollection"
+        android:textSize="15sp" />
     <LinearLayout
         android:id="@+id/household_layout"
         android:layout_width="match_parent"
