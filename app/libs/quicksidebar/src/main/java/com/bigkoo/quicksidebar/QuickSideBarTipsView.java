@@ -33,10 +33,10 @@ public class QuickSideBarTipsView extends RelativeLayout {
     }
 
 
-    public void setText(String text,int poistion, int itemHeight){
+    public void setText(String text,int poistion, float y){
         mTipsView.setText(text);
         LayoutParams layoutParams = (LayoutParams) mTipsView.getLayoutParams();
-        layoutParams.topMargin = poistion * itemHeight;
+        layoutParams.topMargin = (int)(y - getWidth()/2.8);
         mTipsView.setLayoutParams(layoutParams);
     }
 

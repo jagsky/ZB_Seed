@@ -25,7 +25,7 @@
         android:textColor="#e60f12"
         android:textSize="30sp" />
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <ImageView
+    <ImageView
         android:id="@+id/fragment4_important_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

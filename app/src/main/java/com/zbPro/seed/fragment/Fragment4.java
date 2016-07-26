@@ -28,16 +28,12 @@ import butterknife.OnClick;
 public class Fragment4 extends Fragment {
     private SharedPreferences preferences;
 
-    @Bind(R.id.fragment4_UserIdtv)
-    TextView fragment4UserIdtv;
-    @Bind(R.id.fragment4_sofeware_iv)
-    Button fragment4UserIdbtn;
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragmentpage4, null);
-        ButterKnife.bind(this, view);
         //读取login事务中的数据
         gainUserName();
         return view;
@@ -52,25 +48,8 @@ public class Fragment4 extends Fragment {
     private void gainUserName() {
         preferences = getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
         String register_userName = preferences.getString("register_userName", "欢迎使用");
-        fragment4UserIdtv.setText(register_userName);
 
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
 
-    @OnClick(R.id.fragment4_sofeware_iv)
-    public void onClick() {
-        //点击退出当前用户，SharedPreferences中的ISOK设置为false，不在自动登入。
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.clear();
-        editor.commit();
-        Intent intent = new Intent(getActivity(), LoginActivity.class);
-        startActivity(intent);
-
-
-    }
 }

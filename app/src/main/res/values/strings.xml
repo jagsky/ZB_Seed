@@ -7,7 +7,7 @@
     <string name="dataCollection">数据收集中心</string>
     <string name="farmerCollection">农户基础数据</string>
     <string name="personageCollection">个人中心</string>
-    <string name="important">重要信息上传</string>
+    <string name="important">基础数据</string>
     <string name="sofeware">软件升级</string>
     <string name="register_name_digits">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLIMNOPQRSTUVWXYZ</string>
 </resources>
