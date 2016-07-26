@@ -30,7 +30,7 @@ public class Fragment4 extends Fragment {
 
     @Bind(R.id.fragment4_UserIdtv)
     TextView fragment4UserIdtv;
-    @Bind(R.id.fragment4_UserIdbtn)
+    @Bind(R.id.fragment4_sofeware_iv)
     Button fragment4UserIdbtn;
 
     @Nullable
@@ -62,7 +62,7 @@ public class Fragment4 extends Fragment {
         ButterKnife.unbind(this);
     }
 
-    @OnClick(R.id.fragment4_UserIdbtn)
+    @OnClick(R.id.fragment4_sofeware_iv)
     public void onClick() {
         //点击退出当前用户，SharedPreferences中的ISOK设置为false，不在自动登入。
         SharedPreferences.Editor editor = preferences.edit();
