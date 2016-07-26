@@ -87,17 +87,16 @@ public class Fragment1 extends Fragment {
         timeContent = fragment1Et.getText().toString();
         bobyContent = contentEt.getText().toString();
         System.out.println(timeContent);
-                if (bobyContent.length() == 0 && bobyContent.equals("")) {
-                    Toast.makeText(getActivity(), "请输入信息", Toast.LENGTH_SHORT).show();
-                } else {
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            sendHttpPost();
-                        }
-                    }).start();
+        if (bobyContent.length() == 0 && bobyContent.equals("")) {
+            Toast.makeText(getActivity(), "请输入信息", Toast.LENGTH_SHORT).show();
+        } else {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    sendHttpPost();
                 }
-
+            }).start();
+        }
     }
 
     private void sendHttpPost() {
@@ -126,8 +125,6 @@ public class Fragment1 extends Fragment {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
     class TimeThrad extends Thread {
@@ -139,11 +136,7 @@ public class Fragment1 extends Fragment {
             Message message = new Message();
             message.what = 1;
             handler.sendMessage(message);
-
-
         }
     }
-
-
 }
 
