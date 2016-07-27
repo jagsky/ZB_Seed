@@ -23,13 +23,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".WelComeActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleInstance" />
@@ -55,7 +49,15 @@
             android:exported="true" />
 
         <activity android:name=".AdminActivity" />
-        <activity android:name=".TechnicianActivity"></activity>
+        <activity android:name=".TechnicianActivity" />
+        <activity android:name="com.zbPro.seed.adminActivity.Main2Activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
     </application>
 
 </manifest>
