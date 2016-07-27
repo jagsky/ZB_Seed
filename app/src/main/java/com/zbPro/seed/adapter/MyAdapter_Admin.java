@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zbPro.seed.activity.R;
+import com.zbPro.seed.bean.ImportantTitleBean;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ import java.util.List;
  */
 public class MyAdapter_Admin extends BaseAdapter {
     Context context;
-    List list;
+    List<ImportantTitleBean> list;
 
     public MyAdapter_Admin(Context context, List list) {
         this.context = context;
@@ -52,9 +53,12 @@ public class MyAdapter_Admin extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        //设置
+        //设置空间的内容
+        viewHolder.imageView.setBackgroundResource(R.mipmap.ic_launcher);
+        viewHolder.textView1.setText(list.get(position).getTitle());
+        viewHolder.textView2.setText(list.get(position).getContent());
 
-        return null;
+        return convertView;
     }
 
     class ViewHolder {
