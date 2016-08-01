@@ -17,4 +17,7 @@ public class Constant {
     public static final String LOGINFARMER = "loginFarmer.do";
     public static final String TECHNICIAN = "technician.do";
     public static final String EVERYDAY = "everyday.do";
+
+    //管理员访问的页面
+    public static final String IMPORTANT = "important.do";
 }
