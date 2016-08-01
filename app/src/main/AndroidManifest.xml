@@ -23,7 +23,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".WelComeActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:launchMode="singleInstance" />
@@ -56,8 +56,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+        <activity android:name="com.zbPro.seed.adminActivity.Admin_MainActivity"></activity>
     </application>
 
 </manifest>
