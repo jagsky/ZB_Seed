@@ -10,6 +10,7 @@ import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.zbPro.seed.bean.CastrationBean;
+import com.zbPro.seed.bean.City;
 import com.zbPro.seed.bean.FarmerBean;
 import com.zbPro.seed.bean.GainBean;
 import com.zbPro.seed.bean.RogueBean;
@@ -62,6 +63,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTableIfNotExists(connectionSource, CastrationBean.class);
             TableUtils.createTableIfNotExists(connectionSource, RogueBean.class);
             TableUtils.createTableIfNotExists(connectionSource, GainBean.class);
+            TableUtils.createTableIfNotExists(connectionSource, City.class);
         } catch (SQLException e) {
             Log.e(TAG, e.toString());
             e.printStackTrace();

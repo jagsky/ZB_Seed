@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.zbPro.seed.activity.FarmerDataActivity;
+import com.zbPro.seed.activity.ImportantActivity;
 import com.zbPro.seed.activity.R;
 
 import butterknife.Bind;
@@ -57,6 +58,8 @@ public class Fragment3 extends Fragment {
 
                 break;
             case R.id.fragment3_important_lv:
+                Intent intent1 = new Intent(getActivity(), ImportantActivity.class);
+                startActivity(intent1);
                 break;
         }
     }
