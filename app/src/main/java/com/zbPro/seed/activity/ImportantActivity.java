@@ -295,26 +295,29 @@ public class ImportantActivity extends BaseActivity {
                 break;
             case R.id.send_btn:
                 //发送Json到服务器
+
                 sendHttpPostForJson();
+
                 Toast.makeText(ImportantActivity.this, "上传成功", Toast.LENGTH_SHORT).show();
 
                 break;
         }
     }
 
-    /*  //获取界面中所有的数据放到ImportantBean中
-      private void getActivityAllData() {
-          importantBean = new ImportantBean();
-          importantBean.setTitle();
-          importantBean.setDate();
-          importantBean.setProvince();
-          importantBean.setCity();
-          importantBean.setCounty();
-          importantBean.setTown();
-          importantBean.setVillage();
-          importantBean.setContenttype();
-          importantBean.setContent();
-      }*/
+  /*  //获取界面中所有的数据放到ImportantBean中
+    private void getActivityAllData() {
+        importantBean = new ImportantBean();
+        importantBean.setTitle();
+        importantBean.setDate();
+        importantBean.setProvince();
+        importantBean.setCity();
+        importantBean.setCounty();
+        importantBean.setTown();
+        importantBean.setVillage();
+        importantBean.setContenttype();
+        importantBean.setContent();
+    }
+*/
     String jsonStr;
 
     //发送Json到服务器
