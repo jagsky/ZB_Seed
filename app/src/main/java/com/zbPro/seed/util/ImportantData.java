@@ -45,7 +45,7 @@ public class ImportantData {
         return list;
     }
 
-    public List<String> getDistrictData(){
+    public List<String> getTownData(){
         List<String> list = new ArrayList<String>();
         list.add("长沙");
         list.add("衡阳");

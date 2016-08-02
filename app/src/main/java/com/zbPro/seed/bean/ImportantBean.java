@@ -7,7 +7,7 @@ package com.zbPro.seed.bean;
 public class ImportantBean {
     private int id;
     private String title;
-    private String data;
+    private String date;
     private String province;
     private String city;
     private String county;
@@ -19,10 +19,10 @@ public class ImportantBean {
     public ImportantBean() {
     }
 
-    public ImportantBean(int id, String title, String data, String province, String city, String county, String town, String village, String contenttype, String content) {
+    public ImportantBean(int id, String title, String date, String province, String city, String county, String town, String village, String contenttype, String content) {
         this.id = id;
         this.title = title;
-        this.data = data;
+        this.date = date;
         this.province = province;
         this.city = city;
         this.county = county;
@@ -48,12 +48,12 @@ public class ImportantBean {
         this.title = title;
     }
 
-    public String getData() {
-        return data;
+    public String getDate() {
+        return date;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getProvince() {
@@ -117,7 +117,7 @@ public class ImportantBean {
         return "ImportantBean{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", data='" + data + '\'' +
+                ", date='" + date + '\'' +
                 ", province='" + province + '\'' +
                 ", city='" + city + '\'' +
                 ", county='" + county + '\'' +

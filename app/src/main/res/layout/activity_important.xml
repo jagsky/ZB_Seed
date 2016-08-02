@@ -102,7 +102,7 @@
             android:orientation="horizontal">
 
             <Spinner
-                android:id="@+id/spinner_district"
+                android:id="@+id/spinner_county"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
