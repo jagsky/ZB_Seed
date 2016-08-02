@@ -8,7 +8,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zbPro.seed.activity.R;
 
@@ -25,7 +27,7 @@ public class Fragment4 extends Fragment {
     @Bind(R.id.fragment4_UserIdtv)
     TextView fragment4UserIdtv;
     @Bind(R.id.fragment4_SofeWareUp)
-    TextView fragment4SofeWareUp;
+    Button fragment4SofeWareUp;
     private SharedPreferences preferences;
 
 
@@ -36,6 +38,13 @@ public class Fragment4 extends Fragment {
         //读取login事务中的数据
         gainUserName();
         ButterKnife.bind(this, view);
+        fragment4SofeWareUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "已是最新版本", Toast.LENGTH_SHORT).show();
+
+            }
+        });
         return view;
 
     }
