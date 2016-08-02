@@ -50,15 +50,16 @@
 
         <activity android:name=".AdminActivity" />
         <activity android:name=".TechnicianActivity" />
-        <activity android:name="com.zbPro.seed.adminActivity.Main2Activity"></activity>
+        <activity android:name="com.zbPro.seed.adminActivity.Main2Activity" />
         <activity android:name="com.zbPro.seed.adminActivity.Admin_MainActivity">
+        </activity>
+        <activity android:name=".ImportantActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.zbPro.seed.admin_fragment.Admin_Fragment1"></activity>
     </application>
 
 </manifest>

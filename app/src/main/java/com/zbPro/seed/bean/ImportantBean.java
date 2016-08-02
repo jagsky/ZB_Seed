@@ -6,7 +6,7 @@ package com.zbPro.seed.bean;
  */
 public class ImportantBean {
     private int id;
-    private String userName;
+    private String title;
     private String data;
     private String province;
     private String city;
@@ -14,15 +14,14 @@ public class ImportantBean {
     private String town;
     private String village;
     private String contenttype;
-    private String theme;
     private String content;
 
     public ImportantBean() {
     }
 
-    public ImportantBean(int id, String userName, String data, String province, String city, String county, String town, String village, String contenttype, String theme, String content) {
+    public ImportantBean(int id, String title, String data, String province, String city, String county, String town, String village, String contenttype, String content) {
         this.id = id;
-        this.userName = userName;
+        this.title = title;
         this.data = data;
         this.province = province;
         this.city = city;
@@ -30,7 +29,6 @@ public class ImportantBean {
         this.town = town;
         this.village = village;
         this.contenttype = contenttype;
-        this.theme = theme;
         this.content = content;
     }
 
@@ -42,12 +40,12 @@ public class ImportantBean {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getTitle() {
+        return title;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getData() {
@@ -106,14 +104,6 @@ public class ImportantBean {
         this.contenttype = contenttype;
     }
 
-    public String getTheme() {
-        return theme;
-    }
-
-    public void setTheme(String theme) {
-        this.theme = theme;
-    }
-
     public String getContent() {
         return content;
     }
@@ -126,7 +116,7 @@ public class ImportantBean {
     public String toString() {
         return "ImportantBean{" +
                 "id=" + id +
-                ", userName='" + userName + '\'' +
+                ", title='" + title + '\'' +
                 ", data='" + data + '\'' +
                 ", province='" + province + '\'' +
                 ", city='" + city + '\'' +
@@ -134,7 +124,6 @@ public class ImportantBean {
                 ", town='" + town + '\'' +
                 ", village='" + village + '\'' +
                 ", contenttype='" + contenttype + '\'' +
-                ", theme='" + theme + '\'' +
                 ", content='" + content + '\'' +
                 '}';
     }
