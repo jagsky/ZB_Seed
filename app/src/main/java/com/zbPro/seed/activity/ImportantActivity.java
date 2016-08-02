@@ -304,24 +304,26 @@ public class ImportantActivity extends BaseActivity {
         }
     }
 
-  /*  //获取界面中所有的数据放到ImportantBean中
+    //获取界面中所有的数据放到ImportantBean中
     private void getActivityAllData() {
         importantBean = new ImportantBean();
-        importantBean.setTitle();
-        importantBean.setDate();
-        importantBean.setProvince();
-        importantBean.setCity();
-        importantBean.setCounty();
-        importantBean.setTown();
-        importantBean.setVillage();
-        importantBean.setContenttype();
-        importantBean.setContent();
+        importantBean.setTitle(titleEditText.getText().toString());
+        importantBean.setDate(dataEd.getText().toString());
+        importantBean.setProvince(provinceItem);
+        importantBean.setCity(cityItem);
+        importantBean.setCounty(countyItem);
+        importantBean.setTown(townItem);
+        importantBean.setVillage(streetItem);
+        importantBean.setContenttype(contentTypeItem);
+        importantBean.setContent(contentEditText.getText().toString());
+        System.out.println(importantBean.toString());
     }
-*/
+
     String jsonStr;
 
     //发送Json到服务器
     private void sendHttpPostForJson() {
+        getActivityAllData();
         Gson gson = new Gson();
         jsonStr = gson.toJson(importantBean);
         new Thread(new Runnable() {

@@ -5,7 +5,7 @@ package com.zbPro.seed.bean;
  * Created by Administrator on 2016/7/27.
  */
 public class ImportantBean {
-    private int id;
+    private String UserName;
     private String title;
     private String date;
     private String province;
@@ -19,8 +19,8 @@ public class ImportantBean {
     public ImportantBean() {
     }
 
-    public ImportantBean(int id, String title, String date, String province, String city, String county, String town, String village, String contenttype, String content) {
-        this.id = id;
+    public ImportantBean(String userName, String title, String date, String province, String city, String county, String town, String village, String contenttype, String content) {
+        UserName = userName;
         this.title = title;
         this.date = date;
         this.province = province;
@@ -32,12 +32,12 @@ public class ImportantBean {
         this.content = content;
     }
 
-    public int getId() {
-        return id;
+    public String getUserName() {
+        return UserName;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserName(String userName) {
+        UserName = userName;
     }
 
     public String getTitle() {
@@ -115,7 +115,7 @@ public class ImportantBean {
     @Override
     public String toString() {
         return "ImportantBean{" +
-                "id=" + id +
+                "UserName='" + UserName + '\'' +
                 ", title='" + title + '\'' +
                 ", date='" + date + '\'' +
                 ", province='" + province + '\'' +
