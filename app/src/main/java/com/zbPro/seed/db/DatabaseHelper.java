@@ -13,6 +13,7 @@ import com.zbPro.seed.bean.CastrationBean;
 import com.zbPro.seed.bean.City;
 import com.zbPro.seed.bean.FarmerBean;
 import com.zbPro.seed.bean.GainBean;
+import com.zbPro.seed.bean.ImportantBean;
 import com.zbPro.seed.bean.RogueBean;
 import com.zbPro.seed.bean.Seed;
 
@@ -174,6 +175,18 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         }
         return rogueBeanDao;
     }
+    Dao<City, Integer> cities;
+    public Dao<City, Integer> getCityDao() {
+        if (cities == null) {
+            try {
+                cities = getDao(City.class);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return cities;
+    }
+
 
     /**
      * 释放资源

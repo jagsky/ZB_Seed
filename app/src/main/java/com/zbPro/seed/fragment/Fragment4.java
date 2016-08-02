@@ -1,7 +1,6 @@
 package com.zbPro.seed.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,15 +8,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
-import com.zbPro.seed.activity.LoginActivity;
 import com.zbPro.seed.activity.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /*
 * 创建时间：2016/5/23
@@ -26,8 +22,11 @@ import butterknife.OnClick;
 * 实现功能：用户退出以及相关操作
 * */
 public class Fragment4 extends Fragment {
+    @Bind(R.id.fragment4_UserIdtv)
+    TextView fragment4UserIdtv;
+    @Bind(R.id.fragment4_SofeWareUp)
+    TextView fragment4SofeWareUp;
     private SharedPreferences preferences;
-
 
 
     @Nullable
@@ -36,6 +35,7 @@ public class Fragment4 extends Fragment {
         View view = inflater.inflate(R.layout.fragmentpage4, null);
         //读取login事务中的数据
         gainUserName();
+        ButterKnife.bind(this, view);
         return view;
 
     }
@@ -52,4 +52,9 @@ public class Fragment4 extends Fragment {
     }
 
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
 }

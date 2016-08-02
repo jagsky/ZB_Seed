@@ -25,32 +25,13 @@
         android:textColor="#e60f12"
         android:textSize="30sp" />
 
-    <ImageView
-        android:id="@+id/fragment4_important_iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:src="@mipmap/umeng_socialize_default_avatar" />
 
     <TextView
+        android:onClick="xxx"
+        android:id="@+id/fragment4_SofeWareUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/important"
-        android:textSize="30sp" />
-
-    <ImageView
-        android:id="@+id/fragment4_sofeware_iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:src="@mipmap/umeng_socialize_default_avatar" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
+        android:background="@color/colorGray"
         android:text="@string/sofeware"
         android:textSize="30sp" />
 </LinearLayout>

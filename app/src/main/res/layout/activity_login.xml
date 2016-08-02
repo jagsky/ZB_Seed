@@ -65,12 +65,6 @@
         android:text="登入"
         android:textSize="30sp" />
 
-    <Button
-        android:id="@+id/register_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="注册"
-        android:textSize="30sp" />
 
 
 </LinearLayout>

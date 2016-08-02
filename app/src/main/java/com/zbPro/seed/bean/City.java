@@ -8,12 +8,31 @@ import com.j256.ormlite.table.DatabaseTable;
  */
 @DatabaseTable(tableName = "City")
 public class City {
+    public City() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public City(int id, String cityName, String firstLetter) {
+
+        this.id = id;
+        this.cityName = cityName;
+        this.firstLetter = firstLetter;
+    }
 
     /**
      * {"cityName":"广州","firstLetter":"☆"
      * cityName : 鞍山
      * firstLetter : A
      */
+    @DatabaseField(columnName = "id")
+    private int id;
     @DatabaseField(columnName = "cityName")
     private String cityName;
     @DatabaseField(columnName = "firstLetter")

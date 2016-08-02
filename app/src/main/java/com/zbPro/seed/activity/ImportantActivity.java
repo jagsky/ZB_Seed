@@ -2,7 +2,9 @@ package com.zbPro.seed.activity;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -304,9 +306,13 @@ public class ImportantActivity extends BaseActivity {
         }
     }
 
+
     //获取界面中所有的数据放到ImportantBean中
     private void getActivityAllData() {
         importantBean = new ImportantBean();
+        SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
+        String userName = preferences.getString("register_userName", "s");
+        importantBean.setUserName(userName);
         importantBean.setTitle(titleEditText.getText().toString());
         importantBean.setDate(dataEd.getText().toString());
         importantBean.setProvince(provinceItem);

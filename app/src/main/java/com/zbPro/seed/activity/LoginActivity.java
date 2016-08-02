@@ -64,8 +64,6 @@ public class LoginActivity extends BaseActivity {
     EditText userEt;
     @Bind(R.id.login_btn)
     Button loginBtn;
-    @Bind(R.id.register_btn)
-    Button registerBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +77,7 @@ public class LoginActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.login_btn, R.id.register_btn})
+    @OnClick({R.id.login_btn})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.login_btn:
@@ -100,13 +98,7 @@ public class LoginActivity extends BaseActivity {
 
 
                 break;
-            case R.id.register_btn:
-                //注册按钮 跳转到注册页面
-                Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(registerIntent);
-                finish();
 
-                break;
         }
     }
 
@@ -180,8 +172,6 @@ public class LoginActivity extends BaseActivity {
             Toast.makeText(LoginActivity.this, "登入成功", Toast.LENGTH_SHORT).show();
         } else if (isSkiplogin.equals("0")) {
             Toast.makeText(LoginActivity.this, "密码/账号错误", Toast.LENGTH_SHORT).show();
-
-
         } else if (isSkiplogin.equals("")) {
             Toast.makeText(LoginActivity.this, "服务器错误", Toast.LENGTH_SHORT).show();
         } else {
