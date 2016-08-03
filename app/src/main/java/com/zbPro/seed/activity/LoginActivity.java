@@ -11,6 +11,8 @@ import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +42,13 @@ public class LoginActivity extends BaseActivity {
     //定义一个用户名与密码
     String userName;
     String password;
+    String selectType;
+    @Bind(R.id.radioMale)
+    RadioButton radioMale;
+    @Bind(R.id.radioFemale)
+    RadioButton radioFemale;
+    @Bind(R.id.radioGroup)
+    RadioGroup radioGroup;
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
     //判断登入是否成功
@@ -64,6 +73,7 @@ public class LoginActivity extends BaseActivity {
     EditText userEt;
     @Bind(R.id.login_btn)
     Button loginBtn;
+    RadioButton riaodButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +83,16 @@ public class LoginActivity extends BaseActivity {
         //获取IsOK事务的SharedPreferences对象以及编辑对象
         preferences = getSharedPreferences("login", MODE_PRIVATE);
         editor = preferences.edit();
-
+        radioFemale.setChecked(false);
+        radioMale.setChecked(false);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                int radioButtonId = group.getCheckedRadioButtonId();
+                // radioButton = (RadioButton)findViewById(radioGroup.getCheckedRadioButtonId());
+                riaodButton = (RadioButton) findViewById(radioButtonId);
+            }
+        });
     }
 
 
@@ -84,7 +103,7 @@ public class LoginActivity extends BaseActivity {
                 //点击登入按钮时，获取用户的账号和密码。
                 userName = userEt.getText().toString();
                 password = passwordEt.getText().toString();
-
+                selectType = riaodButton.getText().toString();
                 // LogBase.i(userName + "返回");
                 //首先判断是否有网络可用
                 // 然后执行网络请求方法，传入用户名与密码 获得是否验证成功。
@@ -118,6 +137,7 @@ public class LoginActivity extends BaseActivity {
         RequestBody formBody = new FormEncodingBuilder()
                 .add("userName", userName)
                 .add("password", password)
+                .add("selectType", selectType)
                 .build();
 
         final Request request = new Request.Builder()
@@ -161,6 +181,7 @@ public class LoginActivity extends BaseActivity {
             editor.putBoolean("IsOK", true);
             editor.putString("register_userName", userName);
             editor.putString("register_password", password);
+            editor.putString("selectType", selectType);
             editor.commit();
             Intent intent = new Intent(LoginActivity.this, LoginMyService.class);
             intent.putExtra("userName", userName);
@@ -180,5 +201,6 @@ public class LoginActivity extends BaseActivity {
     }
 
     //通过idcard查询其管理农户的基本信息
+
 
 }
