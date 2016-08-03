@@ -5,7 +5,7 @@ package com.zbPro.seed.bean;
  * Created by Administrator on 2016/7/27.
  */
 public class ImportantBean {
-    private String UserName;
+    private String userName;
     private String title;
     private String date;
     private String province;
@@ -19,25 +19,12 @@ public class ImportantBean {
     public ImportantBean() {
     }
 
-    public ImportantBean(String userName, String title, String date, String province, String city, String county, String town, String village, String contenttype, String content) {
-        UserName = userName;
-        this.title = title;
-        this.date = date;
-        this.province = province;
-        this.city = city;
-        this.county = county;
-        this.town = town;
-        this.village = village;
-        this.contenttype = contenttype;
-        this.content = content;
-    }
-
     public String getUserName() {
-        return UserName;
+        return userName;
     }
 
     public void setUserName(String userName) {
-        UserName = userName;
+        this.userName = userName;
     }
 
     public String getTitle() {
@@ -112,19 +99,17 @@ public class ImportantBean {
         this.content = content;
     }
 
-    @Override
-    public String toString() {
-        return "ImportantBean{" +
-                "UserName='" + UserName + '\'' +
-                ", title='" + title + '\'' +
-                ", date='" + date + '\'' +
-                ", province='" + province + '\'' +
-                ", city='" + city + '\'' +
-                ", county='" + county + '\'' +
-                ", town='" + town + '\'' +
-                ", village='" + village + '\'' +
-                ", contenttype='" + contenttype + '\'' +
-                ", content='" + content + '\'' +
-                '}';
+    public ImportantBean(String userName, String title, String date, String province, String city, String county, String town, String village, String contenttype, String content) {
+
+        this.userName = userName;
+        this.title = title;
+        this.date = date;
+        this.province = province;
+        this.city = city;
+        this.county = county;
+        this.town = town;
+        this.village = village;
+        this.contenttype = contenttype;
+        this.content = content;
     }
 }

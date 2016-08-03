@@ -1,7 +1,11 @@
 package com.zbPro.seed.activity;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
@@ -297,10 +301,21 @@ public class ImportantActivity extends BaseActivity {
                 break;
             case R.id.send_btn:
                 //发送Json到服务器
+                String s = titleEditText.getText().toString();
+                String s1 = contentEditText.getText().toString();
+                if (s.equals("") && s.length() == 0) {
+                    Toast.makeText(ImportantActivity.this, "请输入标题", Toast.LENGTH_SHORT).show();
 
-                sendHttpPostForJson();
+                } else {
+                    if (s1.equals("") && s1.length() == 0) {
+                        Toast.makeText(ImportantActivity.this, "内容不能为空", Toast.LENGTH_SHORT).show();
+                    } else {
+                        getDialog();
+                        Toast.makeText(ImportantActivity.this, "上传成功", Toast.LENGTH_SHORT).show();
+                    }
 
-                Toast.makeText(ImportantActivity.this, "上传成功", Toast.LENGTH_SHORT).show();
+                }
+
 
                 break;
         }
@@ -312,6 +327,7 @@ public class ImportantActivity extends BaseActivity {
         importantBean = new ImportantBean();
         SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
         String userName = preferences.getString("register_userName", "s");
+        System.out.println(userName);
         importantBean.setUserName(userName);
         importantBean.setTitle(titleEditText.getText().toString());
         importantBean.setDate(dataEd.getText().toString());
@@ -340,6 +356,33 @@ public class ImportantActivity extends BaseActivity {
             }
         }).start();
 
+
+
+    }
+
+    private void getDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("是否发送？");
+        builder.setMessage("是否发送？");
+        builder.setTitle("提示");
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //获取数据，然后发送数据
+                sendHttpPostForJson();
+                Intent intent = new Intent(ImportantActivity.this,MainActivity.class);
+                startActivity(intent);
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
     }
 
 }
+

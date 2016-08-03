@@ -1,5 +1,7 @@
 package com.zbPro.seed.fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -83,22 +85,33 @@ public class Fragment1 extends Fragment {
 
     @OnClick(R.id.fragment1_send_btn)
     public void onClick() {
-
+        //获取界面上的数据
         timeContent = fragment1Et.getText().toString();
         bobyContent = contentEt.getText().toString();
         System.out.println(timeContent);
         if (bobyContent.length() == 0 && bobyContent.equals("")) {
             Toast.makeText(getActivity(), "请输入信息", Toast.LENGTH_SHORT).show();
         } else {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    sendHttpPost();
-                }
-            }).start();
+           getDialog();
         }
+
+
     }
 
+    //获取界面上的数据并判断内容不能为空
+    private void getActivityAllData() {
+        Toast.makeText(getActivity(), "发送成功", Toast.LENGTH_SHORT).show();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //发送到服务器
+                sendHttpPost();
+            }
+        }).start();
+
+    }
+
+    //发送到服务器
     private void sendHttpPost() {
         preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String register_userName = preferences.getString("register_userName", "sss");
@@ -137,6 +150,28 @@ public class Fragment1 extends Fragment {
             message.what = 1;
             handler.sendMessage(message);
         }
+    }
+
+    //创建对话框
+    private void getDialog() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage("是否发送");
+        builder.setTitle("提示");
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                getActivityAllData();
+                dialog.dismiss();
+            }
+        });
+
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
     }
 }
 
