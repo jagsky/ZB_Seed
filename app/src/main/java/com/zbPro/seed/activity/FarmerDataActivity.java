@@ -6,10 +6,12 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bigkoo.quicksidebar.QuickSideBarTipsView;
 import com.bigkoo.quicksidebar.QuickSideBarView;
@@ -25,8 +27,12 @@ import com.zbPro.seed.net.HttpPost;
 import com.zbPro.seed.util.Constant;
 
 import java.lang.reflect.Type;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -50,14 +56,37 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_farmer_data);
+        String address = getLocalIpAddress();
+        System.out.println(address);
+        if (address == null) {
+            Toast.makeText(FarmerDataActivity.this, "网络连接错误", Toast.LENGTH_SHORT).show();
+        } else {
+            httpJson();
+        }
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         quickSideBarView = (QuickSideBarView) findViewById(R.id.quickSideBarView);
         quickSideBarTipsView = (QuickSideBarTipsView) findViewById(R.id.quickSideBarTipsView);
         //设置监听
         quickSideBarView.setOnQuickSideBarTouchListener(this);
-        httpJson();
 
 
+    }
+
+    public String getLocalIpAddress() {
+        try {
+            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
+                NetworkInterface intf = en.nextElement();
+                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
+                    InetAddress inetAddress = enumIpAddr.nextElement();
+                    if (!inetAddress.isLoopbackAddress()) {
+                        return inetAddress.getHostAddress().toString();
+                    }
+                }
+            }
+        } catch (SocketException ex) {
+            Log.e("TAG", ex.toString());
+        }
+        return null;
     }
 
     protected void getUI(String allData) {
@@ -120,8 +149,6 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
     }
 
 
-
-
     @Override
     public void onLetterChanged(String letter, int position, float y) {
         quickSideBarTipsView.setText(letter, position, y);
@@ -138,8 +165,9 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
         quickSideBarTipsView.setVisibility(touching ? View.VISIBLE : View.INVISIBLE);
     }
 
-    private class CityListWithHeadersAdapter extends CityListAdapter<RecyclerView.ViewHolder>
+    public class CityListWithHeadersAdapter extends CityListAdapter<RecyclerView.ViewHolder>
             implements StickyRecyclerHeadersAdapter<RecyclerView.ViewHolder> {
+
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
