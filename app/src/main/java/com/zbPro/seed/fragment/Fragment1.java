@@ -1,6 +1,5 @@
 package com.zbPro.seed.fragment;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,6 +8,7 @@ import android.os.Message;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -92,15 +92,17 @@ public class Fragment1 extends Fragment {
         if (bobyContent.length() == 0 && bobyContent.equals("")) {
             Toast.makeText(getActivity(), "请输入信息", Toast.LENGTH_SHORT).show();
         } else {
-           getDialog();
+            getActivityAllData();
+            Toast.makeText(getActivity(), "发送成功", Toast.LENGTH_SHORT).show();
         }
 
 
     }
-
+    String register_userName;
     //获取界面上的数据并判断内容不能为空
     private void getActivityAllData() {
-        Toast.makeText(getActivity(), "发送成功", Toast.LENGTH_SHORT).show();
+        preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        register_userName = preferences.getString("register_userName", "sss");
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -113,8 +115,6 @@ public class Fragment1 extends Fragment {
 
     //发送到服务器
     private void sendHttpPost() {
-        preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String register_userName = preferences.getString("register_userName", "sss");
         OkHttpClient okHttpClient = new OkHttpClient();
         RequestBody requestBody = new FormEncodingBuilder()
                 .add("register_userName", register_userName)
@@ -152,26 +152,5 @@ public class Fragment1 extends Fragment {
         }
     }
 
-    //创建对话框
-    private void getDialog() {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("是否发送");
-        builder.setTitle("提示");
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                getActivityAllData();
-                dialog.dismiss();
-            }
-        });
-
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        builder.create().show();
-    }
 }
 
