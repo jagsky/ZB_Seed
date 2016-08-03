@@ -11,26 +11,65 @@
         android:text="@string/personageCollection"
         android:textSize="15sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="用户名："
-        android:textColor="#0008ff"
-        android:textSize="30sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/fragment4_UserIdtv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#e60f12"
-        android:textSize="30sp" />
+        <ImageView
+            android:layout_marginTop="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@mipmap/biz_comment_avatar_default" />
+
+        <TextView
+            android:id="@+id/fragment4_UserIdtv"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center" />
+    </LinearLayout>
 
 
-    <Button
-        android:id="@+id/fragment4_SofeWareUp"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorGray"
-        android:text="@string/sofeware"
-        android:textSize="30sp" />
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/fragment4_Feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:background="@color/white"
+            android:gravity="left|center"
+            android:text="反馈" />
+
+        <Button
+            android:id="@+id/fragment4_SofeWareUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:background="@color/white"
+            android:gravity="left|center"
+            android:text="@string/sofeware" />
+
+        <Button
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:background="@color/white"
+            android:gravity="left|center"
+            android:text="帮助" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:background="@color/white"
+            android:gravity="left|center"
+            android:text="关于" />
+    </LinearLayout>
 </LinearLayout>

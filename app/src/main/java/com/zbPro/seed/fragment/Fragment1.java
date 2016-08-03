@@ -1,6 +1,5 @@
 package com.zbPro.seed.fragment;
 
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,7 +7,6 @@ import android.os.Message;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -152,5 +150,16 @@ public class Fragment1 extends Fragment {
         }
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        contentEt.setText("");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        System.out.println("onDestroy");
+    }
 }
 
