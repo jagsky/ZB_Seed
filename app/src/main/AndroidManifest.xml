@@ -25,9 +25,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".WelComeActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
-        </activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:launchMode="singleInstance" />
@@ -58,14 +56,18 @@
         <activity
             android:name=".ImportantActivity"
             android:windowSoftInputMode="stateHidden|stateUnchanged" />
-
         <activity android:name="com.zbPro.seed.adminActivity.Admin_MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+        <activity android:name="com.zbPro.seed.adminActivity.Admin_TodayActivity" />
+        <activity android:name="com.zbPro.seed.adminActivity.Admin_SeedActivity" />
+        <activity android:name="com.zbPro.seed.adminActivity.Admin_RogueActivity" />
+        <activity android:name="com.zbPro.seed.adminActivity.Admin_CastrationActivity" />
+        <activity android:name="com.zbPro.seed.adminActivity.Admin_GainActitivy"></activity>
     </application>
 
 </manifest>
