@@ -1,5 +1,6 @@
 package com.zbPro.seed.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,6 +26,7 @@ import com.zbPro.seed.adapter.DividerDecoration;
 import com.zbPro.seed.bean.City;
 import com.zbPro.seed.net.HttpPost;
 import com.zbPro.seed.util.Constant;
+import com.zbPro.seed.util.RecyclerItemClickListener;
 
 import java.lang.reflect.Type;
 import java.net.InetAddress;
@@ -37,6 +39,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTouchListener {
+    public String recycleViewItemData;
     RecyclerView recyclerView;
     HashMap<String, Integer> letters = new HashMap<>();
     QuickSideBarView quickSideBarView;
@@ -47,6 +50,7 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
             super.handleMessage(msg);
             Bundle bundle = msg.getData();
             String allData = bundle.getString("str");
+            System.out.println(allData);
             getUI(allData);
         }
     };
@@ -89,6 +93,7 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
         return null;
     }
 
+
     protected void getUI(String allData) {
         //设置列表数据和浮动header
         final LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -98,7 +103,7 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
         CityListWithHeadersAdapter adapter = new CityListWithHeadersAdapter();
 
         //GSON解释出来
-        Type type = new TypeToken<LinkedList<City>>() {
+        final Type type = new TypeToken<LinkedList<City>>() {
         }.getType();
         Gson gson = new Gson();
 
@@ -121,18 +126,30 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
         quickSideBarView.setLetters(customLetters);
         adapter.addAll(cities);
         recyclerView.setAdapter(adapter);
-
         final StickyRecyclerHeadersDecoration headersDecor = new StickyRecyclerHeadersDecoration(adapter);
         recyclerView.addItemDecoration(headersDecor);
 
         // Add decoration for dividers between list items
         recyclerView.addItemDecoration(new DividerDecoration(this));
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                System.out.println(position);
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+                // ...
+            }
+        }));
+
     }
 
     private void httpJson() {
         String str = "{boolean\": true,\n" +
                 "  \"null\": null,\n" +
                 "  \"number\": 123,\n}";
+
         Gson gson = new Gson();
         final String json = gson.toJson(str);
         new Thread(new Runnable() {
@@ -147,6 +164,12 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
             }
         }).start();
     }
+
+
+
+
+
+
 
 
     @Override
@@ -165,8 +188,14 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
         quickSideBarTipsView.setVisibility(touching ? View.VISIBLE : View.INVISIBLE);
     }
 
+
+
+
+
+
     public class CityListWithHeadersAdapter extends CityListAdapter<RecyclerView.ViewHolder>
             implements StickyRecyclerHeadersAdapter<RecyclerView.ViewHolder> {
+        public FarmerDataActivity.MyItemClickListener mItemClickListener;
 
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -177,9 +206,18 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
         }
 
         @Override
-        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
             TextView textView = (TextView) holder.itemView;
             textView.setText(getItem(position).getCityName());
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(FarmerDataActivity.this, ((TextView) holder.itemView).getText().toString(), Toast.LENGTH_SHORT).show();
+                    recycleViewItemData = ((TextView) holder.itemView).getText().toString();
+                    System.out.println(recycleViewItemData);
+
+                }
+            });
         }
 
         @Override
@@ -208,6 +246,17 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
                     rgen.nextInt(359), 1, 1
             });
         }
+        /**
+         * 设置Item点击监听
+         * @param listener
+         */
+        public void setOnItemClickListener(MyItemClickListener listener){
+            this.mItemClickListener = listener;
+        }
 
+    }
+
+    public interface MyItemClickListener {
+        public void onItemClick(View view, int postion);
     }
 }

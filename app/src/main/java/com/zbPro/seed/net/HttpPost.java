@@ -7,6 +7,7 @@ import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Administrator on 2016/6/8.
@@ -28,6 +29,9 @@ public class HttpPost {
 
         //构建一个OKhttp，请别人别人做某件事情
         OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.setConnectTimeout(10, TimeUnit.SECONDS);
+        okHttpClient.setWriteTimeout(10, TimeUnit.SECONDS);
+        okHttpClient.setReadTimeout(30, TimeUnit.SECONDS);
     /*如果是Post发送键值对则，
     *
     RequestBody requestBody = new FormEncodingBuilder()

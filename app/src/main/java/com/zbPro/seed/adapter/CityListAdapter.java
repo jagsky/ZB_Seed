@@ -2,6 +2,7 @@ package com.zbPro.seed.adapter;
 
 import android.support.v7.widget.RecyclerView;
 
+import com.zbPro.seed.activity.FarmerDataActivity;
 import com.zbPro.seed.bean.City;
 
 import java.util.ArrayList;
