@@ -107,7 +107,7 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
         }.getType();
         Gson gson = new Gson();
 
-        LinkedList<City> cities = gson.fromJson(allData, type);
+        final LinkedList<City> cities = gson.fromJson(allData, type);
 
 //        System.out.println("便利签" + cities.toString());
         ArrayList<String> customLetters = new ArrayList<String>();
@@ -134,7 +134,7 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                System.out.println(position);
+                System.out.println(cities.get(position));
             }
 
             @Override

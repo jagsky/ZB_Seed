@@ -26,11 +26,7 @@
         <activity
             android:name=".WelComeActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
@@ -59,10 +55,17 @@
         <activity android:name=".AdminActivity" />
         <activity android:name=".TechnicianActivity" />
         <activity android:name="com.zbPro.seed.adminActivity.Main2Activity" />
-        <activity android:name="com.zbPro.seed.adminActivity.Admin_MainActivity"></activity>
         <activity
             android:name=".ImportantActivity"
             android:windowSoftInputMode="stateHidden|stateUnchanged" />
+
+        <activity android:name="com.zbPro.seed.adminActivity.Admin_MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
     </application>
 
 </manifest>
