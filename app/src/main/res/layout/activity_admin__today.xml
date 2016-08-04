@@ -3,7 +3,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fadingEdge="vertical"
+    android:focusable="true"
+    android:orientation="vertical"
     tools:context="com.zbPro.seed.adminActivity.Admin_TodayActivity">
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/admin_today_dateet"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:focusable="false"
+            android:gravity="center"
+            android:textColor="@color/colorAccent" />
+
+        <Button
+            android:id="@+id/admin_today_datebtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="查看其他日期" />
+
+    </LinearLayout>
+
+
+    <ListView
+        android:id="@+id/admin_today_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </ListView>
 </LinearLayout>

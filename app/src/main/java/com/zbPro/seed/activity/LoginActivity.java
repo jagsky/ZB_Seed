@@ -26,6 +26,7 @@ import com.zbPro.seed.service.LoginMyService;
 import com.zbPro.seed.util.Constant;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -134,6 +135,9 @@ public class LoginActivity extends BaseActivity {
     * */
     public void postRequest() {
         final OkHttpClient client = new OkHttpClient();
+        client.setConnectTimeout(10, TimeUnit.SECONDS);
+        client.setWriteTimeout(10, TimeUnit.SECONDS);
+        client.setReadTimeout(30, TimeUnit.SECONDS);
         RequestBody formBody = new FormEncodingBuilder()
                 .add("userName", userName)
                 .add("password", password)
