@@ -14,11 +14,15 @@ public class FarmerLineActivity extends BaseActivity {
         Intent intent = getIntent();
         String cityName = intent.getStringExtra("cityName");
         if (cityName != null) {
-
+            sendHttpPost();
         } else {
             Toast.makeText(FarmerLineActivity.this, "信息异常", Toast.LENGTH_SHORT).show();
 
         }
+
+    }
+
+    private void sendHttpPost() {
 
     }
 }
