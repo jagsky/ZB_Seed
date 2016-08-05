@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.zbPro.seed.activity.R;
 import com.zbPro.seed.bean.TodayBean;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -17,9 +18,9 @@ import java.util.List;
  */
 public class TodayAdapter extends BaseAdapter {
     Context context;
-    List<TodayBean> list;
+    LinkedList<TodayBean> list;
 
-    public TodayAdapter(Context context, List<TodayBean> list) {
+    public TodayAdapter(Context context,  LinkedList<TodayBean> list) {
         this.context = context;
         this.list = list;
     }

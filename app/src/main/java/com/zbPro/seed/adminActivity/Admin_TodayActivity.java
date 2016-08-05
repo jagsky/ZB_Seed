@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -47,7 +48,12 @@ public class Admin_TodayActivity extends BaseActivity {
             super.handleMessage(msg);
             Bundle todayData = msg.getData();
             String dataToday = (String) todayData.get("todayData");
-            getUI(dataToday);
+            if (dataToday != null) {
+                getUI(dataToday);
+            } else if (dataToday == null && dataToday.length() == 0) {
+                Toast.makeText(Admin_TodayActivity.this, "sssss", Toast.LENGTH_SHORT).show();
+
+            }
         }
     };
     String time;
@@ -69,6 +75,7 @@ public class Admin_TodayActivity extends BaseActivity {
             adminTodayDateet.setText(format.format(calendar.getTime()));
             time = adminTodayDateet.getText().toString();
             System.out.println(time);
+            sendHttpPost();
 
         }
 
@@ -81,11 +88,10 @@ public class Admin_TodayActivity extends BaseActivity {
         ButterKnife.bind(this);
         adminTodayDateet.setText(format.format(calendar.getTime()));
         time = adminTodayDateet.getText().toString();
+        sendHttpPost();
         System.out.println(time);
-        sendHttpPost(time);
-
-
     }
+
 
     @OnClick(R.id.admin_today_datebtn)
     public void onClick() {
@@ -96,10 +102,11 @@ public class Admin_TodayActivity extends BaseActivity {
                 calendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.show();
 
+
     }
 
     //发送数据获取每日工作汇报
-    private void sendHttpPost(String s) {
+    private void sendHttpPost() {
         final OkHttpClient okHttpClient = new OkHttpClient();
         okHttpClient.setConnectTimeout(10, TimeUnit.SECONDS);
         okHttpClient.setWriteTimeout(10, TimeUnit.SECONDS);
@@ -120,12 +127,15 @@ public class Admin_TodayActivity extends BaseActivity {
                 try {
                     response = okHttpClient.newCall(request).execute();
                     if (response.isSuccessful()) {
-                        String data = response.body().toString();
+                        String data = response.body().string();
+                        System.out.println(data);
                         Message message = handler.obtainMessage();
                         Bundle bundle = new Bundle();
                         bundle.putString("todayData", data);
                         message.setData(bundle);
                         handler.sendMessage(message);
+                    } else {
+                        throw new IOException("Unexpected code " + response);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -138,8 +148,10 @@ public class Admin_TodayActivity extends BaseActivity {
         Gson gson = new Gson();
         Type type = new TypeToken<LinkedList<TodayBean>>() {
         }.getType();
-        List<TodayBean> todayBeen = gson.fromJson(dataToday, type);
+        LinkedList<TodayBean> todayBeen = gson.fromJson(dataToday, type);
+        System.out.println(todayBeen.toString());
         TodayAdapter todayAdapter = new TodayAdapter(this, todayBeen);
+        System.out.println(todayBeen);
         adminTodayListview.setAdapter(todayAdapter);
 
     }
