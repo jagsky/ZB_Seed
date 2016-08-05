@@ -135,6 +135,10 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
             @Override
             public void onItemClick(View view, int position) {
                 System.out.println(cities.get(position));
+                String cityName = cities.get(position).getCityName();
+                Intent intent = new Intent(FarmerDataActivity.this, FarmerLineActivity.class);
+                intent.putExtra("cityName", cityName);
+                startActivity(intent);
             }
 
             @Override
@@ -166,12 +170,6 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
     }
 
 
-
-
-
-
-
-
     @Override
     public void onLetterChanged(String letter, int position, float y) {
         quickSideBarTipsView.setText(letter, position, y);
@@ -187,10 +185,6 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
         //可以自己加入动画效果渐显渐隐
         quickSideBarTipsView.setVisibility(touching ? View.VISIBLE : View.INVISIBLE);
     }
-
-
-
-
 
 
     public class CityListWithHeadersAdapter extends CityListAdapter<RecyclerView.ViewHolder>
@@ -246,11 +240,13 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
                     rgen.nextInt(359), 1, 1
             });
         }
+
         /**
          * 设置Item点击监听
+         *
          * @param listener
          */
-        public void setOnItemClickListener(MyItemClickListener listener){
+        public void setOnItemClickListener(MyItemClickListener listener) {
             this.mItemClickListener = listener;
         }
 

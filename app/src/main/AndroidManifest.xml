@@ -28,7 +28,13 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleInstance" />
+            android:launchMode="singleInstance">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".SeedActivity" />
@@ -56,20 +62,15 @@
         <activity
             android:name=".ImportantActivity"
             android:windowSoftInputMode="stateHidden|stateUnchanged" />
-        <activity android:name="com.zbPro.seed.adminActivity.Admin_MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name="com.zbPro.seed.adminActivity.Admin_MainActivity"></activity>
         <activity android:name="com.zbPro.seed.adminActivity.Admin_TodayActivity" />
         <activity android:name="com.zbPro.seed.adminActivity.Admin_SeedActivity" />
         <activity android:name="com.zbPro.seed.adminActivity.Admin_RogueActivity" />
         <activity android:name="com.zbPro.seed.adminActivity.Admin_CastrationActivity" />
         <activity android:name="com.zbPro.seed.adminActivity.Admin_GainActitivy" />
         <activity android:name="com.zbPro.seed.adminActivity.Admin_ASActivity" />
-        <activity android:name="com.zbPro.seed.adminActivity.Admin_SDActivity"></activity>
+        <activity android:name="com.zbPro.seed.adminActivity.Admin_SDActivity" />
+        <activity android:name=".FarmerLineActivity"></activity>
     </application>
 
 </manifest>

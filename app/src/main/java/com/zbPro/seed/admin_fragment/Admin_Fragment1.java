@@ -30,6 +30,8 @@ public class Admin_Fragment1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_admin__fragment1, null);
         ButterKnife.bind(this, view);
+        //获取重大信息数据
+
         init();
         return view;
     }
