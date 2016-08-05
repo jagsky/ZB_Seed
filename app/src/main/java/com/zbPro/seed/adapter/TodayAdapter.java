@@ -5,22 +5,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zbPro.seed.activity.R;
-import com.zbPro.seed.bean.ImportantTitleBean;
+import com.zbPro.seed.bean.TodayBean;
 
 import java.util.List;
 
 /**
- * Created by Administrator on 2016/7/27.
+ * Created by Administrator on 2016/8/4.
  */
-public class MyAdapter_Admin extends BaseAdapter {
+public class TodayAdapter extends BaseAdapter {
     Context context;
-    List<ImportantTitleBean> list;
+    List<TodayBean> list;
 
-    public MyAdapter_Admin(Context context, List list) {
+    public TodayAdapter(Context context, List<TodayBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -44,26 +43,25 @@ public class MyAdapter_Admin extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder = null;
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.admin_listview_item, null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.admin_today_listview_item, null);
             viewHolder = new ViewHolder();
-            viewHolder.imageView = (ImageView) convertView.findViewById(R.id.admin_listview_item_titleimage);
-            viewHolder.textView1 = (TextView) convertView.findViewById(R.id.admin_listview_item_titletext1);
-            viewHolder.textView2 = (TextView) convertView.findViewById(R.id.admin_listview_item_titletext2);
+            viewHolder.textView1 = (TextView) convertView.findViewById(R.id.admin_today_name);
+            viewHolder.textView2 = (TextView) convertView.findViewById(R.id.admin_today_time);
+            viewHolder.textView3 = (TextView) convertView.findViewById(R.id.admin_today_content);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        //设置空间的内容
-        viewHolder.imageView.setBackgroundResource(R.mipmap.ic_launcher);
-        viewHolder.textView1.setText(list.get(position).getTitle());
-        viewHolder.textView2.setText(list.get(position).getContent());
+        viewHolder.textView1.setText(list.get(position).getId());
+        viewHolder.textView2.setText(list.get(position).getTime());
+        viewHolder.textView3.setText(list.get(position).getContent());
 
         return convertView;
     }
 
     class ViewHolder {
-        ImageView imageView;
         TextView textView1;
         TextView textView2;
+        TextView textView3;
     }
 }

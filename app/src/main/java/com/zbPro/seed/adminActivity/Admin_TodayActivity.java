@@ -4,6 +4,8 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -18,6 +20,7 @@ import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 import com.zbPro.seed.activity.BaseActivity;
 import com.zbPro.seed.activity.R;
+import com.zbPro.seed.adapter.TodayAdapter;
 import com.zbPro.seed.bean.TodayBean;
 import com.zbPro.seed.util.Constant;
 
@@ -79,6 +82,7 @@ public class Admin_TodayActivity extends BaseActivity {
         adminTodayDateet.setText(format.format(calendar.getTime()));
         time = adminTodayDateet.getText().toString();
         System.out.println(time);
+        sendHttpPost(time);
 
 
     }
@@ -135,7 +139,8 @@ public class Admin_TodayActivity extends BaseActivity {
         Type type = new TypeToken<LinkedList<TodayBean>>() {
         }.getType();
         List<TodayBean> todayBeen = gson.fromJson(dataToday, type);
-
+        TodayAdapter todayAdapter = new TodayAdapter(this, todayBeen);
+        adminTodayListview.setAdapter(todayAdapter);
 
     }
 
