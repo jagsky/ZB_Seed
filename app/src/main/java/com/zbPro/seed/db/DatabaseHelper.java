@@ -76,7 +76,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource, int oldVersion, int newVersion) {
 
-      /*  try {
+        try {
             TableUtils.dropTable(connectionSource, FarmerBean.class, true);
             TableUtils.dropTable(connectionSource, CastrationBean.class, true);
             TableUtils.dropTable(connectionSource, Seed.class, true);
@@ -85,7 +85,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        onCreate(sqLiteDatabase, connectionSource);*/
+        onCreate(sqLiteDatabase, connectionSource);
 
     }
 

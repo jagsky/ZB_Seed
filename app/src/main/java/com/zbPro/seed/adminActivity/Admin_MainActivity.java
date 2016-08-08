@@ -1,5 +1,6 @@
 package com.zbPro.seed.adminActivity;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
@@ -16,6 +17,7 @@ import com.zbPro.seed.admin_fragment.Admin_Fragment1;
 import com.zbPro.seed.admin_fragment.Admin_Fragment2;
 import com.zbPro.seed.admin_fragment.Admin_Fragment3;
 import com.zbPro.seed.admin_fragment.Admin_Fragment4;
+import com.zbPro.seed.service.Admin_LoginService;
 
 public class Admin_MainActivity extends FragmentActivity {
     //存放Dock栏文字
@@ -35,6 +37,9 @@ public class Admin_MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent intent = new Intent(this, Admin_LoginService.class);
+        intent.putExtra("userName", "userName");
+        startService(intent);
         //初始化控件
         init();
     }

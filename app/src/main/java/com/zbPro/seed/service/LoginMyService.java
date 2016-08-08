@@ -29,6 +29,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+//技术员登入后，返回农户基本信息
 public class LoginMyService extends Service {
     public LoginMyService() {
     }
@@ -118,9 +119,7 @@ public class LoginMyService extends Service {
         System.out.println("这个是我新打印的" + farmerBeanList.toString());
         try {
             for (int i = 0; i < farmerBeanList.size(); i++) {
-
                 farmaerDao.addFarmerBean(farmerBeanList.get(i));
-
             }
         } catch (SQLException e) {
             e.printStackTrace();

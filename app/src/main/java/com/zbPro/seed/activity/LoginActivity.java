@@ -8,6 +8,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,7 +29,6 @@ import com.zbPro.seed.service.LoginMyService;
 import com.zbPro.seed.util.Constant;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -83,11 +83,12 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        riaodButton = (RadioButton) findViewById(R.id.radioMale);
+        selectType = riaodButton.getText().toString();
         //获取IsOK事务的SharedPreferences对象以及编辑对象
         preferences = getSharedPreferences("login", MODE_PRIVATE);
         editor = preferences.edit();
-        radioFemale.setChecked(false);
-        radioMale.setChecked(false);
+        radioMale.setChecked(true);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -108,13 +109,18 @@ public class LoginActivity extends BaseActivity {
                 userName = userEt.getText().toString();
                 password = passwordEt.getText().toString();
                 selectType = riaodButton.getText().toString();
-                // LogBase.i(userName + "返回");
+
+
                 //首先判断是否有网络可用
                 // 然后执行网络请求方法，传入用户名与密码 获得是否验证成功。
                 boolean isNetwork = isNetworkConnected();
                 //   System.out.println(isNetwork);
                 if (isNetwork) {
-                    postRequest();
+                    if (userName.length() != 0 && !userName.equals("") && password.length() != 0) {
+                        postRequest();
+                    } else {
+                        Toast.makeText(LoginActivity.this, "账号/密码不能为空", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     Toast.makeText(LoginActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
                 }
@@ -197,6 +203,7 @@ public class LoginActivity extends BaseActivity {
 
             } else if (selectType.equals("管理员")) {
                 Intent intent = new Intent(LoginActivity.this, Admin_LoginService.class);
+                intent.putExtra("userName", userName);
                 startService(intent);
                 Intent adminIntent = new Intent(LoginActivity.this, Admin_MainActivity.class);
                 startActivity(adminIntent);
