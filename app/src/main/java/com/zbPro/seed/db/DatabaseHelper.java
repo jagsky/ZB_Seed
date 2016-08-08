@@ -65,6 +65,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTableIfNotExists(connectionSource, RogueBean.class);
             TableUtils.createTableIfNotExists(connectionSource, GainBean.class);
             TableUtils.createTableIfNotExists(connectionSource, City.class);
+
         } catch (SQLException e) {
             Log.e(TAG, e.toString());
             e.printStackTrace();
