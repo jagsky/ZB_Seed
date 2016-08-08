@@ -27,6 +27,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class LoginMyService extends Service {
     public LoginMyService() {
@@ -70,6 +71,9 @@ public class LoginMyService extends Service {
 
     private void isRegisterOKGoHttpGet() {
         final OkHttpClient client = new OkHttpClient();
+        client.setConnectTimeout(10, TimeUnit.SECONDS);
+        client.setReadTimeout(20, TimeUnit.SECONDS);
+        client.setWriteTimeout(30, TimeUnit.SECONDS);
         RequestBody formBody = new FormEncodingBuilder()
                 .add("userName", userName)
                 .build();
@@ -108,7 +112,7 @@ public class LoginMyService extends Service {
         Gson gson = new Gson();
         Type type = new TypeToken<LinkedList<FarmerBean>>() {
         }.getType();
-         FarmaerDao farmaerDao = new FarmaerDao(LoginMyService.this);
+        FarmaerDao farmaerDao = new FarmaerDao(LoginMyService.this);
 
         List<FarmerBean> farmerBeanList = gson.fromJson(jsonstr, type);
         System.out.println("这个是我新打印的" + farmerBeanList.toString());

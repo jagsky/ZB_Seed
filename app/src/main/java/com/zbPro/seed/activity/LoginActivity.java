@@ -21,7 +21,9 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
+import com.zbPro.seed.adminActivity.Admin_MainActivity;
 import com.zbPro.seed.collector.LogBase;
+import com.zbPro.seed.service.Admin_LoginService;
 import com.zbPro.seed.service.LoginMyService;
 import com.zbPro.seed.util.Constant;
 
@@ -185,12 +187,22 @@ public class LoginActivity extends BaseActivity {
             editor.putString("register_password", password);
             editor.putString("selectType", selectType);
             editor.commit();
-            Intent intent = new Intent(LoginActivity.this, LoginMyService.class);
-            intent.putExtra("userName", userName);
-            startService(intent);
-            Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(loginIntent);
-            finish();
+            if (selectType.equals("技术员")) {
+                Intent intent = new Intent(LoginActivity.this, LoginMyService.class);
+                intent.putExtra("userName", userName);
+                startService(intent);
+                Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(loginIntent);
+                finish();
+
+            } else if (selectType.equals("管理员")) {
+                Intent intent = new Intent(LoginActivity.this, Admin_LoginService.class);
+                startService(intent);
+                Intent adminIntent = new Intent(LoginActivity.this, Admin_MainActivity.class);
+                startActivity(adminIntent);
+                finish();
+            }
+
 
             Toast.makeText(LoginActivity.this, "登入成功", Toast.LENGTH_SHORT).show();
         } else if (isSkiplogin.equals("0")) {
