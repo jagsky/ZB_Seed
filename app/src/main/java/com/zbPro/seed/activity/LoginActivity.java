@@ -92,6 +92,7 @@ public class LoginActivity extends BaseActivity {
                 int radioButtonId = group.getCheckedRadioButtonId();
                 // radioButton = (RadioButton)findViewById(radioGroup.getCheckedRadioButtonId());
                 riaodButton = (RadioButton) findViewById(radioButtonId);
+                System.out.println(riaodButton.getText().toString());
             }
         });
     }
@@ -135,9 +136,6 @@ public class LoginActivity extends BaseActivity {
     * */
     public void postRequest() {
         final OkHttpClient client = new OkHttpClient();
-        client.setConnectTimeout(10, TimeUnit.SECONDS);
-        client.setWriteTimeout(10, TimeUnit.SECONDS);
-        client.setReadTimeout(30, TimeUnit.SECONDS);
         RequestBody formBody = new FormEncodingBuilder()
                 .add("userName", userName)
                 .add("password", password)

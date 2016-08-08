@@ -53,7 +53,7 @@
             android:digits="@string/register_name_digits"
             android:hint="请输入密码"
             android:inputType="textPassword"
-            android:maxLength="15"
+            android:maxLength="20"
             android:paddingLeft="10dp" />
     </LinearLayout>
 
@@ -75,6 +75,7 @@
 
 
         <RadioButton
+            android:checked="true"
             android:id="@+id/radioFemale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
