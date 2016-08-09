@@ -109,6 +109,7 @@ public class LoginActivity extends BaseActivity {
                 userName = userEt.getText().toString();
                 password = passwordEt.getText().toString();
                 selectType = riaodButton.getText().toString();
+                System.out.println(selectType+"selectType");
 
 
                 //首先判断是否有网络可用

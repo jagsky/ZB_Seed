@@ -10,6 +10,8 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 
+import com.zbPro.seed.adminActivity.Admin_MainActivity;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -54,15 +56,23 @@ public class WelComeActivity extends BaseActivity {
                 preferences = getSharedPreferences("login", MODE_PRIVATE);
                 boolean IsOK = preferences.getBoolean("IsOK", false);
                 String s = preferences.getString("register_userName", "0");
+                String selectType = preferences.getString("selectType", "04");
                 if (IsOK == false) {
                     //如果之前没有保存过账号密码，则先跳转到登入界面
                     Intent intent = new Intent(WelComeActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
                 } else {
-                    Intent intent = new Intent(WelComeActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                    if (selectType.equals("技术员")) {
+                        Intent intent = new Intent(WelComeActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else if (selectType.equals("管理员")) {
+                        Intent intent = new Intent(WelComeActivity.this, Admin_MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
                 }
             }
 

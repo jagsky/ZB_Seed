@@ -33,6 +33,7 @@ import com.zbPro.seed.fragment.Fragment1;
 import com.zbPro.seed.fragment.Fragment2;
 import com.zbPro.seed.fragment.Fragment3;
 import com.zbPro.seed.fragment.Fragment4;
+import com.zbPro.seed.service.LoginMyService;
 
 import java.sql.SQLException;
 
@@ -198,5 +199,18 @@ public class MainActivity extends FragmentActivity {
         return view;
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        System.out.println("关闭服务");
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Intent intentService = new Intent(this, LoginMyService.class);
+        stopService(intentService);
+        System.out.println("开启服务");
+    }
 }

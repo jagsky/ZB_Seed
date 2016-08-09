@@ -48,10 +48,10 @@ public class Admin_TodayActivity extends BaseActivity {
             super.handleMessage(msg);
             Bundle todayData = msg.getData();
             String dataToday = (String) todayData.get("todayData");
-            if (dataToday != null) {
+            if (dataToday != null&&dataToday.length() > 0) {
                 getUI(dataToday);
-            } else if (dataToday == null && dataToday.length() == 0) {
-                Toast.makeText(Admin_TodayActivity.this, "sssss", Toast.LENGTH_SHORT).show();
+            } else if (dataToday.isEmpty() && dataToday.length() <= 0) {
+                Toast.makeText(Admin_TodayActivity.this, "没有上传信息", Toast.LENGTH_SHORT).show();
 
             }
         }
