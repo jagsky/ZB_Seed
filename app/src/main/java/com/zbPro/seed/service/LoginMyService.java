@@ -16,22 +16,51 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
-import com.zbPro.seed.bean.Farmer;
+import com.zbPro.seed.bean.CastrationBean;
+import com.zbPro.seed.bean.City;
 import com.zbPro.seed.bean.FarmerBean;
+import com.zbPro.seed.bean.GainBean;
+import com.zbPro.seed.bean.RogueBean;
+import com.zbPro.seed.bean.Seed;
+import com.zbPro.seed.dao.CastrationDao;
+import com.zbPro.seed.dao.CityDao;
 import com.zbPro.seed.dao.FarmaerDao;
+import com.zbPro.seed.dao.GainDao;
+import com.zbPro.seed.dao.RogueDao;
+import com.zbPro.seed.dao.SeedDao;
 import com.zbPro.seed.util.Constant;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 //技术员登入后，返回农户基本信息
 public class LoginMyService extends Service {
+    Seed seed;
+    SeedDao seedDao;
+    CastrationBean castrationBean;
+    CastrationDao castrationDao;
+    GainBean gainBean;
+    GainDao gainDao;
+    RogueBean rogueBean;
+    RogueDao rogueDao;
+    FarmerBean farmerBean;
+    FarmaerDao farmaerDao;
+    CityDao cityDao;
+    City city;
+
     public LoginMyService() {
+        seedDao = new SeedDao(this);
+        castrationDao = new CastrationDao(this);
+        gainDao = new GainDao(this);
+        rogueDao = new RogueDao(this);
+        farmaerDao = new FarmaerDao(this);
+        cityDao = new CityDao(this);
+
+
     }
 
     Handler handler = new Handler() {
@@ -109,23 +138,34 @@ public class LoginMyService extends Service {
         }).start();
     }
 
+    //将返回的Json数据添加到本地对应的数据库中
     private void jsonTOArray(String jsonstr) {
         Gson gson = new Gson();
         Type type = new TypeToken<LinkedList<FarmerBean>>() {
         }.getType();
-        FarmaerDao farmaerDao = new FarmaerDao(LoginMyService.this);
+
 
         List<FarmerBean> farmerBeanList = gson.fromJson(jsonstr, type);
-        System.out.println("这个是我新打印的" + farmerBeanList.toString());
+        // System.out.println("这个是我新打印的" + farmerBeanList.toString());
         try {
             for (int i = 0; i < farmerBeanList.size(); i++) {
                 farmaerDao.addFarmerBean(farmerBeanList.get(i));
+                seed = new Seed(farmerBeanList.get(i).getFarmerName(), farmerBeanList.get(i).getdKnumber(), farmerBeanList.get(i).getType());
+                seedDao.addSeed(seed);
+                gainBean = new GainBean(farmerBeanList.get(i).getFarmerName(), farmerBeanList.get(i).getdKnumber(), farmerBeanList.get(i).getType());
+                gainDao.addGainBean(gainBean);
+                castrationBean = new CastrationBean(farmerBeanList.get(i).getFarmerName(), farmerBeanList.get(i).getdKnumber(), farmerBeanList.get(i).getType());
+                castrationDao.addCastrationBean(castrationBean);
+                rogueBean = new RogueBean(farmerBeanList.get(i).getFarmerName(), farmerBeanList.get(i).getdKnumber(), farmerBeanList.get(i).getType());
+                rogueDao.addRogueBean(rogueBean);
+                city = new City(farmerBeanList.get(i).getFarmerName(), farmerBeanList.get(i).getFarmer_letter());
+                cityDao.addCity(city);
+
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
     }
 
     @Override

@@ -62,7 +62,7 @@ public class FarmaerDao {
     }
 
     //显示 农户姓名 地块 种类信息
-    public ArrayList<HashMap<String, Object>> displayFarmerNDT() {
+    public  ArrayList<HashMap<String, Object>> displayFarmerNDT() {
         List<FarmerBean> queryBuilder = null;
         try {
             queryBuilder = mUserDAO.queryBuilder().selectColumns

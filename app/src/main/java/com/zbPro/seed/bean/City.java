@@ -25,9 +25,7 @@ public class City {
     }
 
 
-    public City(int id, String cityName, String firstLetter) {
-
-        this.id = id;
+    public City( String cityName, String firstLetter) {
         this.cityName = cityName;
         this.firstLetter = firstLetter;
     }

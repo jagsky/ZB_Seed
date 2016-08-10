@@ -202,15 +202,11 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        System.out.println("关闭服务");
 
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Intent intentService = new Intent(this, LoginMyService.class);
-        stopService(intentService);
-        System.out.println("开启服务");
     }
 }

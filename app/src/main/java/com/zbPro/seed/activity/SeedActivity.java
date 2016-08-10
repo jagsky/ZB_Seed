@@ -26,6 +26,7 @@ import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 import com.zbPro.seed.bean.Seed;
 import com.zbPro.seed.collector.LogBase;
+import com.zbPro.seed.dao.FarmaerDao;
 import com.zbPro.seed.dao.SeedDao;
 import com.zbPro.seed.net.HttpPost;
 import com.zbPro.seed.util.Constant;
@@ -59,8 +60,6 @@ public class SeedActivity extends BaseActivity {
     String beizhu;
     String s = null;
     Button seed_send_btn;
-    //收取seed表操作工具
-    SeedDao seedDao;
     //收取用户填写信息的数据
     Seed seed;
     //农户信息表操作
@@ -69,6 +68,7 @@ public class SeedActivity extends BaseActivity {
     //  FarmerBean farmerBean;
     //单独查询地块号会返回一个ArrayList
     ArrayList lineArrayList;
+    SeedDao seedDao;
     //收集搜索栏选择的地块号
     String queryDKNumber;
     //收集 姓名 地块号 种类信息
@@ -196,12 +196,13 @@ public class SeedActivity extends BaseActivity {
         setContentView(R.layout.activity_seed);
         ButterKnife.bind(this);
         //获取搜索栏控件
+        seedDao = new SeedDao(this);
         seedAutoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.seed_AutoCompleteTextView);
         //获取Button控件
         seed_send_btn = (Button) findViewById(R.id.seed_send_btn);
         //获取Seed表操作权限
         seedDao = new SeedDao(getApplicationContext());
-        //获取地块号
+        //获取 farmer表中 姓名 地块号 种类显示到Listvew中
         lineArrayList = seedDao.displaySeedDKnumber();
         //在创建Activity时，设置今天的时间
         txtDate.setText(fmtDate.format(dateAndTime.getTime()));

@@ -49,6 +49,16 @@ public class FarmerBean {
     @DatabaseField(columnName = "aera")
     private String farmer_area;
 
+    private String farmer_letter;
+
+    public String getFarmer_letter() {
+        return farmer_letter;
+    }
+
+    public void setFarmer_letter(String farmer_letter) {
+        this.farmer_letter = farmer_letter;
+    }
+
     public FarmerBean() {
     }
 

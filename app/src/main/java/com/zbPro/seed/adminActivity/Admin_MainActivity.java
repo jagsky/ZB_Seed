@@ -37,9 +37,6 @@ public class Admin_MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent intent = new Intent(this, Admin_LoginService.class);
-        intent.putExtra("userName", "userName");
-        startService(intent);
         //初始化控件
         init();
     }

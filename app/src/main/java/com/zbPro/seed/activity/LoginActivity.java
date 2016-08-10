@@ -145,6 +145,7 @@ public class LoginActivity extends BaseActivity {
     * */
     public void postRequest() {
         final OkHttpClient client = new OkHttpClient();
+
         RequestBody formBody = new FormEncodingBuilder()
                 .add("userName", userName)
                 .add("password", password)

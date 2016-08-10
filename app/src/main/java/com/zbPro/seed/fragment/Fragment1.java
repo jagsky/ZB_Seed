@@ -36,7 +36,8 @@ import butterknife.OnClick;
  * 作用：
  */
 public class Fragment1 extends Fragment {
-    SharedPreferences preferences;
+    private SharedPreferences preferences;
+    SharedPreferences.Editor editor;
     String timeContent;
     String bobyContent;
     @Bind(R.id.fragment1_et)
@@ -96,11 +97,15 @@ public class Fragment1 extends Fragment {
 
 
     }
+
     String register_userName;
+
     //获取界面上的数据并判断内容不能为空
     private void getActivityAllData() {
-        preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        register_userName = preferences.getString("register_userName", "sss");
+        preferences = getActivity().getSharedPreferences("login", getActivity().MODE_PRIVATE);
+        register_userName = preferences.getString("register_userName", "0");
+
+        System.out.println("日常信息 技术员的姓名是：" + register_userName);
         new Thread(new Runnable() {
             @Override
             public void run() {
