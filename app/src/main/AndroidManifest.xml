@@ -34,7 +34,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleInstance"></activity>
+            android:launchMode="singleInstance" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".SeedActivity" />
@@ -42,11 +42,8 @@
         <activity android:name=".CastrationActivity" />
         <activity android:name=".PredictedActivity" />
         <activity android:name=".MakersActivity" />
-
-
         <activity android:name=".FarmerDataActivity" />
         <activity android:name=".FarmerBasedataActiivty" />
-
         <activity android:name=".AdminActivity" />
         <activity android:name=".TechnicianActivity" />
         <activity android:name="com.zbPro.seed.adminActivity.Main2Activity" />
@@ -62,7 +59,6 @@
         <activity android:name="com.zbPro.seed.adminActivity.Admin_ASActivity" />
         <activity android:name="com.zbPro.seed.adminActivity.Admin_SDActivity" />
 
-
         <service
             android:name="com.zbPro.seed.service.LoginMyService"
             android:enabled="true"
@@ -75,6 +71,8 @@
             android:name="com.zbPro.seed.service.Admin_LoginService"
             android:enabled="true"
             android:exported="true" />
+
+        <activity android:name=".FeedbackActivity"></activity>
     </application>
 
 </manifest>

@@ -1,6 +1,6 @@
 package com.zbPro.seed.fragment;
 
-import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,10 +12,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.zbPro.seed.activity.FeedbackActivity;
 import com.zbPro.seed.activity.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /*
 * 创建时间：2016/5/23
@@ -27,7 +29,7 @@ public class Fragment4 extends Fragment {
     @Bind(R.id.fragment4_UserIdtv)
     TextView fragment4UserIdtv;
     @Bind(R.id.fragment4_SofeWareUp)
-    Button fragment4SofeWareUp;
+    Button fragment4Feedback;
     private SharedPreferences preferences;
 
 
@@ -38,13 +40,6 @@ public class Fragment4 extends Fragment {
         ButterKnife.bind(this, view);
         //读取login事务中的数据
         gainUserName();
-        fragment4SofeWareUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "已是最新版本", Toast.LENGTH_SHORT).show();
-
-            }
-        });
         return view;
 
     }
@@ -66,5 +61,18 @@ public class Fragment4 extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @OnClick({R.id.fragment4_Feedback, R.id.fragment4_SofeWareUp})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.fragment4_Feedback:
+                Intent intent = new Intent(getActivity(), FeedbackActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.fragment4_SofeWareUp:
+                Toast.makeText(getActivity(), "已是最新版本", Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 }
