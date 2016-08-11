@@ -176,6 +176,7 @@ public class FarmerBasedataActiivty extends BaseActivity {
                     call();
 
                 } else {
+                    //ssssss
                     //用户拒绝了授权
                     // Toast.makeText(MainActivity.this, "Permission Denied", Toast.LENGTH_SHORT).show();
                 }
