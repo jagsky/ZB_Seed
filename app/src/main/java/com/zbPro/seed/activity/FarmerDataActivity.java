@@ -24,6 +24,8 @@ import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
 import com.zbPro.seed.adapter.CityListAdapter;
 import com.zbPro.seed.adapter.DividerDecoration;
 import com.zbPro.seed.bean.City;
+import com.zbPro.seed.dao.CityDao;
+import com.zbPro.seed.dao.SeedDao;
 import com.zbPro.seed.net.HttpPost;
 import com.zbPro.seed.util.Constant;
 import com.zbPro.seed.util.RecyclerItemClickListener;
@@ -33,18 +35,22 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.security.SecureRandom;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTouchListener {
+    CityDao cityDao;
+    List<City> cities;
     public String recycleViewItemData;
     RecyclerView recyclerView;
     HashMap<String, Integer> letters = new HashMap<>();
     QuickSideBarView quickSideBarView;
     QuickSideBarTipsView quickSideBarTipsView;
-    Handler handler = new Handler() {
+  /*  Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -53,7 +59,7 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
             System.out.println(allData);
             getUI(allData);
         }
-    };
+    };*/
 
 
     @Override
@@ -62,16 +68,17 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
         setContentView(R.layout.activity_farmer_data);
         String address = getLocalIpAddress();
         System.out.println(address);
-        if (address == null) {
+      /*  if (address == null) {
             Toast.makeText(FarmerDataActivity.this, "网络连接错误", Toast.LENGTH_SHORT).show();
         } else {
-            httpJson();
-        }
+            *//*httpJson();*//*
+        }*/
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         quickSideBarView = (QuickSideBarView) findViewById(R.id.quickSideBarView);
         quickSideBarTipsView = (QuickSideBarTipsView) findViewById(R.id.quickSideBarTipsView);
         //设置监听
         quickSideBarView.setOnQuickSideBarTouchListener(this);
+        getUI();
 
 
     }
@@ -93,22 +100,28 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
         return null;
     }
 
+    //将数据添加显示到界面
+    protected void getUI() {
 
-    protected void getUI(String allData) {
         //设置列表数据和浮动header
         final LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
         // Add the sticky headers decoration
         CityListWithHeadersAdapter adapter = new CityListWithHeadersAdapter();
-
-        //GSON解释出来
+        cityDao = new CityDao(FarmerDataActivity.this);
+        try {
+            cities = cityDao.queryAllCity();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    /*    //GSON解释出来
         final Type type = new TypeToken<LinkedList<City>>() {
         }.getType();
         Gson gson = new Gson();
 
-        final LinkedList<City> cities = gson.fromJson(allData, type);
-
+        final LinkedList<City> cities = gson.fromJson((city, type);
+*/
 //        System.out.println("便利签" + cities.toString());
         ArrayList<String> customLetters = new ArrayList<String>();
         int position = 0;
@@ -136,8 +149,11 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
             public void onItemClick(View view, int position) {
                 System.out.println(cities.get(position));
                 String cityName = cities.get(position).getCityName();
-                Intent intent = new Intent(FarmerDataActivity.this, FarmerLineActivity.class);
-                intent.putExtra("cityName", cityName);
+                // mystr.split("\\[]");//
+                String[] split = cityName.split("\\[]");
+
+                Intent intent = new Intent(FarmerDataActivity.this, FarmerBasedataActiivty.class);
+                intent.putExtra("dk", split);
                 startActivity(intent);
             }
 
@@ -149,7 +165,7 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
 
     }
 
-    private void httpJson() {
+   /* private void httpJson() {
         String str = "{boolean\": true,\n" +
                 "  \"null\": null,\n" +
                 "  \"number\": 123,\n}";
@@ -167,7 +183,7 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
                 handler.sendMessage(message);
             }
         }).start();
-    }
+    }*/
 
 
     @Override
@@ -255,4 +271,5 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
     public interface MyItemClickListener {
         public void onItemClick(View view, int postion);
     }
+
 }

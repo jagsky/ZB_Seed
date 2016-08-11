@@ -158,7 +158,7 @@ public class LoginMyService extends Service {
                 castrationDao.addCastrationBean(castrationBean);
                 rogueBean = new RogueBean(farmerBeanList.get(i).getFarmerName(), farmerBeanList.get(i).getdKnumber(), farmerBeanList.get(i).getType());
                 rogueDao.addRogueBean(rogueBean);
-                city = new City(farmerBeanList.get(i).getFarmerName(), farmerBeanList.get(i).getFarmer_letter());
+                city = new City(farmerBeanList.get(i).getFarmerName() + "[" + farmerBeanList.get(i).getdKnumber() + "]", farmerBeanList.get(i).getFarmer_letter());
                 cityDao.addCity(city);
 
             }

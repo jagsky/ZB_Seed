@@ -9,7 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.WindowManager;
 
+import com.zbPro.seed.bean.City;
 import com.zbPro.seed.collector.ActivityCollector;
+import com.zbPro.seed.dao.CityDao;
 
 /*
 * 类名：BaseActivity
@@ -17,7 +19,6 @@ import com.zbPro.seed.collector.ActivityCollector;
 * 功能：所有Activity继承此界面，方便管理
 * */
 public class BaseActivity extends Activity {
-
     Activity activity;
 
     @Override

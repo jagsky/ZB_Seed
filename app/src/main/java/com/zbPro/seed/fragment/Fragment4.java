@@ -35,9 +35,9 @@ public class Fragment4 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragmentpage4, null);
+        ButterKnife.bind(this, view);
         //读取login事务中的数据
         gainUserName();
-        ButterKnife.bind(this, view);
         fragment4SofeWareUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,8 +55,9 @@ public class Fragment4 extends Fragment {
          * 参数：无
          * */
     private void gainUserName() {
-        preferences = getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
+        preferences = getActivity().getSharedPreferences("login", getActivity().MODE_PRIVATE);
         String register_userName = preferences.getString("register_userName", "欢迎使用");
+        fragment4UserIdtv.setText(register_userName);
 
     }
 

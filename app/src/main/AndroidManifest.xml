@@ -43,18 +43,9 @@
         <activity android:name=".PredictedActivity" />
         <activity android:name=".MakersActivity" />
 
-        <service
-            android:name="com.zbPro.seed.service.FarmerService"
-            android:enabled="true"
-            android:exported="true" />
 
         <activity android:name=".FarmerDataActivity" />
         <activity android:name=".FarmerBasedataActiivty" />
-
-        <service
-            android:name="com.zbPro.seed.service.LoginMyService"
-            android:enabled="true"
-            android:exported="true" />
 
         <activity android:name=".AdminActivity" />
         <activity android:name=".TechnicianActivity" />
@@ -70,12 +61,20 @@
         <activity android:name="com.zbPro.seed.adminActivity.Admin_GainActitivy" />
         <activity android:name="com.zbPro.seed.adminActivity.Admin_ASActivity" />
         <activity android:name="com.zbPro.seed.adminActivity.Admin_SDActivity" />
-        <activity android:name=".FarmerLineActivity" />
 
+
+        <service
+            android:name="com.zbPro.seed.service.LoginMyService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name="com.zbPro.seed.service.FarmerService"
+            android:enabled="true"
+            android:exported="true" />
         <service
             android:name="com.zbPro.seed.service.Admin_LoginService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
     </application>
 
 </manifest>
