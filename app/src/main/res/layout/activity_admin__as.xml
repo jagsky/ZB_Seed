@@ -44,6 +44,7 @@
                 android:text="基地名称" />
 
             <EditText
+                android:id="@+id/admin_as_ed1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -61,6 +62,7 @@
                 android:text="联检区域" />
 
             <EditText
+                android:id="@+id/admin_as_ed2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -78,6 +80,7 @@
                 android:text="员工姓名" />
 
             <EditText
+                android:id="@+id/admin_as_ed3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -95,6 +98,7 @@
                 android:text="组合代号" />
 
             <EditText
+                android:id="@+id/admin_as_ed4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -112,6 +116,7 @@
                 android:text="抽样地块编号" />
 
             <EditText
+                android:id="@+id/admin_as_ed5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -129,6 +134,7 @@
                 android:text="地图熟悉程度" />
 
             <EditText
+                android:id="@+id/admin_as_ed6"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -146,11 +152,11 @@
                 android:text="平面图准确度" />
 
             <EditText
+                android:id="@+id/admin_as_ed7"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
         </LinearLayout>
-
 
 
         <Button
