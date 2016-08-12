@@ -56,7 +56,7 @@
         <activity android:name="com.zbPro.seed.adminActivity.Admin_RogueActivity" />
         <activity android:name="com.zbPro.seed.adminActivity.Admin_CastrationActivity" />
         <activity android:name="com.zbPro.seed.adminActivity.Admin_GainActitivy" />
-        <activity android:name="com.zbPro.seed.adminActivity.Admin_ASActivity" />
+        <activity android:name="com.zbPro.seed.adminActivity.Admin_ASActivity1" />
         <activity android:name="com.zbPro.seed.adminActivity.Admin_SDActivity" />
 
         <service
@@ -72,7 +72,9 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".FeedbackActivity"></activity>
+        <activity android:name=".FeedbackActivity" />
+        <activity android:name="com.zbPro.seed.adminActivity.Admin_ASActivity2" />
+        <activity android:name="com.zbPro.seed.adminActivity.Admin_ASActivity3"></activity>
     </application>
 
 </manifest>

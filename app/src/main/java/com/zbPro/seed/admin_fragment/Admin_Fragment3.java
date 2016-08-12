@@ -10,7 +10,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.zbPro.seed.activity.R;
-import com.zbPro.seed.adminActivity.Admin_ASActivity;
+import com.zbPro.seed.adminActivity.Admin_ASActivity1;
+import com.zbPro.seed.adminActivity.Admin_SDActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -41,12 +42,12 @@ public class Admin_Fragment3 extends Fragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.admin_fragment3_as:
-                Intent asIntent = new Intent(getActivity(), Admin_ASActivity.class);
+                Intent asIntent = new Intent(getActivity(), Admin_ASActivity1.class);
                 startActivity(asIntent);
 
                 break;
             case R.id.admin_fragment3_sd:
-                Intent sdIntent = new Intent(getActivity(), Admin_ASActivity.class);
+                Intent sdIntent = new Intent(getActivity(), Admin_SDActivity.class);
                 startActivity(sdIntent);
                 break;
         }

@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textSize">@dimen/activity_vertical_margin</item>
     </style>
+    
+    <style name="spinner_style">
+        <item name="android:background">@drawable/spinner_selector</item>
+        <item name="android:paddingLeft">5dip</item>
+    </style>
 </resources>
