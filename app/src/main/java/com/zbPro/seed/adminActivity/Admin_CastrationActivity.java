@@ -36,11 +36,12 @@ import java.util.List;
 public class Admin_CastrationActivity extends BaseActivity implements OnQuickSideBarTouchListener {
     List<City> cities;
     City city = new City();
-    CityDao cityDao =new CityDao(this);
+    CityDao cityDao = new CityDao(this);
     RecyclerView recyclerView;
-    HashMap<String,Integer> letters = new HashMap<>();
+    HashMap<String, Integer> letters = new HashMap<>();
     QuickSideBarView quickSideBarView;
     QuickSideBarTipsView quickSideBarTipsView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,11 +62,12 @@ public class Admin_CastrationActivity extends BaseActivity implements OnQuickSid
         CityListWithHeadersAdapter adapter = new CityListWithHeadersAdapter();
 
         //GSON解释出来
-        Type listType = new TypeToken<LinkedList<City>>(){}.getType();
+        Type listType = new TypeToken<LinkedList<City>>() {
+        }.getType();
         Gson gson = new Gson();
 
         try {
-            cities= cityDao.queryAllCity();
+            cities = cityDao.queryAllCity();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -74,11 +76,11 @@ public class Admin_CastrationActivity extends BaseActivity implements OnQuickSid
         ArrayList<String> customLetters = new ArrayList<>();
 
         int position = 0;
-        for(City city: cities){
+        for (City city : cities) {
             String letter = city.getFirstLetter();
             //如果没有这个key则加入并把位置也加入
-            if(!letters.containsKey(letter)){
-                letters.put(letter,position);
+            if (!letters.containsKey(letter)) {
+                letters.put(letter, position);
                 customLetters.add(letter);
             }
             position++;
@@ -94,6 +96,8 @@ public class Admin_CastrationActivity extends BaseActivity implements OnQuickSid
 
         // Add decoration for dividers between list items
         recyclerView.addItemDecoration(new DividerDecoration(this));
+
+
     }
 
 
@@ -101,7 +105,7 @@ public class Admin_CastrationActivity extends BaseActivity implements OnQuickSid
     public void onLetterChanged(String letter, int position, float y) {
         quickSideBarTipsView.setText(letter, position, y);
         //有此key则获取位置并滚动到该位置
-        if(letters.containsKey(letter)) {
+        if (letters.containsKey(letter)) {
             recyclerView.scrollToPosition(letters.get(letter));
         }
     }
@@ -109,7 +113,7 @@ public class Admin_CastrationActivity extends BaseActivity implements OnQuickSid
     @Override
     public void onLetterTouching(boolean touching) {
         //可以自己加入动画效果渐显渐隐
-        quickSideBarTipsView.setVisibility(touching? View.VISIBLE:View.INVISIBLE);
+        quickSideBarTipsView.setVisibility(touching ? View.VISIBLE : View.INVISIBLE);
     }
 
     private class CityListWithHeadersAdapter extends CityListAdapter<RecyclerView.ViewHolder>
