@@ -24,6 +24,7 @@ import com.zbPro.seed.adapter.CityListAdapter;
 import com.zbPro.seed.adapter.DividerDecoration;
 import com.zbPro.seed.bean.City;
 import com.zbPro.seed.dao.CityDao;
+import com.zbPro.seed.util.RecyclerItemClickListener;
 
 import java.lang.reflect.Type;
 import java.security.SecureRandom;
@@ -94,6 +95,32 @@ public class Admin_GainActitivy extends BaseActivity implements OnQuickSideBarTo
 
         // Add decoration for dividers between list items
         recyclerView.addItemDecoration(new DividerDecoration(this));
+        //列表项的点击事件
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                // System.out.println(cities.get(position));
+                String cityName = cities.get(position).getCityName();
+                // mystr.split("\\[]");//
+                //获取列表中的数据，city1表示技术员的名字，city2表示对应的基地编号，然后通过这两个数据去查询
+                //技术员的Id，然后通过技术员Id去查询此技术员管理员的农户
+                String[] split = cityName.split("\\[");
+                String city1 = split[0];
+                String[] s = split[1].split("\\]");
+                String city2 = s[0];
+
+                System.out.println(city2+city1);
+
+               /* Intent intent = new Intent(FarmerDataActivity.this, FarmerBasedataActiivty.class);
+                intent.putExtra("dk", split);
+                startActivity(intent);*/
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+                // ...
+            }
+        }));
     }
 
 

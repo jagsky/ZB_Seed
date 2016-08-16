@@ -150,10 +150,13 @@ public class FarmerDataActivity extends BaseActivity implements OnQuickSideBarTo
                 System.out.println(cities.get(position));
                 String cityName = cities.get(position).getCityName();
                 // mystr.split("\\[]");//
-                String[] split = cityName.split("\\[]");
+                String[] split = cityName.split("\\[");
+                String city1 = split[0];
+                String[] s = split[1].split("\\]");
+                String city2 = s[0];
 
                 Intent intent = new Intent(FarmerDataActivity.this, FarmerBasedataActiivty.class);
-                intent.putExtra("dk", split);
+                intent.putExtra("dk", city2);
                 startActivity(intent);
             }
 
