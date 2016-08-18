@@ -76,7 +76,10 @@
         <activity android:name="com.zbPro.seed.adminActivity.Admin_ASActivity2" />
         <activity android:name="com.zbPro.seed.adminActivity.Admin_ASActivity3" />
         <activity android:name="com.zbPro.seed.adminActivity.Admin_ASActivity4" />
-        <activity android:name="com.zbPro.seed.adminActivity.Admin_SeedOKActivity"></activity>
+        <activity android:name="com.zbPro.seed.adminActivity.Admin_SeedOKActivity" />
+        <activity android:name="com.zbPro.seed.adminActivity.Admin_RogueOKActivity" />
+        <activity android:name="com.zbPro.seed.adminActivity.Admin_CastrationOKActivity" />
+        <activity android:name="com.zbPro.seed.adminActivity.Admin_GainOKActivity"></activity>
     </application>
 
 </manifest>

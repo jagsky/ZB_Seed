@@ -2,6 +2,7 @@ package com.zbPro.seed.adminActivity;
 //Admin_CastrationActivity  activity_admin__castration
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -116,6 +117,10 @@ public class Admin_GainActitivy extends BaseActivity implements OnQuickSideBarTo
                /* Intent intent = new Intent(FarmerDataActivity.this, FarmerBasedataActiivty.class);
                 intent.putExtra("dk", split);
                 startActivity(intent);*/
+                Intent intent = new Intent(Admin_GainActitivy.this, Admin_GainOKActivity.class);
+                intent.putExtra("city1", city1);
+                intent.putExtra("city2", city2);
+                startActivity(intent);
             }
 
             @Override

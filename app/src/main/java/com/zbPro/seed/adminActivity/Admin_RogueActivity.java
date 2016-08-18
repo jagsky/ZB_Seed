@@ -1,5 +1,6 @@
 package com.zbPro.seed.adminActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -37,11 +38,12 @@ import java.util.List;
 public class Admin_RogueActivity extends BaseActivity implements OnQuickSideBarTouchListener {
     List<City> cities;
     City city = new City();
-    CityDao cityDao =new CityDao(this);
+    CityDao cityDao = new CityDao(this);
     RecyclerView recyclerView;
-    HashMap<String,Integer> letters = new HashMap<>();
+    HashMap<String, Integer> letters = new HashMap<>();
     QuickSideBarView quickSideBarView;
     QuickSideBarTipsView quickSideBarTipsView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,11 +64,12 @@ public class Admin_RogueActivity extends BaseActivity implements OnQuickSideBarT
         CityListWithHeadersAdapter adapter = new CityListWithHeadersAdapter();
 
         //GSON解释出来
-        Type listType = new TypeToken<LinkedList<City>>(){}.getType();
+        Type listType = new TypeToken<LinkedList<City>>() {
+        }.getType();
         Gson gson = new Gson();
 
         try {
-            cities= cityDao.queryAllCity();
+            cities = cityDao.queryAllCity();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -75,11 +78,11 @@ public class Admin_RogueActivity extends BaseActivity implements OnQuickSideBarT
         ArrayList<String> customLetters = new ArrayList<>();
 
         int position = 0;
-        for(City city: cities){
+        for (City city : cities) {
             String letter = city.getFirstLetter();
             //如果没有这个key则加入并把位置也加入
-            if(!letters.containsKey(letter)){
-                letters.put(letter,position);
+            if (!letters.containsKey(letter)) {
+                letters.put(letter, position);
                 customLetters.add(letter);
             }
             position++;
@@ -109,11 +112,15 @@ public class Admin_RogueActivity extends BaseActivity implements OnQuickSideBarT
                 String[] s = split[1].split("\\]");
                 String city2 = s[0];
 
-                System.out.println(city2+city1);
+                System.out.println(city2 + city1);
 
                /* Intent intent = new Intent(FarmerDataActivity.this, FarmerBasedataActiivty.class);
                 intent.putExtra("dk", split);
                 startActivity(intent);*/
+                Intent intent = new Intent(Admin_RogueActivity.this, Admin_RogueOKActivity.class);
+                intent.putExtra("city1", city1);
+                intent.putExtra("city2", city2);
+                startActivity(intent);
             }
 
             @Override
@@ -128,7 +135,7 @@ public class Admin_RogueActivity extends BaseActivity implements OnQuickSideBarT
     public void onLetterChanged(String letter, int position, float y) {
         quickSideBarTipsView.setText(letter, position, y);
         //有此key则获取位置并滚动到该位置
-        if(letters.containsKey(letter)) {
+        if (letters.containsKey(letter)) {
             recyclerView.scrollToPosition(letters.get(letter));
         }
     }
@@ -136,7 +143,7 @@ public class Admin_RogueActivity extends BaseActivity implements OnQuickSideBarT
     @Override
     public void onLetterTouching(boolean touching) {
         //可以自己加入动画效果渐显渐隐
-        quickSideBarTipsView.setVisibility(touching? View.VISIBLE:View.INVISIBLE);
+        quickSideBarTipsView.setVisibility(touching ? View.VISIBLE : View.INVISIBLE);
     }
 
     private class CityListWithHeadersAdapter extends CityListAdapter<RecyclerView.ViewHolder>

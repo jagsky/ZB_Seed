@@ -62,7 +62,6 @@ public class Admin_SeedOKActivity extends BaseActivity {
         Intent intent = getIntent();
         city1 = intent.getStringExtra("city1");
         city2 = intent.getStringExtra("city2");
-        Toast.makeText(this, city1 + city2, Toast.LENGTH_SHORT).show();
         seedhttp();
 
 
