@@ -21,4 +21,6 @@ public class Constant {
     //管理员访问的页面
     public static final String IMPORTANT = "important.do";
     public static final String ADMIN_TODAY = "adminToday1.do";
+
+    public static final String ADMIN_SEED = "adminseed.do";
 }

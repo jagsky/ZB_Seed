@@ -104,7 +104,7 @@ public class Admin_SeedActivity extends BaseActivity implements OnQuickSideBarTo
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-               // System.out.println(cities.get(position));
+                // System.out.println(cities.get(position));
                 String cityName = cities.get(position).getCityName();
                 // mystr.split("\\[]");//
                 //获取列表中的数据，city1表示技术员的名字，city2表示对应的基地编号，然后通过这两个数据去查询
@@ -114,11 +114,14 @@ public class Admin_SeedActivity extends BaseActivity implements OnQuickSideBarTo
                 String[] s = split[1].split("\\]");
                 String city2 = s[0];
 
-                System.out.println(city2+city1);
+                System.out.println(city2 + city1);
 
-               /* Intent intent = new Intent(FarmerDataActivity.this, FarmerBasedataActiivty.class);
-                intent.putExtra("dk", split);
-                startActivity(intent);*/
+                Intent intent = new Intent(Admin_SeedActivity.this, Admin_SeedOKActivity.class);
+                intent.putExtra("city1", city1);
+                intent.putExtra("city2", city2);
+                startActivity(intent);
+
+
             }
 
             @Override
