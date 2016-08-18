@@ -25,5 +25,6 @@ public class Constant {
     public static final String ADMIN_SEED = "adminseed.do";
 
     public static final String ADMIN_CASTRATION="/adminCastration.do";
-    public static final String ADMINROGUE  = "/adminRogue.do";
+    public static final String ADMIN_ROGUE  = "/adminRogue.do";
+    public static final String ADMIN_GAIN = "/adminGain.do";
 }

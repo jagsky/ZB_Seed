@@ -30,6 +30,7 @@ public class Admin_SeedOKActivity extends BaseActivity {
     private String city1;
     private String city2;
 
+
     //
     Handler handler = new Handler() {
         @Override
