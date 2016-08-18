@@ -9,4 +9,9 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.zbPro.seed.adminActivity.Admin_SeedOKActivity">
 
+    <ListView
+        android:id="@+id/exlist_lol"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:childDivider="#E02D2F" />
 </RelativeLayout>
