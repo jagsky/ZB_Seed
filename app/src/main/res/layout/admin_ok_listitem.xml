@@ -6,9 +6,10 @@
 
 
     <TextView
+        android:textSize="30sp"
         android:id="@+id/adminseed_text1"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:paddingLeft="15dp" />
 
 </LinearLayout>

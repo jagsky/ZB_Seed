@@ -1,12 +1,15 @@
 package com.zbPro.seed.adminActivity;
 
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -99,6 +102,17 @@ public class Admin_SeedOKActivity extends BaseActivity {
         myAdminSeedAdapter2 = new MyAdminSeedAdapter(this, seedList2);
         adminSeedList1.setAdapter(myAdminSeedAdapter1);
         adminSeedList2.setAdapter(myAdminSeedAdapter2);
+        adminSeedList2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Seed seed = seedList2.get(position);
+                View inflate = LayoutInflater.from(Admin_SeedOKActivity.this).inflate(R.layout.admin_seed_query, null);
+                AlertDialog.Builder builder = new AlertDialog.Builder(Admin_SeedOKActivity.this);
+                builder.setTitle("播种信息：");
+                builder.setView(inflate);
+                builder.show();
+            }
+        });
 
         // ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_expandable_list_item_1, farmerList);
         //exlistLol.setAdapter(myAdminSeedAdapter);
