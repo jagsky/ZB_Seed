@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.zbPro.seed.activity.R;
 import com.zbPro.seed.bean.CastrationBean;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -59,7 +58,7 @@ public class MyAdminCastrationAdapter extends BaseAdapter {
         return convertView;
     }
 
-   private class ViewHolder {
+    private class ViewHolder {
         TextView textView1;
         //TextView textView2;
     }

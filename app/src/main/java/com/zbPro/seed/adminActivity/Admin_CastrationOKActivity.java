@@ -1,10 +1,15 @@
 package com.zbPro.seed.adminActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -68,7 +73,60 @@ public class Admin_CastrationOKActivity extends BaseActivity {
 
         castrationBeen1 = new ArrayList<CastrationBean>();
         castrationBeen2 = new ArrayList<CastrationBean>();
+        for (int i = 0; i < farmerLinkedList.size(); i++) {
+            if (farmerLinkedList.get(i).getFatherLoose() != null && farmerLinkedList.get(i).getFatherLoose().length() > 0) {
 
+                castrationBeen1.add(farmerLinkedList.get(i));
+            } else {
+
+                castrationBeen2.add(farmerLinkedList.get(i));
+            }
+
+            System.out.println("完成的数据" + castrationBeen1.toString());
+            System.out.println("未完成的数据" + castrationBeen2.toString());
+            myAdminCastrationAdapter1 = new MyAdminCastrationAdapter(Admin_CastrationOKActivity.this, castrationBeen1);
+            myAdminCastrationAdapter2 = new MyAdminCastrationAdapter(Admin_CastrationOKActivity.this, castrationBeen2);
+
+            adminCasList1.setAdapter(myAdminCastrationAdapter1);
+            adminCasList2.setAdapter(myAdminCastrationAdapter2);
+            adminCasList1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    ViewHolderCastration viewHolderCastration = new ViewHolderCastration();
+                    CastrationBean castrationBean1 = castrationBeen1.get(position);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Admin_CastrationOKActivity.this);
+                    View inflate = LayoutInflater.from(Admin_CastrationOKActivity.this).inflate(R.layout.admin_castration_query, null);
+                    viewHolderCastration.editText1 = (EditText) inflate.findViewById(R.id.admin_castration1);
+                    viewHolderCastration.editText2 = (EditText) inflate.findViewById(R.id.admin_castration2);
+                    viewHolderCastration.editText3 = (EditText) inflate.findViewById(R.id.admin_castration3);
+                    viewHolderCastration.editText4 = (EditText) inflate.findViewById(R.id.admin_castration4);
+                    viewHolderCastration.editText5 = (EditText) inflate.findViewById(R.id.admin_castration5);
+                    viewHolderCastration.editText6 = (EditText) inflate.findViewById(R.id.admin_castration6);
+                    viewHolderCastration.editText7 = (EditText) inflate.findViewById(R.id.admin_castration7);
+                    viewHolderCastration.editText8 = (EditText) inflate.findViewById(R.id.admin_castration8);
+                    viewHolderCastration.editText9 = (EditText) inflate.findViewById(R.id.admin_castration9);
+                    viewHolderCastration.editText10 = (EditText) inflate.findViewById(R.id.admin_castration10);
+                    viewHolderCastration.editText11 = (EditText) inflate.findViewById(R.id.admin_castration11);
+                    viewHolderCastration.editText1.setText(castrationBean1.getFramarName());
+                    viewHolderCastration.editText2.setText(castrationBean1.getdKNumber());
+                    viewHolderCastration.editText3.setText(castrationBean1.getType());
+                    viewHolderCastration.editText4.setText(castrationBean1.getStartTime());
+                    viewHolderCastration.editText5.setText(castrationBean1.getMotherExtractTime());
+                    viewHolderCastration.editText6.setText(castrationBean1.getInspectTime());
+                    viewHolderCastration.editText7.setText(castrationBean1.getMotherNoCastration());
+                    viewHolderCastration.editText8.setText(castrationBean1.getMotherExtract());
+                    viewHolderCastration.editText9.setText(castrationBean1.getMotherLoose());
+                    viewHolderCastration.editText10.setText(castrationBean1.getFatherLoose());
+                    viewHolderCastration.editText11.setText(castrationBean1.getContent());
+                    builder.setTitle("去杂信息");
+                    builder.setView(inflate);
+                    builder.show();
+
+
+                }
+            });
+
+        }
 
 
     }
@@ -126,6 +184,21 @@ public class Admin_CastrationOKActivity extends BaseActivity {
             }
         }).start();
 
+
+    }
+
+    class ViewHolderCastration {
+        EditText editText1;
+        EditText editText2;
+        EditText editText3;
+        EditText editText4;
+        EditText editText5;
+        EditText editText6;
+        EditText editText7;
+        EditText editText8;
+        EditText editText9;
+        EditText editText10;
+        EditText editText11;
 
     }
 }
