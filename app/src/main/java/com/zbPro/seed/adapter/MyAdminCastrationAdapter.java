@@ -52,12 +52,13 @@ public class MyAdminCastrationAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.textView1.setText(castrationBeen.get(position).getFramarName());
+        System.out.println(castrationBeen.get(position).getFramarName() + "这是我要的数据");
 
 
         return convertView;
     }
 
-    class ViewHolder {
+   private class ViewHolder {
         TextView textView1;
         //TextView textView2;
     }
