@@ -51,12 +51,8 @@ public class MyAdminSeedAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        if (seeds.get(position).getFatherUse() != null && seeds.get(position).getFatherUse().length() > 0) {
             viewHolder.textView1.setText(seeds.get(position).getFramarName());
-            viewHolder.textView1.setBackgroundResource(R.color.aquamarine);
-        } else {
-            viewHolder.textView1.setText(seeds.get(position).getFramarName());
-        }
+
 
         return convertView;
     }

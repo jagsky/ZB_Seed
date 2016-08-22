@@ -1,10 +1,14 @@
 package com.zbPro.seed.adminActivity;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.widget.ArrayAdapter;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -18,6 +22,8 @@ import com.zbPro.seed.activity.BaseActivity;
 import com.zbPro.seed.activity.R;
 import com.zbPro.seed.adapter.MyAdminSeedAdapter;
 import com.zbPro.seed.adapter.MyBaseExpandableListAdapter;
+import com.zbPro.seed.admin_fragment.Admin_FragmentOne;
+import com.zbPro.seed.admin_fragment.Admin_Fragmenttwo;
 import com.zbPro.seed.bean.Seed;
 import com.zbPro.seed.util.Constant;
 
@@ -25,21 +31,31 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class Admin_SeedOKActivity extends BaseActivity {
-    MyAdminSeedAdapter myAdminSeedAdapter;
-    @Bind(R.id.exlist_lol)
-    ListView exlistLol;
+    MyAdminSeedAdapter myAdminSeedAdapter1;
+    MyAdminSeedAdapter myAdminSeedAdapter2;
+    @Bind(R.id.admin_seed_list2)
+    ListView adminSeedList2;
+    @Bind(R.id.admin_seed_list1)
+    ListView adminSeedList1;
     // 获取技术员的名字以及基地号
     private String city1;
     private String city2;
     MyBaseExpandableListAdapter myBaseExpandableListAdapter;
     ArrayList<String> arrayList = new ArrayList<String>();
     private LinkedList<LinkedList<Seed>> iData;
+
+    FragmentManager fragmentManager;
+    Admin_FragmentOne admin_fragmentOne;
+    Admin_Fragmenttwo admin_fragmenttwo;
+    FragmentTransaction fragmentTransaction;
 
     //
     Handler handler = new Handler() {
@@ -53,11 +69,11 @@ public class Admin_SeedOKActivity extends BaseActivity {
 
         }
     };
-    ArrayList<String> farmerList;
+    List<Seed> seedList1;
+    List<Seed> seedList2;
 
     //把获取Json解析，更新UI界面
     private void updateUI(String isSkiplogin) {
-        farmerList = new ArrayList<String>();
         Gson gson = new Gson();
         Type type = new TypeToken<LinkedList<Seed>>() {
         }.getType();
@@ -67,9 +83,25 @@ public class Admin_SeedOKActivity extends BaseActivity {
             farmerLinkedList.get(i);
             farmerList.add(str);
         }*/
-        myAdminSeedAdapter = new MyAdminSeedAdapter(this,farmerLinkedList);
-       // ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_expandable_list_item_1, farmerList);
-        exlistLol.setAdapter(myAdminSeedAdapter);
+        seedList1 = new ArrayList<Seed>();
+        seedList2 = new ArrayList<Seed>();
+        for (int i = 0; i < farmerLinkedList.size(); i++) {
+            if (farmerLinkedList.get(i).getFatherUse() != null && farmerLinkedList.get(i).getFatherUse().length() > 0) {
+
+                seedList2.add(farmerLinkedList.get(i));
+            } else {
+
+                seedList1.add(farmerLinkedList.get(i));
+            }
+        }
+
+        myAdminSeedAdapter1 = new MyAdminSeedAdapter(this, seedList1);
+        myAdminSeedAdapter2 = new MyAdminSeedAdapter(this, seedList2);
+        adminSeedList1.setAdapter(myAdminSeedAdapter1);
+        adminSeedList2.setAdapter(myAdminSeedAdapter2);
+
+        // ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_expandable_list_item_1, farmerList);
+        //exlistLol.setAdapter(myAdminSeedAdapter);
 
     }
 
@@ -85,6 +117,7 @@ public class Admin_SeedOKActivity extends BaseActivity {
 
 
     }
+
 
     private void seedhttp() {
         System.out.println(city1 + "这是要发送到数据");
@@ -130,4 +163,5 @@ public class Admin_SeedOKActivity extends BaseActivity {
         }).start();
 
     }
+
 }
