@@ -1,10 +1,12 @@
 package com.zbPro.seed.adminActivity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -13,10 +15,10 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
+import com.zbPro.seed.activity.BaseActivity;
 import com.zbPro.seed.activity.R;
 import com.zbPro.seed.adapter.MyAdminCastrationAdapter;
 import com.zbPro.seed.bean.CastrationBean;
-import com.zbPro.seed.bean.Seed;
 import com.zbPro.seed.util.Constant;
 
 import java.io.IOException;
@@ -25,12 +27,19 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
 
-public class Admin_CastrationOKActivity extends AppCompatActivity {
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
+public class Admin_CastrationOKActivity extends BaseActivity {
     // 获取技术员的名字以及基地号
     ArrayList<CastrationBean> castrationBeen1;
     ArrayList<CastrationBean> castrationBeen2;
     MyAdminCastrationAdapter myAdminCastrationAdapter1;
     MyAdminCastrationAdapter myAdminCastrationAdapter2;
+    @Bind(R.id.admin_cas_list1)
+    ListView adminCasList1;
+    @Bind(R.id.admin_cas_list2)
+    ListView adminCasList2;
 
     private String city1;
     private String city2;
@@ -51,11 +60,15 @@ public class Admin_CastrationOKActivity extends AppCompatActivity {
         Type type = new TypeToken<LinkedList<CastrationBean>>() {
         }.getType();
         LinkedList<CastrationBean> farmerLinkedList = gson.fromJson(isSkiplogin, type);
+        System.out.println(farmerLinkedList.toString());
+       /* if (farmerLinkedList == null && farmerLinkedList.size() == 0) {
+            Toast.makeText(Admin_CastrationOKActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
+        }*/
         System.out.println("发送过来的数据" + farmerLinkedList.toString());
+
         castrationBeen1 = new ArrayList<CastrationBean>();
         castrationBeen2 = new ArrayList<CastrationBean>();
-        myAdminCastrationAdapter1 = new MyAdminCastrationAdapter(Admin_CastrationOKActivity.this, castrationBeen1);
-        myAdminCastrationAdapter2 = new MyAdminCastrationAdapter(Admin_CastrationOKActivity.this, castrationBeen2);
+
 
 
     }
@@ -64,6 +77,7 @@ public class Admin_CastrationOKActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin__castration_ok);
+        ButterKnife.bind(this);
         Intent intent = getIntent();
         city1 = intent.getStringExtra("city1");
         city2 = intent.getStringExtra("city2");

@@ -11,15 +11,16 @@ import com.zbPro.seed.activity.R;
 import com.zbPro.seed.bean.CastrationBean;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/8/22.
  */
 public class MyAdminCastrationAdapter extends BaseAdapter {
     Context context;
-    ArrayList<CastrationBean> castrationBeen;
+    List<CastrationBean> castrationBeen;
 
-    public MyAdminCastrationAdapter(Context context, ArrayList<CastrationBean> castrationBeen) {
+    public MyAdminCastrationAdapter(Context context, List<CastrationBean> castrationBeen) {
         this.context = context;
         this.castrationBeen = castrationBeen;
     }

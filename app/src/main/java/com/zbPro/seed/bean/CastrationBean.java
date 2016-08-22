@@ -47,7 +47,33 @@ public class CastrationBean {
     //备注
     @DatabaseField(columnName = "content")
     private String content;
+    public CastrationBean(String userId, String framarName, String dKNumber,
+                          String type, String startTime, String motherExtractTime,
+                          String inspectTime, String motherNoCastration,
+                          String motherExtract, String motherLoose,
+                          String fatherLoose, String content) {
+        UserId = userId;
+        this.framarName = framarName;
+        this.dKNumber = dKNumber;
+        this.type = type;
+        this.startTime = startTime;
+        this.motherExtractTime = motherExtractTime;
+        this.inspectTime = inspectTime;
+        this.motherNoCastration = motherNoCastration;
+        this.motherExtract = motherExtract;
+        this.motherLoose = motherLoose;
+        this.fatherLoose = fatherLoose;
+        this.content = content;
+    }
 
+    public CastrationBean() {
+    }
+
+    public CastrationBean(String framarName, String dKNumber, String type) {
+        this.framarName = framarName;
+        this.dKNumber = dKNumber;
+        this.type = type;
+    }
     public int getId() {
         return id;
     }
@@ -170,31 +196,4 @@ public class CastrationBean {
                 '}';
     }
 
-    public CastrationBean(String userId, String framarName, String dKNumber,
-                          String type, String startTime, String motherExtractTime,
-                          String inspectTime, String motherNoCastration,
-                          String motherExtract, String motherLoose,
-                          String fatherLoose, String content) {
-        UserId = userId;
-        this.framarName = framarName;
-        this.dKNumber = dKNumber;
-        this.type = type;
-        this.startTime = startTime;
-        this.motherExtractTime = motherExtractTime;
-        this.inspectTime = inspectTime;
-        this.motherNoCastration = motherNoCastration;
-        this.motherExtract = motherExtract;
-        this.motherLoose = motherLoose;
-        this.fatherLoose = fatherLoose;
-        this.content = content;
-    }
-
-    public CastrationBean() {
-    }
-
-    public CastrationBean(String framarName, String dKNumber, String type) {
-        this.framarName = framarName;
-        this.dKNumber = dKNumber;
-        this.type = type;
-    }
 }
