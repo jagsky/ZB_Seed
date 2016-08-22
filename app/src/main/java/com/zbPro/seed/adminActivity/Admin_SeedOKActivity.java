@@ -4,7 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.widget.Toast;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -15,21 +16,30 @@ import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 import com.zbPro.seed.activity.BaseActivity;
 import com.zbPro.seed.activity.R;
-import com.zbPro.seed.bean.Farmer;
-import com.zbPro.seed.bean.FarmerBean;
+import com.zbPro.seed.adapter.MyAdminSeedAdapter;
+import com.zbPro.seed.adapter.MyBaseExpandableListAdapter;
 import com.zbPro.seed.bean.Seed;
 import com.zbPro.seed.util.Constant;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class Admin_SeedOKActivity extends BaseActivity {
+    MyAdminSeedAdapter myAdminSeedAdapter;
+    @Bind(R.id.exlist_lol)
+    ListView exlistLol;
     // 获取技术员的名字以及基地号
     private String city1;
     private String city2;
-
+    MyBaseExpandableListAdapter myBaseExpandableListAdapter;
+    ArrayList<String> arrayList = new ArrayList<String>();
+    private LinkedList<LinkedList<Seed>> iData;
 
     //
     Handler handler = new Handler() {
@@ -43,16 +53,23 @@ public class Admin_SeedOKActivity extends BaseActivity {
 
         }
     };
+    ArrayList<String> farmerList;
 
     //把获取Json解析，更新UI界面
     private void updateUI(String isSkiplogin) {
+        farmerList = new ArrayList<String>();
         Gson gson = new Gson();
         Type type = new TypeToken<LinkedList<Seed>>() {
         }.getType();
         LinkedList<Seed> farmerLinkedList = gson.fromJson(isSkiplogin, type);
-        System.out.println("发送过来的数据" + farmerLinkedList.toString());
-
-
+       /* for (int i = 0; i < farmerLinkedList.size(); i++) {
+            String str = farmerLinkedList.get(i).getFramarName();
+            farmerLinkedList.get(i);
+            farmerList.add(str);
+        }*/
+        myAdminSeedAdapter = new MyAdminSeedAdapter(this,farmerLinkedList);
+       // ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_expandable_list_item_1, farmerList);
+        exlistLol.setAdapter(myAdminSeedAdapter);
 
     }
 
@@ -60,6 +77,7 @@ public class Admin_SeedOKActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin__seed_ok);
+        ButterKnife.bind(this);
         Intent intent = getIntent();
         city1 = intent.getStringExtra("city1");
         city2 = intent.getStringExtra("city2");
