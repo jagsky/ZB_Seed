@@ -3,6 +3,7 @@ package com.zbPro.seed.adminActivity;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -106,11 +108,38 @@ public class Admin_SeedOKActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Seed seed = seedList2.get(position);
+                ViewHolder viewHolder = new ViewHolder();
                 View inflate = LayoutInflater.from(Admin_SeedOKActivity.this).inflate(R.layout.admin_seed_query, null);
                 AlertDialog.Builder builder = new AlertDialog.Builder(Admin_SeedOKActivity.this);
                 builder.setTitle("播种信息：");
+                viewHolder.editText1 = (EditText) inflate.findViewById(R.id.admin_seed1);
+                viewHolder.editText2 = (EditText) inflate.findViewById(R.id.admin_seed2);
+                viewHolder.editText3 = (EditText) inflate.findViewById(R.id.admin_seed3);
+                viewHolder.editText4 = (EditText) inflate.findViewById(R.id.admin_seed4);
+                viewHolder.editText5 = (EditText) inflate.findViewById(R.id.admin_seed5);
+                viewHolder.editText6 = (EditText) inflate.findViewById(R.id.admin_seed6);
+                viewHolder.editText7 = (EditText) inflate.findViewById(R.id.admin_seed7);
+                viewHolder.editText8 = (EditText) inflate.findViewById(R.id.admin_seed8);
+                viewHolder.editText9 = (EditText) inflate.findViewById(R.id.admin_seed9);
+                viewHolder.editText10 = (EditText) inflate.findViewById(R.id.admin_seed10);
+                viewHolder.editText1.setText(seed.getFramarName());
+                viewHolder.editText2.setText(seed.getdKNumber());
+                viewHolder.editText3.setText(seed.getType());
+                viewHolder.editText4.setText(seed.getSeedDate());
+                viewHolder.editText5.setText(seed.getFather1());
+                viewHolder.editText6.setText(seed.getFather2());
+                viewHolder.editText7.setText(seed.getMother());
+                viewHolder.editText8.setText(seed.getFatherUse());
+                viewHolder.editText9.setText(seed.getMotherUse());
+                viewHolder.editText10.setText(seed.getBeizhu());
                 builder.setView(inflate);
                 builder.show();
+                builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
             }
         });
 
@@ -176,6 +205,19 @@ public class Admin_SeedOKActivity extends BaseActivity {
             }
         }).start();
 
+    }
+
+    public class ViewHolder {
+        EditText editText1;
+        EditText editText2;
+        EditText editText3;
+        EditText editText4;
+        EditText editText5;
+        EditText editText6;
+        EditText editText7;
+        EditText editText8;
+        EditText editText9;
+        EditText editText10;
     }
 
 }

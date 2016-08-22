@@ -14,17 +14,24 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 import com.zbPro.seed.activity.R;
+import com.zbPro.seed.adapter.MyAdminCastrationAdapter;
 import com.zbPro.seed.bean.CastrationBean;
 import com.zbPro.seed.bean.Seed;
 import com.zbPro.seed.util.Constant;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
 
 public class Admin_CastrationOKActivity extends AppCompatActivity {
     // 获取技术员的名字以及基地号
+    ArrayList<CastrationBean> castrationBeen1;
+    ArrayList<CastrationBean> castrationBeen2;
+    MyAdminCastrationAdapter myAdminCastrationAdapter1;
+    MyAdminCastrationAdapter myAdminCastrationAdapter2;
+
     private String city1;
     private String city2;
     Handler handler = new Handler() {
@@ -45,6 +52,12 @@ public class Admin_CastrationOKActivity extends AppCompatActivity {
         }.getType();
         LinkedList<CastrationBean> farmerLinkedList = gson.fromJson(isSkiplogin, type);
         System.out.println("发送过来的数据" + farmerLinkedList.toString());
+        castrationBeen1 = new ArrayList<CastrationBean>();
+        castrationBeen2 = new ArrayList<CastrationBean>();
+        myAdminCastrationAdapter1 = new MyAdminCastrationAdapter(Admin_CastrationOKActivity.this, castrationBeen1);
+        myAdminCastrationAdapter2 = new MyAdminCastrationAdapter(Admin_CastrationOKActivity.this, castrationBeen2);
+
+
     }
 
     @Override
