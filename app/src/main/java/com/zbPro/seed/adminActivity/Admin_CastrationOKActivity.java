@@ -118,7 +118,7 @@ public class Admin_CastrationOKActivity extends BaseActivity {
                     viewHolderCastration.editText9.setText(castrationBean1.getMotherLoose());
                     viewHolderCastration.editText10.setText(castrationBean1.getFatherLoose());
                     viewHolderCastration.editText11.setText(castrationBean1.getContent());
-                    builder.setTitle("去杂信息");
+                    builder.setTitle("去雄详情：");
                     builder.setView(inflate);
                     builder.show();
 
