@@ -13,6 +13,7 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 import com.zbPro.seed.collector.LogBase;
+import com.zbPro.seed.net.IsNetOK;
 import com.zbPro.seed.util.Constant;
 
 import java.io.IOException;
@@ -53,8 +54,13 @@ public class FanGuiActivity extends BaseActivity {
             str1 = fangui1.getText().toString();
             if (!TextUtils.isEmpty(fangui2.getText())) {
                 str2 = fangui2.getText().toString();
-                sendhttpPost();
-                Toast.makeText(FanGuiActivity.this, "发送成功", Toast.LENGTH_SHORT).show();
+                if (IsNetOK.isNetworkAvailable(this)) {
+                    sendhttpPost();
+                    Toast.makeText(FanGuiActivity.this, "发送成功", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(FanGuiActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
+                }
+
             } else {
                 Toast.makeText(FanGuiActivity.this, "请输入数据", Toast.LENGTH_SHORT).show();
             }

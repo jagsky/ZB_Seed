@@ -1,5 +1,7 @@
 package com.zbPro.seed.adminActivity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,17 +36,32 @@ public class Admin_ASActivity1 extends BaseActivity {
     @Bind(R.id.admin_as1_btn)
     Button adminAs1Btn;
 
+    SharedPreferences preferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin__as);
         ButterKnife.bind(this);
+        preferences = getPreferences();
 
 
     }
 
     @OnClick(R.id.admin_as1_btn)
     public void onClick() {
-        adminAsEd1.getText().toString();
+        Intent intent = new Intent(this, Admin_ASActivity2.class);
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
     }
 }
