@@ -80,7 +80,8 @@
         <activity android:name="com.zbPro.seed.adminActivity.Admin_RogueOKActivity" />
         <activity android:name="com.zbPro.seed.adminActivity.Admin_CastrationOKActivity" />
         <activity android:name="com.zbPro.seed.adminActivity.Admin_GainOKActivity" />
-        <activity android:name="com.zbPro.seed.adminActivity.Admin_ImportantActivity"></activity>
+        <activity android:name="com.zbPro.seed.adminActivity.Admin_ImportantActivity" />
+        <activity android:name=".FanGuiActivity"></activity>
     </application>
 
 </manifest>

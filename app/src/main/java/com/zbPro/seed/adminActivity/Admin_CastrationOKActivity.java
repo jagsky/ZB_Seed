@@ -24,6 +24,7 @@ import com.zbPro.seed.activity.BaseActivity;
 import com.zbPro.seed.activity.R;
 import com.zbPro.seed.adapter.MyAdminCastrationAdapter;
 import com.zbPro.seed.bean.CastrationBean;
+import com.zbPro.seed.net.IsNetOK;
 import com.zbPro.seed.util.Constant;
 
 import java.io.IOException;
@@ -139,7 +140,11 @@ public class Admin_CastrationOKActivity extends BaseActivity {
         Intent intent = getIntent();
         city1 = intent.getStringExtra("city1");
         city2 = intent.getStringExtra("city2");
-        seedhttp();
+       if (IsNetOK.isNetworkAvailable(Admin_CastrationOKActivity.this)){
+           seedhttp();
+       }else {
+           Toast.makeText(Admin_CastrationOKActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
+       }
     }
 
     private void seedhttp() {

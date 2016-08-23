@@ -1,6 +1,10 @@
 package com.zbPro.seed.admin_fragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -12,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -21,6 +26,7 @@ import com.zbPro.seed.adminActivity.Admin_ImportantActivity;
 import com.zbPro.seed.bean.ImportantBean;
 import com.zbPro.seed.bean.ImportantTitleBean;
 import com.zbPro.seed.net.HttpPost;
+import com.zbPro.seed.net.IsNetOK;
 import com.zbPro.seed.util.Constant;
 
 import java.lang.reflect.Type;
@@ -56,21 +62,25 @@ public class Admin_Fragment1 extends Fragment {
         }.getType();
         //List<ImportantTitleBean> importantTitleBeen = new ArrayList<ImportantTitleBean>();
         final List<ImportantBean> importantBeen = gson.fromJson(json, type);
+
         myAdminImportantAdapter = new MyAdminImportantAdapter(importantBeen, getActivity());
         adminFragment1ListView.setAdapter(myAdminImportantAdapter);
         adminFragment1ListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ImportantBean importantBean = importantBeen.get(position);
-                System.out.println("电机的数据"+importantBean.toString());
-                Intent intent = new Intent(getActivity(),Admin_ImportantActivity.class);
-                intent.putExtra("importantBean123",importantBean);
+                System.out.println("电机的数据" + importantBean.toString());
+                Intent intent = new Intent(getActivity(), Admin_ImportantActivity.class);
+                intent.putExtra("importantBean123", importantBean);
                 startActivity(intent);
 
             }
         });
 
+
     }
+
+
 
     @Nullable
     @Override
@@ -78,8 +88,12 @@ public class Admin_Fragment1 extends Fragment {
         View view = inflater.inflate(R.layout.activity_admin__fragment1, null);
         ButterKnife.bind(this, view);
         //获取重大信息数据
+        if (IsNetOK.isNetworkAvailable(getActivity())) {
+            init();
+        } else {
+            Toast.makeText(getActivity(), "网络错误", Toast.LENGTH_SHORT).show();
+        }
 
-        init();
         return view;
     }
 

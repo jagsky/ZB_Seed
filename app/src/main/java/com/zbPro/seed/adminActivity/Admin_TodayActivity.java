@@ -23,6 +23,7 @@ import com.zbPro.seed.activity.BaseActivity;
 import com.zbPro.seed.activity.R;
 import com.zbPro.seed.adapter.TodayAdapter;
 import com.zbPro.seed.bean.TodayBean;
+import com.zbPro.seed.net.IsNetOK;
 import com.zbPro.seed.util.Constant;
 
 import java.io.IOException;
@@ -48,7 +49,7 @@ public class Admin_TodayActivity extends BaseActivity {
             super.handleMessage(msg);
             Bundle todayData = msg.getData();
             String dataToday = (String) todayData.get("todayData");
-            if (dataToday != null&&dataToday.length() > 0) {
+            if (dataToday != null && dataToday.length() > 0) {
                 getUI(dataToday);
             } else if (dataToday.isEmpty() && dataToday.length() <= 0) {
                 Toast.makeText(Admin_TodayActivity.this, "没有上传信息", Toast.LENGTH_SHORT).show();
@@ -88,7 +89,11 @@ public class Admin_TodayActivity extends BaseActivity {
         ButterKnife.bind(this);
         adminTodayDateet.setText(format.format(calendar.getTime()));
         time = adminTodayDateet.getText().toString();
-        sendHttpPost();
+        if (IsNetOK.isNetworkAvailable(Admin_TodayActivity.this)) {
+            sendHttpPost();
+        } else {
+            Toast.makeText(Admin_TodayActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
+        }
         System.out.println(time);
     }
 

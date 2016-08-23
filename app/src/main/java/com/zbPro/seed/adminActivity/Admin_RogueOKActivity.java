@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -23,6 +24,7 @@ import com.zbPro.seed.activity.R;
 import com.zbPro.seed.adapter.MyAdminRogueAdapter;
 import com.zbPro.seed.adapter.MyAdminSeedAdapter;
 import com.zbPro.seed.bean.RogueBean;
+import com.zbPro.seed.net.IsNetOK;
 import com.zbPro.seed.util.Constant;
 
 import java.io.IOException;
@@ -132,7 +134,12 @@ public class Admin_RogueOKActivity extends BaseActivity {
         Intent intent = getIntent();
         city1 = intent.getStringExtra("city1");
         city2 = intent.getStringExtra("city2");
-        seedhttp();
+
+        if (IsNetOK.isNetworkAvailable(Admin_RogueOKActivity.this)) {
+            seedhttp();
+        } else {
+            Toast.makeText(Admin_RogueOKActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void seedhttp() {

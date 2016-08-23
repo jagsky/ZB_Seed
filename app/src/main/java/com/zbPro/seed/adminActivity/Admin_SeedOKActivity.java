@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -30,6 +31,7 @@ import com.zbPro.seed.adapter.MyBaseExpandableListAdapter;
 import com.zbPro.seed.admin_fragment.Admin_FragmentOne;
 import com.zbPro.seed.admin_fragment.Admin_Fragmenttwo;
 import com.zbPro.seed.bean.Seed;
+import com.zbPro.seed.net.IsNetOK;
 import com.zbPro.seed.util.Constant;
 
 import java.io.IOException;
@@ -156,7 +158,13 @@ public class Admin_SeedOKActivity extends BaseActivity {
         Intent intent = getIntent();
         city1 = intent.getStringExtra("city1");
         city2 = intent.getStringExtra("city2");
-        seedhttp();
+
+
+        if (IsNetOK.isNetworkAvailable(Admin_SeedOKActivity.this)) {
+            seedhttp();
+        } else {
+            Toast.makeText(Admin_SeedOKActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
+        }
 
 
     }

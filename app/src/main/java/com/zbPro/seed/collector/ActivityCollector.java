@@ -1,6 +1,9 @@
 package com.zbPro.seed.collector;
 
 import android.app.Activity;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +19,7 @@ public class ActivityCollector {
 
     public static void addActivity(Activity activity) {
         activityList.add(activity);
+
     }
 
     public static void removeActivity(Activity activity) {
@@ -31,5 +35,6 @@ public class ActivityCollector {
 
         }
     }
+
 
 }
