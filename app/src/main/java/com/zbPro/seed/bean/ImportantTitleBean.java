@@ -7,34 +7,43 @@ import android.widget.ImageView;
  * Created by Administrator on 2016/7/27.
  */
 public class ImportantTitleBean {
-    private ImageView imageView;
-    private String title;
+    private String userId;
+    private String userName;
+    private String date;
     private String content;
 
-    public ImportantTitleBean(ImageView imageView, String title, String content) {
-        this.imageView = imageView;
-        this.title = title;
-        this.content = content;
+    @Override
+    public String toString() {
+        return "ImportantTitleBean{" +
+                "userId='" + userId + '\'' +
+                ", userName='" + userName + '\'' +
+                ", date='" + date + '\'' +
+                ", content='" + content + '\'' +
+                '}';
     }
 
-    public ImportantTitleBean() {
-
+    public String getUserId() {
+        return userId;
     }
 
-    public ImageView getImageView() {
-        return imageView;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public void setImageView(ImageView imageView) {
-        this.imageView = imageView;
+    public String getUserName() {
+        return userName;
     }
 
-    public String getTitle() {
-        return title;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getContent() {
@@ -45,12 +54,14 @@ public class ImportantTitleBean {
         this.content = content;
     }
 
-    @Override
-    public String toString() {
-        return "ImportantTitleBean{" +
-                "imageView=" + imageView +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                '}';
+    public ImportantTitleBean() {
+
+    }
+
+    public ImportantTitleBean(String userId, String userName, String date, String content) {
+        this.userId = userId;
+        this.userName = userName;
+        this.date = date;
+        this.content = content;
     }
 }

@@ -1,6 +1,8 @@
 package com.zbPro.seed.admin_fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,7 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.google.gson.Gson;
 import com.zbPro.seed.activity.R;
+import com.zbPro.seed.bean.ImportantTitleBean;
+import com.zbPro.seed.net.HttpPost;
+import com.zbPro.seed.util.Constant;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,6 +30,9 @@ public class Admin_Fragment1 extends Fragment {
 
     @Bind(R.id.admin_fragment1_listView)
     ListView adminFragment1ListView;
+    Handler handler = new Handler() {
+
+    };
 
     @Nullable
     @Override
@@ -36,15 +45,34 @@ public class Admin_Fragment1 extends Fragment {
         return view;
     }
 
-    //初始化控件
     private void init() {
-        List<HashMap<String, Object>> list = getAllData();
+        Gson gson = new Gson();
+        ImportantTitleBean importantTitleBean = new ImportantTitleBean("ddd", "dd", "s", "sss");
+        final String s = gson.toJson(importantTitleBean);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String json = HttpPost.SendhttpPostJson(s, Constant.PATH + Constant.ADMINIMPORTANTTITLE);
+                Message message = handler.obtainMessage();
+                Bundle bundle = new Bundle();
+                bundle.putString("json", json);
+                message.setData(bundle);
+                handler.sendMessage(message);
+            }
+        }).start();
+
+
+    }
+
+    //初始化控件
+    /*private void init() {
+     *//*   List<HashMap<String, Object>> list = getAllData();*//*
         SimpleAdapter adapter = new SimpleAdapter(getActivity(), list, R.layout.admin_listview_item, new String[]{"image", "title", "content"},
                 new int[]{R.id.admin_listview_item_titleimage, R.id.admin_listview_item_titletext1, R.id.admin_listview_item_titletext2});
         adminFragment1ListView.setAdapter(adapter);
-    }
+    }*/
 
-    //获取填充到ListView中的数据
+   /* //获取填充到ListView中的数据
     private List<HashMap<String, Object>> getAllData() {
         List<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
 
@@ -56,7 +84,7 @@ public class Admin_Fragment1 extends Fragment {
             list.add(map);
         }
         return list;
-    }
+    }*/
 
     @Override
     public void onDestroyView() {

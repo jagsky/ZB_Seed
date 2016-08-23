@@ -1,10 +1,12 @@
 package com.zbPro.seed.adminActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -17,6 +19,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
+import com.zbPro.seed.activity.BaseActivity;
 import com.zbPro.seed.activity.R;
 import com.zbPro.seed.adapter.MyAdminGainAdapter;
 import com.zbPro.seed.bean.GainBean;
@@ -31,7 +34,7 @@ import java.util.concurrent.TimeUnit;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class Admin_GainOKActivity extends AppCompatActivity {
+public class Admin_GainOKActivity extends BaseActivity {
     ArrayList<GainBean> gainBeen1;
     ArrayList<GainBean> gainBeen2;
     MyAdminGainAdapter myAdminGainAdapter1;
@@ -81,6 +84,34 @@ public class Admin_GainOKActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 GainBean gainBean = gainBeen1.get(position);
                 ViewHolderGain viewHolderGain = new ViewHolderGain();
+                AlertDialog.Builder builder = new AlertDialog.Builder(Admin_GainOKActivity.this);
+                View inflate = LayoutInflater.from(Admin_GainOKActivity.this).inflate(R.layout.admin_gain_query, null);
+                viewHolderGain.editText1 = (EditText) inflate.findViewById(R.id.admin_gain1);
+                viewHolderGain.editText2 = (EditText) inflate.findViewById(R.id.admin_gain2);
+                viewHolderGain.editText3 = (EditText) inflate.findViewById(R.id.admin_gain3);
+                viewHolderGain.editText4 = (EditText) inflate.findViewById(R.id.admin_gain4);
+                viewHolderGain.editText5 = (EditText) inflate.findViewById(R.id.admin_gain5);
+                viewHolderGain.editText6 = (EditText) inflate.findViewById(R.id.admin_gain6);
+                viewHolderGain.editText7 = (EditText) inflate.findViewById(R.id.admin_gain7);
+                viewHolderGain.editText8 = (EditText) inflate.findViewById(R.id.admin_gain8);
+                viewHolderGain.editText9 = (EditText) inflate.findViewById(R.id.admin_gain9);
+                viewHolderGain.editText10 = (EditText) inflate.findViewById(R.id.admin_gain10);
+                viewHolderGain.editText11 = (EditText) inflate.findViewById(R.id.admin_gain11);
+                viewHolderGain.editText1.setText(gainBean.getFramarName());
+                viewHolderGain.editText2.setText(gainBean.getdKNumber());
+                viewHolderGain.editText3.setText(gainBean.getType());
+                viewHolderGain.editText4.setText(gainBean.getMotherNO());
+                viewHolderGain.editText5.setText(gainBean.getSinglePlant());
+                viewHolderGain.editText6.setText(gainBean.getThousand());
+                viewHolderGain.editText7.setText(gainBean.getFatherExciseStart());
+                viewHolderGain.editText8.setText(gainBean.getFatherExciseStop());
+                viewHolderGain.editText9.setText(gainBean.getGainTime());
+                viewHolderGain.editText10.setText(gainBean.getGainOutput());
+                viewHolderGain.editText11.setText(gainBean.getBeiZhu());
+                builder.setTitle("测产详细信息");
+                builder.setView(inflate);
+                builder.show();
+
 
 
             }
