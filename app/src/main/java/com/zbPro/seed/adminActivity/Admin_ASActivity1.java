@@ -36,15 +36,12 @@ public class Admin_ASActivity1 extends BaseActivity {
     @Bind(R.id.admin_as1_btn)
     Button adminAs1Btn;
 
-    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin__as);
         ButterKnife.bind(this);
-        preferences = getPreferences();
-
 
     }
 
@@ -52,16 +49,7 @@ public class Admin_ASActivity1 extends BaseActivity {
     public void onClick() {
         Intent intent = new Intent(this, Admin_ASActivity2.class);
         startActivity(intent);
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
 
     }
+
 }

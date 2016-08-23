@@ -52,6 +52,7 @@
                     android:text="联检株距" />
 
                 <EditText
+                    android:id="@+id/as3_1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -70,6 +71,7 @@
                     android:text="报表株距" />
 
                 <EditText
+                    android:id="@+id/as3_2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -88,6 +90,7 @@
                     android:text="得分" />
 
                 <EditText
+                    android:id="@+id/as3_3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -115,6 +118,7 @@
                     android:text="联检行距" />
 
                 <EditText
+                    android:id="@+id/as3_4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -133,6 +137,7 @@
                     android:text="报表行距" />
 
                 <EditText
+                    android:id="@+id/as3_5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -151,6 +156,7 @@
                     android:text="得分" />
 
                 <EditText
+                    android:id="@+id/as3_6"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -178,6 +184,7 @@
                     android:text="父联检出苗率" />
 
                 <EditText
+                    android:id="@+id/as3_7"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -196,6 +203,7 @@
                     android:text="父报表出料率" />
 
                 <EditText
+                    android:id="@+id/as3_8"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -214,6 +222,7 @@
                     android:text="得分" />
 
                 <EditText
+                    android:id="@+id/as3_9"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -241,6 +250,7 @@
                     android:text="母联检出苗率" />
 
                 <EditText
+                    android:id="@+id/as3_10"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -259,6 +269,7 @@
                     android:text="母报表出苗率" />
 
                 <EditText
+                    android:id="@+id/as3_11"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -277,9 +288,11 @@
                     android:text="得分" />
 
                 <EditText
+                    android:id="@+id/as3_12"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:inputType="number" />
             </LinearLayout>
 
 
@@ -292,18 +305,12 @@
             android:orientation="horizontal">
 
             <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:text="上一步" />
-
-            <Button
+                android:id="@+id/as3_13"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:text="上一步" />
+                android:text="下一步" />
 
         </LinearLayout>
 

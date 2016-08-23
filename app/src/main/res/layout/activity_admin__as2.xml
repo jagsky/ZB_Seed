@@ -244,16 +244,10 @@
             android:layout_marginRight="20dp"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/as2_11"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:text="上一步" />
+
 
             <Button
-                android:id="@+id/as2_12"
+                android:id="@+id/as2_11"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"

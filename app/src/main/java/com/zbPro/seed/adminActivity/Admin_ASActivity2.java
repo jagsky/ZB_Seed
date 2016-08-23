@@ -1,7 +1,7 @@
 package com.zbPro.seed.adminActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -35,8 +35,6 @@ public class Admin_ASActivity2 extends BaseActivity {
     @Bind(R.id.as2_10)
     EditText as210;
     @Bind(R.id.as2_11)
-    Button as211;
-    @Bind(R.id.as2_12)
     Button as212;
 
     @Override
@@ -46,13 +44,10 @@ public class Admin_ASActivity2 extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.as2_11, R.id.as2_12})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.as2_11:
-                break;
-            case R.id.as2_12:
-                break;
-        }
+    @OnClick(R.id.as2_11)
+    public void onClick() {
+        Intent intent = new Intent(this, Admin_ASActivity3.class);
+        startActivity(intent);
+
     }
 }

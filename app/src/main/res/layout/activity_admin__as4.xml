@@ -48,6 +48,7 @@
                 android:text="挂牌编号" />
 
             <EditText
+                android:id="@+id/as4_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -83,6 +84,7 @@
                     android:text="行比得分" />
 
                 <EditText
+                    android:id="@+id/as4_2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -101,6 +103,7 @@
                     android:text="父本株距" />
 
                 <EditText
+                    android:id="@+id/as4_3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -119,6 +122,7 @@
                     android:text="父本株距得分" />
 
                 <EditText
+                    android:id="@+id/as4_4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -140,12 +144,14 @@
                 android:text="地块总得分" />
 
             <EditText
+                android:id="@+id/as4_5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
         </LinearLayout>
 
         <Button
+            android:id="@+id/as4_6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="发送" />
