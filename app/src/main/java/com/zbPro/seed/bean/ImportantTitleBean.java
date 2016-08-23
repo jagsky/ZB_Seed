@@ -10,17 +10,8 @@ public class ImportantTitleBean {
     private String userId;
     private String userName;
     private String date;
-    private String content;
+    private String title;
 
-    @Override
-    public String toString() {
-        return "ImportantTitleBean{" +
-                "userId='" + userId + '\'' +
-                ", userName='" + userName + '\'' +
-                ", date='" + date + '\'' +
-                ", content='" + content + '\'' +
-                '}';
-    }
 
     public String getUserId() {
         return userId;
@@ -46,22 +37,32 @@ public class ImportantTitleBean {
         this.date = date;
     }
 
-    public String getContent() {
-        return content;
+    public String getTitle() {
+        return title;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Override
+    public String toString() {
+        return "ImportantTitleBean{" +
+                "userId='" + userId + '\'' +
+                ", userName='" + userName + '\'' +
+                ", date='" + date + '\'' +
+                ", title='" + title + '\'' +
+                '}';
     }
 
     public ImportantTitleBean() {
-
     }
 
-    public ImportantTitleBean(String userId, String userName, String date, String content) {
+    public ImportantTitleBean(String userId, String userName, String date, String title) {
+
         this.userId = userId;
         this.userName = userName;
         this.date = date;
-        this.content = content;
+        this.title = title;
     }
 }

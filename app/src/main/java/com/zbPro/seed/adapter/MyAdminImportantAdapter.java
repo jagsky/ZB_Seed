@@ -5,53 +5,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zbPro.seed.activity.R;
+import com.zbPro.seed.bean.ImportantBean;
 import com.zbPro.seed.bean.ImportantTitleBean;
 
 import java.util.List;
 
 /**
- * Created by Administrator on 2016/7/27.
+ * Created by Administrator on 2016/8/23.
  */
-public class MyAdapter_Admin extends BaseAdapter {
-    @Override
-    public int getCount() {
-        return 0;
-    }
+public class MyAdminImportantAdapter extends BaseAdapter {
+    List<ImportantBean> importantBeen;
+    Context context;
 
-    @Override
-    public Object getItem(int position) {
-        return null;
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
-    }
-/*    Context context;
-    List<ImportantTitleBean> list;
-
-    public MyAdapter_Admin(Context context, List list) {
+    public MyAdminImportantAdapter(List<ImportantBean> importantBeen, Context context) {
+        this.importantBeen = importantBeen;
         this.context = context;
-        this.list = list;
     }
 
     @Override
     public int getCount() {
-        return list.size();
+        return importantBeen.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return list.get(position);
+        return importantBeen.get(position);
     }
 
     @Override
@@ -65,24 +46,23 @@ public class MyAdapter_Admin extends BaseAdapter {
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.admin_listview_item, null);
             viewHolder = new ViewHolder();
-            viewHolder.imageView = (ImageView) convertView.findViewById(R.id.admin_listview_item_titleimage);
             viewHolder.textView1 = (TextView) convertView.findViewById(R.id.admin_listview_item_titletext1);
             viewHolder.textView2 = (TextView) convertView.findViewById(R.id.admin_listview_item_titletext2);
+            viewHolder.textView3 = (TextView) convertView.findViewById(R.id.admin_listview_item_titletext3);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        //设置空间的内容
-        viewHolder.imageView.setBackgroundResource(R.mipmap.ic_launcher);
-        viewHolder.textView1.setText(list.get(position).getTitle());
-        viewHolder.textView2.setText(list.get(position).getContent());
-
+        viewHolder.textView1.setText(importantBeen.get(position).getTitle());
+        viewHolder.textView2.setText(importantBeen.get(position).getUserName());
+        viewHolder.textView3.setText(importantBeen.get(position).getDate());
         return convertView;
     }
 
     class ViewHolder {
-        ImageView imageView;
-        TextView textView1;
-        TextView textView2;
-    }*/
+        private TextView textView1;
+        private TextView textView2;
+        private TextView textView3;
+
+    }
 }

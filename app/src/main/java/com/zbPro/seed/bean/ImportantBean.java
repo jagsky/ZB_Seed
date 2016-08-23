@@ -1,10 +1,12 @@
 package com.zbPro.seed.bean;
 
+import java.io.Serializable;
+
 /**
  * 作用：重要信息上报 实体类
  * Created by Administrator on 2016/7/27.
  */
-public class ImportantBean {
+public class ImportantBean implements Serializable{
     private String userName;
     private String title;
     private String date;
@@ -97,6 +99,22 @@ public class ImportantBean {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @Override
+    public String toString() {
+        return "ImportantBean{" +
+                "userName='" + userName + '\'' +
+                ", title='" + title + '\'' +
+                ", date='" + date + '\'' +
+                ", province='" + province + '\'' +
+                ", city='" + city + '\'' +
+                ", county='" + county + '\'' +
+                ", town='" + town + '\'' +
+                ", village='" + village + '\'' +
+                ", contenttype='" + contenttype + '\'' +
+                ", content='" + content + '\'' +
+                '}';
     }
 
     public ImportantBean(String userName, String title, String date, String province, String city, String county, String town, String village, String contenttype, String content) {

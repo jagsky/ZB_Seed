@@ -1,6 +1,8 @@
 package com.zbPro.seed.admin_fragment;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zbPro.seed.activity.R;
 
@@ -36,10 +39,13 @@ public class Admin_Fragment4 extends Fragment {
         return view;
     }
 
+    SharedPreferences preferences;
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+
     }
 
     @OnClick({R.id.admin_fragment4_Feedback, R.id.admin_fragment4_SofeWareUp, R.id.admin_fragment4_help, R.id.admin_fragment4_btn})

@@ -28,4 +28,5 @@ public class Constant {
     public static final String ADMIN_ROGUE  = "/adminRogue.do";
     public static final String ADMIN_GAIN = "/adminGain.do";
     public static final String ADMINIMPORTANTTITLE = "/adminimportanttitle.do";
+    public static final String ADMINIMPORTANT = "/adminimportant.do";
 }

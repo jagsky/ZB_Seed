@@ -1,5 +1,6 @@
 package com.zbPro.seed.admin_fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -8,17 +9,24 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.zbPro.seed.activity.R;
+import com.zbPro.seed.adapter.MyAdminImportantAdapter;
+import com.zbPro.seed.adminActivity.Admin_ImportantActivity;
+import com.zbPro.seed.bean.ImportantBean;
 import com.zbPro.seed.bean.ImportantTitleBean;
 import com.zbPro.seed.net.HttpPost;
 import com.zbPro.seed.util.Constant;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -27,12 +35,42 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class Admin_Fragment1 extends Fragment {
-
+    MyAdminImportantAdapter myAdminImportantAdapter;
     @Bind(R.id.admin_fragment1_listView)
     ListView adminFragment1ListView;
     Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Bundle data = msg.getData();
+            String json = data.getString("json");
+            updateUI(json);
+            System.out.println("json" + json);
 
+        }
     };
+
+    private void updateUI(String json) {
+        Gson gson = new Gson();
+        Type type = new TypeToken<LinkedList<ImportantBean>>() {
+        }.getType();
+        //List<ImportantTitleBean> importantTitleBeen = new ArrayList<ImportantTitleBean>();
+        final List<ImportantBean> importantBeen = gson.fromJson(json, type);
+        myAdminImportantAdapter = new MyAdminImportantAdapter(importantBeen, getActivity());
+        adminFragment1ListView.setAdapter(myAdminImportantAdapter);
+        adminFragment1ListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ImportantBean importantBean = importantBeen.get(position);
+                System.out.println("电机的数据"+importantBean.toString());
+                Intent intent = new Intent(getActivity(),Admin_ImportantActivity.class);
+                intent.putExtra("importantBean123",importantBean);
+                startActivity(intent);
+
+            }
+        });
+
+    }
 
     @Nullable
     @Override
@@ -52,7 +90,7 @@ public class Admin_Fragment1 extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String json = HttpPost.SendhttpPostJson(s, Constant.PATH + Constant.ADMINIMPORTANTTITLE);
+                String json = HttpPost.SendhttpPostJson(s, Constant.PATH + Constant.ADMINIMPORTANT);
                 Message message = handler.obtainMessage();
                 Bundle bundle = new Bundle();
                 bundle.putString("json", json);
